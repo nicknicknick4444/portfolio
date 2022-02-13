@@ -4,7 +4,7 @@ from . import views
 app_name = "squaresg"
 
 urlpatterns = [
-    path("", views.IndexuView.as_view(), name="indexu"),
+    path("", views.IndexuView.as_view(), name="index"),
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
     path("squares/", views.SquaresView.as_view(), name="squares"),

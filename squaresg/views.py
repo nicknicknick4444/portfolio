@@ -15,7 +15,7 @@ from datetime import date, time, datetime, timedelta
 # Create your views here.
 
 class IndexuView(generic.ListView):
-    template_name = "squaresg/indexu.html"
+    template_name = "squaresg/index.html"
     context_object_name = "latest_question_list"
     
     def get_queryset(self):
