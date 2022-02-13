@@ -1,33 +1,33 @@
 from django.contrib import admin
 from django.contrib.sessions.models import Session
-from .models import Question, Choice, Squaresy, Number, Exceppo, Scores, Times
+from .models import Squaresy, Number, Exceppo, Scores, Times
 
 # Register your models here.
 
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    #fields = ["choice_text","votes"]
-    extra = 3
-
-class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ("YEEEEEAAAARGH!!!!!", {"fields":["question_text"]}),
-        ("Date Information", {"fields":["pub_date"]}),
-        #"pub_date", "question_text"
-        ]
-    inlines = [ChoiceInline]
-    list_display = ("question_text", "pub_date", "was_published_recently")
-    list_filter = ["pub_date"]
-    search_fields = ["question_text"]
-    list_per_page = 25
-
-class ChoiceAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ("Specify", {"fields":["question"]}),
-        ("Choice Text", {"fields":["choice_text"]}),
-        ("Vote Rigger", {"fields":["votes"]}),
-        ]
-    list_display = ("choice_text", "votes", "question")
+# class ChoiceInline(admin.TabularInline):
+#     model = Choice
+#     #fields = ["choice_text","votes"]
+#     extra = 3
+# 
+# class QuestionAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#         ("YEEEEEAAAARGH!!!!!", {"fields":["question_text"]}),
+#         ("Date Information", {"fields":["pub_date"]}),
+#         #"pub_date", "question_text"
+#         ]
+#     inlines = [ChoiceInline]
+#     list_display = ("question_text", "pub_date", "was_published_recently")
+#     list_filter = ["pub_date"]
+#     search_fields = ["question_text"]
+#     list_per_page = 25
+# 
+# class ChoiceAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#         ("Specify", {"fields":["question"]}),
+#         ("Choice Text", {"fields":["choice_text"]}),
+#         ("Vote Rigger", {"fields":["votes"]}),
+#         ]
+#     list_display = ("choice_text", "votes", "question")
 
 class SquaresyAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -76,8 +76,8 @@ class SessionAdmin(admin.ModelAdmin):
     
     
 
-admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choice, ChoiceAdmin)
+# admin.site.register(Question, QuestionAdmin)
+# admin.site.register(Choice, ChoiceAdmin)
 admin.site.register(Squaresy, SquaresyAdmin)
 admin.site.register(Number, NumberAdmin)
 admin.site.register(Exceppo, ExceppoAdmin)

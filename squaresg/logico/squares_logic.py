@@ -86,7 +86,7 @@ def win_test(listy, exceppo):
     else:
         return False
 
-def randomise2(listy, excep, clicked, data_token2):
+def randomise2(listy, excep, clicked, data_token2, gases):
     winning_test = False
     print("START OF RANDOMISE2!", listy)
     print("EXCEP!", excep)
@@ -114,7 +114,8 @@ def randomise2(listy, excep, clicked, data_token2):
         listy = ["square_1.png","square_2.png","square_3.png",
                  "square_4.png","square_5.png","square_6.png",
                  "square_7.png","square_8.png","square_9.png"]
-        time = data_token2.objects.latest("id")
+        #time = data_token2.objects.filter(sessiony=gases).latest("id")
+        time = data_token2.objects.filter(sessiony=gases).latest("id")
         time.finish_time = datetime.now()
         time.save()
         cou = "WIN"

@@ -1,14 +1,14 @@
 from django import forms
-from .models import Choice, Scores
+from .models import Scores
 
-class ChoiceForm(forms.ModelForm):
-
-    class Meta:
-        model = Choice
-        choice_text = "Geeseys"
-        votes = 0
-        fields = ["choice_text",]
-        labels = {"choice_text":"New Choice"}
+# class ChoiceForm(forms.ModelForm):
+# 
+#     class Meta:
+#         model = Choice
+#         choice_text = "Geeseys"
+#         votes = 0
+#         fields = ["choice_text",]
+#         labels = {"choice_text":"New Choice"}
 
 class ScoreForm(forms.ModelForm):
     

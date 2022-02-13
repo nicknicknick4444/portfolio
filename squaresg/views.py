@@ -7,19 +7,21 @@ from django.views import generic
 from django.utils import timezone
 from django.db.models import Count
 from django.views.generic.edit import FormMixin
-from .forms import ChoiceForm, ScoreForm
+from .forms import ScoreForm
 from .service import make_list_for_view, randomise_squares, initial_cou
-from .models import Choice, Question, Number, Exceppo, Scores, Times
+from .models import Number, Exceppo, Scores, Times
 from datetime import date, time, datetime, timedelta
 
 # Create your views here.
 
-class IndexuView(generic.ListView):
+class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
-    context_object_name = "latest_question_list"
+    context_object_name = "a_queryset"
     
     def get_queryset(self):
-        return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None).order_by("-pub_date")[:5]
+#         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None).order_by("-pub_date")[:5]
+        queryset = Number.objects.none()
+        return queryset
 
 def resetty(request):
     #Times.objects.all().delete()
@@ -84,23 +86,17 @@ class SquaresView(generic.ListView):
 
 def RandomSquaresView(request):
     gases = request.session._session_key
-    
-#     if not Number.objects.all().exists():
-#         numbo = Number.objects.create(wardle = nine_squares_list, sessiony = gases)
-#         numbo.save()
+
 
     print("I ALSO TRAVEL!", gases)
     SquaresInstance = SquaresView()
-
-    
-    print("KWARGS!!!!!!", Number.objects.all())
 
     #exceppo = Exceppo.objects.latest("id")
     exceppo = Exceppo.objects.filter(sessiony=gases).latest("id")
     form = SquaresInstance.get_form()
     scores = SquaresInstance.get_scores()
     clicked = request.GET.get("square_id")
-    if not Times.objects.all().exists():
+    if not Times.objects.filter(sessiony=gases).all().exists():
         db3 = Times.objects.create(start_time = datetime.now(), \
                                    finish_time = datetime.now(), sessiony = gases)
         db3.save()
@@ -111,7 +107,7 @@ def RandomSquaresView(request):
     listy2 = (str(latest).replace("'","").replace(",","").replace("[","").replace("]","")).split()
     print(type(listy2))
     print("LATEST, GREATEST?", listy2)
-    nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked)
+    nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, gases)
     db2 = Number.objects.create(wardle=nine_squares_list, sessiony = gases)
     db2.save()
     context = {"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
@@ -122,55 +118,56 @@ def RandomSquaresView(request):
     else:
         return render(request, url, context)
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = "squaresg/detail.html"
-    
-    def get_queryset(self):
-        return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context["form"] = ChoiceForm()
-        return context
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = "squaresg/detail.html"
+#     
+#     def get_queryset(self):
+#         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
+#     
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data()
+#         context["form"] = ChoiceForm()
+#         return context
 
-class ResultsView(generic.DetailView):
-    mode = Question
-    template_name = "squaresg/results.html"
-    
-    def get_queryset(self):
-        return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
+# class ResultsView(generic.DetailView):
+#     mode = Question
+#     template_name = "squaresg/results.html"
+#     
+#     def get_queryset(self):
+#         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
 
-def vote(request, question_id):
-    form = ChoiceForm(initial=request.POST)
-    question = get_object_or_404(Question, pk=question_id)
-    if request.method=="POST" and "votey" in request.POST:
-        print(request.POST)
-        try:
-            selected_choice = question.choice_set.get(pk=request.POST["choice"])
-        except (KeyError, Choice.DoesNotExist):
-            return render(request, "squaresg/detail.html", {"question":question,"error_message":"POY!!!","form":form})
-        else:
-            selected_choice.votes += 1
-            selected_choice.save()
-            return HttpResponseRedirect(reverse("squaresg:results", args=(question_id,)))
-    else:
-        return render(request, "squaresg/detail.html", {"question":question, "form":form})
+# def vote(request, question_id):
+#     form = ChoiceForm(initial=request.POST)
+#     question = get_object_or_404(Question, pk=question_id)
+#     if request.method=="POST" and "votey" in request.POST:
+#         print(request.POST)
+#         try:
+#             selected_choice = question.choice_set.get(pk=request.POST["choice"])
+#         except (KeyError, Choice.DoesNotExist):
+#             return render(request, "squaresg/detail.html", {"question":question,"error_message":"POY!!!","form":form})
+#         else:
+#             selected_choice.votes += 1
+#             selected_choice.save()
+#             return HttpResponseRedirect(reverse("squaresg:results", args=(question_id,)))
+#     else:
+#         return render(request, "squaresg/detail.html", {"question":question, "form":form})
 
-def AddyChoice(request, question_id):
-    questiony = get_object_or_404(Question, pk=question_id)
-    if request.method == "POST" and "addey" in request.POST:
-        form = ChoiceForm(request.POST)
-        if form.is_valid():
-            form.instance.question = questiony
-            form.save()
-            return HttpResponseRedirect(reverse("squaresg:detail", args=(question_id,)))
-    else:
-        form = ChoiceForm()
-    return render(request, "squaresg/detail.html", {"form":form,"questiony":questiony})
+# def AddyChoice(request, question_id):
+#     questiony = get_object_or_404(Question, pk=question_id)
+#     if request.method == "POST" and "addey" in request.POST:
+#         form = ChoiceForm(request.POST)
+#         if form.is_valid():
+#             form.instance.question = questiony
+#             form.save()
+#             return HttpResponseRedirect(reverse("squaresg:detail", args=(question_id,)))
+#     else:
+#         form = ChoiceForm()
+#     return render(request, "squaresg/detail.html", {"form":form,"questiony":questiony})
 
-def get_time():
-    timey = Times.objects.latest("id")
+def get_time(request):
+    gases = request.session._session_key
+    timey = Times.objects.filter(sessiony=gases).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
     hours = int(dura.seconds*3600)
@@ -194,14 +191,15 @@ def get_time():
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
+    gases = request.session._session_key
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
         print("BLEAT???")
         if form.is_valid():
             print("PINT-SIZED PALS!!!")
-            scores2 = (Number.objects.all().count())-1
-            duration, seconds2, attempts = get_time()
+            scores2 = (Number.objects.filter(sessiony=gases).all().count())-1
+            duration, seconds2, attempts = get_time(request)
             form.instance.score = int(scores2)
             form.instance.duration = str(duration)
             form.instance.all_seconds = int(seconds2)
