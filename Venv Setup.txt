@@ -152,7 +152,7 @@ git remote -v
 heroku config:set DISABLE_COLLECTSTATIC=1
 damp-plains-75624 <-- My pages app!
 stormy-crag-84268 <-- MY list app!
-radiant-mesa-84279 <-- Portfolio and Squares!
+sleepy-castle-33606 <-- Portfolio and Squares!
 
 #Procfile goes in top-level folder:
 web: gunicorn django_project.wsgi --log-file -
@@ -181,7 +181,7 @@ git branch -D main
 
 https://damp-plains-75624.herokuapp.com/
 https://stormy-crag-84268.herokuapp.com/
-https://radiant-mesa-84279.herokuapp.com/
+https://sleepy-castle-33606.herokuapp.com/
 https://brill-blog.herokuapp.com/
 https://brill-news.herokuapp.com/
 
