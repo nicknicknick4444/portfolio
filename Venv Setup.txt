@@ -1,0 +1,197 @@
+#Start:
+cd <DIRECTORY HERE>
+mkdir <NEW DIRECTORY NAME HERE>
+cd .\OneDrive\Desktop\code\helloworld
+cd C:\Users\nickn\OneDrive\Documents\Little_Django_Projects\Portfolio
+#For .venvy2 mode with green writing: 
+.venvy2\Scripts\Activate.ps1
+
+#Run server (THIS IS ALL YOU NEED):
+python manage.py runserver
+
+Add these:
+from polls.models import Question, Choice
+from django.utils import timezone
+current_year = timezone.now().year
+
+Start here:
+
+
+#Instant liftoff!
+cd C:\Users\nickn\OneDrive\Documents\Little_Django_Projects\Portfolio
+.venvy2\Scripts\Activate.ps1
+python manage.py runserver
+
+#Migrate server
+python manage.py migrate
+
+#123 testing!
+python manage.py test
+
+#Quit server:
+CTRL + C
+
+#Django welcome page!
+http://127.0.0.1:8000/
+
+-------- ADMIN STUFF
+
+Test Env:
+from django.test.utils import setup_test_environment
+setup_test_environment()
+from django.test import Client
+client = Client
+
+#Migrate server
+python manage.py migrate
+
+#After model update, MakeMigration:
+python manage.py makemigrations squaresg
+python manage.py migrate
+
+#Create DB superuser:
+python manage.py createsuperuser
+
+Deets atm:
+Username: nick44
+Email: nicknicknick4444@outlook.com
+Password: barcey414
+
+#Visit the admin for the superuser!
+http://127.0.0.1:8000/admin
+
+#Add this to posts/admin/py:
+from .models import Post
+admin.site.register(Post)
+
+#posts/models.py amendments
+class Post(models.Model):
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text[:50]
+
+--------
+
+#Navigate to directory to contain the venv, then create virtual env:
+python -m venv .venvy2
+
+#DONE! If you want to leave .venvy2 mode:
+deactivate
+
+#For .venvy2 mode with green writing: 
+.venvy2\Scripts\Activate.ps1
+
+#Install Django (+ update pip at the end if asked):
+python -m pip install django~=3.2.0
+
+#Create new Django project in that folder - space before full-stop:
+django-admin startproject django_project_portfolio .
+
+#Create a Django app:
+python manage.py startapp squaresg
+
+#Add to django_project/settings.py, onto the end of the INSTALLED_APPS list:
+'blog.apps.BlogConfig'
+
+#Register your new templates, make this edit to TEMPLATES, on the 'DIRS' empty list:
+'DIRS': [str(BASE_DIR.joinpath("templates"))],
+
+--------
+
+#Git stuff:
+git init
+git status
+
+HOW TO ADD A REPO
+
+echo ".venvy2/" >> .gitignore
+git add .gitignore
+
+#Commit
+git add -A
+git commit -m "initial commit"
+
+#Push
+git push -u origin2+ main
+
+#Start new DO THIS FIRST - create by hand and then DO THIS FIRST:
+git remote add origin https://github.com/nicknicknick4444/news.git
+
+#Basically do this FROM THE START OF A REPO: Commit, push AND restart the server!
+git add -A
+git commit -m "initial commit"
+git push -u origin main
+python manage.py runserver
+
+"""#Create Branch (??)
+git remote add origin https://github.com/nicknicknick4444/hello-world.git
+git branch -M main"""
+
+#To force:
+git push -f origin main
+
+#Create requirements.txt:
+pip freeze > requirements.txt
+
+#Install Gunicorn:
+python -m pip install gunicorn==20.1.0
+
+--HEROKU--
+
+#Adjust django_project/settings/py:
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
+
+#Heroku login:
+heroku login
+
+#Create a Heroku app:
+heroku install
+heroku create
+git remote -v
+heroku config:set DISABLE_COLLECTSTATIC=1
+damp-plains-75624 <-- My pages app!
+stormy-crag-84268 <-- MY list app!
+
+#Procfile goes in top-level folder:
+web: gunicorn django_project.wsgi --log-file -
+
+#Heroku push and make it live:
+git status
+git add -A
+git commit -m "New updates for Heroku deployment"
+git push heroku main
+heroku ps:scale web=1
+python manage.py runserver
+heroku open
+
+#Open it!
+heroku open
+
+#Remove buildpacks if issues:
+heroku buildpacks:clear
+heroku buildpacks:add heroku/python
+git commit --allow-empty -m "Adjust buildpacks on Heroku"
+git push heroku nic
+
+Move or delete branch:
+git checkout -b main
+git branch -D main
+
+https://damp-plains-75624.herokuapp.com/
+https://stormy-crag-84268.herokuapp.com/
+https://brill-blog.herokuapp.com/
+https://brill-news.herokuapp.com/
+
+Superuser:
+nickn
+nicknicknick4444@outlook.com
+Pillows11
+
+SendGrid Key: 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
+nickhart87@hotmail.co.uk
+steppinout212212
+
+Secret Key in case I lose it:
+SECRET_KEY = hKpDyFZ3WZ52i4Mo6p6-DL2OnXVUT26sTN6LqAf8nmE
+
