@@ -8,47 +8,15 @@ from django.contrib import admin
 
 # Create your models here.
 
-# class Question(models.Model):
-#     question_text = models.CharField(max_length=200)
-#     pub_date = models.DateTimeField("date published")
-#     
-#     def __str__(self):
-#         return self.question_text
-#     @admin.display(
-#         boolean=True,
-#         ordering="pub_date",
-#         description="Recent?",
-#         )
-#     def was_published_recently(self):
-#         now = timezone.now()
-#         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-
-# class Choice(models.Model):
-#     question = models.ForeignKey(
-#         Question,
-#         on_delete = models.CASCADE
-#         )
-#     choice_text = models.CharField(max_length=200)
-#     votes = models.IntegerField(default=0)
-#     
-#     def __str__(self):
-#         return self.choice_text
-    
-
 class Squaresy(models.Model):
     square_text = models.CharField(max_length=200)
     number = models.IntegerField(default=0)
-    #game_list = models.TextField(null=True)
     def __str__(self):
         return self.square_text
 
 class Number(models.Model):
-    #the_except = models.TextField(null=True)
-    #game_list = models.TextField(null=True)
-    #game_list2, the_except2 = make_list_for_view()
     wardle = models.TextField(null=True)
     sessiony = models.CharField(max_length=1000, default="", null=True)
-    #initial_cou = initial_cou(game_list2)
     def __str__(self):
         return self.wardle
 
