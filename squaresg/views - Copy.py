@@ -25,13 +25,12 @@ class IndexView(generic.ListView):
 
 def resetty(request):
     sesh = request.session._session_key
-    #Times.objects.filter(sessiony=sesh).all().delete()
+    Times.objects.filter(sessiony=sesh).all().delete()
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
         Exceppo.objects.filter(sessiony=sesh).delete()
-    #if Times.objects.exists():
-    if Times.objects.filter(sessiony=sesh).exists():
+    if Times.objects.exists():
         timey = Times.objects.filter(sessiony=sesh).latest("id")
         att = timey.attempts
         att += 1
@@ -86,30 +85,30 @@ class SquaresView(generic.ListView):
         return self.times
 
 def RandomSquaresView(request):
-    sesh = request.session._session_key
+    gases = request.session._session_key
 
 
-    print("I ALSO TRAVEL!", sesh)
+    print("I ALSO TRAVEL!", gases)
     SquaresInstance = SquaresView()
 
     #exceppo = Exceppo.objects.latest("id")
-    exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
+    exceppo = Exceppo.objects.filter(sessiony=gases).latest("id")
     form = SquaresInstance.get_form()
     scores = SquaresInstance.get_scores()
     clicked = request.GET.get("square_id")
-    if not Times.objects.filter(sessiony=sesh).exists():
+    if not Times.objects.filter(sessiony=gases).exists():
         db3 = Times.objects.create(start_time = datetime.now(), \
-                                   finish_time = datetime.now(), sessiony = sesh)
+                                   finish_time = datetime.now(), sessiony = gases)
         db3.save()
 
     print("CLICKED: ", clicked)
     print("EXCEPPO NOW IT@S GOOD!:", exceppo)
-    latest = Number.objects.filter(sessiony=sesh).latest("id")
+    latest = Number.objects.filter(sessiony=gases).latest("id")
     listy2 = (str(latest).replace("'","").replace(",","").replace("[","").replace("]","")).split()
     print(type(listy2))
     print("LATEST, GREATEST?", listy2)
-    nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, sesh)
-    db2 = Number.objects.create(wardle=nine_squares_list, sessiony = sesh)
+    nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, gases)
+    db2 = Number.objects.create(wardle=nine_squares_list, sessiony = gases)
     db2.save()
     context = {"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
                "exceppo":exceppo, "form":form, "scores":scores}
@@ -167,8 +166,8 @@ def RandomSquaresView(request):
 #     return render(request, "squaresg/detail.html", {"form":form,"questiony":questiony})
 
 def get_time(request):
-    sesh = request.session._session_key
-    timey = Times.objects.filter(sessiony=sesh).latest("id")
+    gases = request.session._session_key
+    timey = Times.objects.filter(sessiony=gases).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
     hours = int(dura.seconds*3600)
@@ -192,14 +191,14 @@ def get_time(request):
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
-    sesh = request.session._session_key
+    gases = request.session._session_key
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
         print("BLEAT???")
         if form.is_valid():
             print("PINT-SIZED PALS!!!")
-            scores2 = (Number.objects.filter(sessiony=sesh).all().count())-1
+            scores2 = (Number.objects.filter(sessiony=gases).all().count())-1
             duration, seconds2, attempts = get_time(request)
             form.instance.score = int(scores2)
             form.instance.duration = str(duration)
@@ -209,7 +208,7 @@ def Scoresy(request, *args, **kwargs):
             form.instance.duration = duration
             #form.instance.all_seconds = seconds2
             form.save()
-            Times.objects.filter(sessiony=sesh).all().delete()
+            #Times.objects.filter(sessiony=gases).all().delete()
             return HttpResponseRedirect(reverse("squaresg:resetto"))
     else:
         form = ScoreForm()
