@@ -12,7 +12,7 @@ def initial_cou(listy):
 def randomise_squares(squares, excep, clicked, SESS):
     listy, cou = randomise2(squares, excep, clicked, Times, SESS)
     if cou == "WIN":
-        goes = Number.objects.filter(sessiony="{}".format(SESS)).count()
+        goes = Number.objects.filter(sessiony=SESS).count()
     else:
         goes = 0
     #return randomise2(squares, excep, clicked)
