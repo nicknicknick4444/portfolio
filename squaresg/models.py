@@ -45,3 +45,9 @@ class Times(models.Model):
     sessiony = models.CharField(max_length=1000, default="", null=True)
     def __datetime__(self):
         return self.start_time
+
+# class FirstInd(models.Model):
+#     first_ind = models.IntegerField(default=0)
+#     sessiony = models.CharField(max_length=1000, default="", null=True)
+#     def __str__(self):
+#         return self.finst_ind

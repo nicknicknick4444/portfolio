@@ -10,7 +10,9 @@ from datetime import date, time, datetime
         
 
 def make_list():
-    listy = ["square_"+ str(i) +".png" for i in range(1,10)]
+    #listy = ["square_"+ str(i) +".png" for i in range(1,10)]
+    listy = [str(i) for i in range(1,10)]
+    #listy = ["1","3","2","4","5","6","7","8","9"]
     #rand_num = random.randint(1,10)
     ind = random.randint(0,8)
     #ind = 5-1
@@ -20,12 +22,12 @@ def make_list():
 #         excepsav = data_token.objects.create(exceppy = excep)
 #         excepsav.save()
     #excep = data_token.objects.latest("id")
-    listy.insert(ind, "token.png")
+    listy.insert(ind, "blank")
     print(listy[ind])
     print("TRUE JAWCY?", excep)
     print("GROOO!", listy)
 #     listy2 = [i for i in listy]
-#     random.shuffle(listy)
+    #random.shuffle(listy)
 #     if listy == listy2:
 #         return make_list(data_token)
 #     else:
@@ -50,23 +52,23 @@ def rand_choose(listy,listy2):
     return listy
 
 def make_cou(listy):
-    if listy[0] == "token.png":
+    if listy[0] == "blank":
         cou = [listy[1], listy[3]]
-    elif listy[1] == "token.png":
+    elif listy[1] == "blank":
         cou = [listy[0], listy[2], listy[4]]
-    elif listy[2] == "token.png":
+    elif listy[2] == "blank":
         cou = [listy[1], listy[5]]
-    elif listy[3] == "token.png":
+    elif listy[3] == "blank":
         cou = [listy[0], listy[4], listy[6]]
-    elif listy[4] == "token.png":
+    elif listy[4] == "blank":
         cou = [listy[1], listy[3], listy[5], listy[7]]
-    elif listy[5] == "token.png":
+    elif listy[5] == "blank":
         cou = [listy[2], listy[4], listy[8]]
-    elif listy[6] == "token.png":
+    elif listy[6] == "blank":
         cou = [listy[3], listy[7]]
-    elif listy[7] == "token.png":
+    elif listy[7] == "blank":
         cou = [listy[4], listy[6], listy[8]]
-    elif listy[8] == "token.png":
+    elif listy[8] == "blank":
         cou = [listy[5], listy[7]]
     else:
         cou = []
@@ -76,11 +78,12 @@ def win_test(listy, exceppo):
     listy2 = []
     listy2 = [i for i in listy]
     for index, i in enumerate(listy2):
-        if listy2[index] == "token.png":
+        if listy2[index] == "blank":
             listy2[index] = str(exceppo)
-    if listy2 == ["square_1.png","square_2.png","square_3.png",
-                 "square_4.png","square_5.png","square_6.png",
-                 "square_7.png","square_8.png","square_9.png"]:
+#     if listy2 == ["square_1.png","square_2.png","square_3.png",
+#                  "square_4.png","square_5.png","square_6.png",
+#                  "square_7.png","square_8.png","square_9.png"]:
+    if listy2 == ["1","2","3","4","5","6","7","8","9"]:
         print("Belinda Carlisle!")
         return True
     else:
@@ -91,7 +94,7 @@ def randomise2(listy, excep, clicked, data_token2, gases):
     print("START OF RANDOMISE2!", listy)
     print("EXCEP!", excep)
     #clicked = "square_2.png"
-    tokens = [clicked, "token.png"]
+    tokens = [clicked, "blank"]
     tokens2 = tokens[::-1]
     print("SWITCH THIS:", tokens)
     print("WITH THIS:", tokens2)
@@ -111,15 +114,23 @@ def randomise2(listy, excep, clicked, data_token2, gases):
     #where_now = 
     print("DONE!", listy)
     if win_test(listy, excep):
-        listy = ["square_1.png","square_2.png","square_3.png",
-                 "square_4.png","square_5.png","square_6.png",
-                 "square_7.png","square_8.png","square_9.png"]
+#         listy = ["square_1.png","square_2.png","square_3.png",
+#                  "square_4.png","square_5.png","square_6.png",
+#                  "square_7.png","square_8.png","square_9.png"]
+#         for index, i in enumerate(listy):
+#             if i == "blank":
+#                 listy[index] = str(excep)
+#             else:
+#                 listy[index] = i
+        #listy = [excep for i in listy if i == "blank"]
+        listy = ["1","2","3","4","5","6","7","8","9"]
         #time = data_token2.objects.filter(sessiony=gases).latest("id")
         time = data_token2.objects.filter(sessiony=gases).latest("id")
         time.finish_time = datetime.now()
         time.save()
         cou = "WIN"
     #finish_time = time.finish_time
+    #listy2 = [i for i in listy]
     return listy, cou
 
         

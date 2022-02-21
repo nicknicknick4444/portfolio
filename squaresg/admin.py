@@ -44,12 +44,18 @@ class NumberAdmin(admin.ModelAdmin):
         ]
     list_display = ("wardle", "sessiony")
 
+# class FirstIndAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#         ("First Indicator", {"fields":["first_ind"]}),
+#         ("Session Glab", {"fields":["sessiony"]}),
+#         ]
+#     list_display = ("first_ind", "sessiony")
+
 class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):
         return obj.get_decoded()
     list_display = ("session_key", "session_data")
-    
-    
+
 
 # admin.site.register(Question, QuestionAdmin)
 # admin.site.register(Choice, ChoiceAdmin)
@@ -58,4 +64,5 @@ admin.site.register(Number, NumberAdmin)
 admin.site.register(Exceppo, ExceppoAdmin)
 admin.site.register(Scores, ScoresAdmin)
 admin.site.register(Times, TimesAdmin)
+#admin.site.register(FirstInd, FirstIndAdmin)
 admin.site.register(Session, SessionAdmin)

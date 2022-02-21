@@ -6,18 +6,18 @@ body {
 	/*background: white url("images/grub.png") repeat;*/
 	background-color: #a0b1e2;
 	margin: auto;
-	width: 100%;
+	overflow: scroll;
 }
 
 .row {
 	//content: "";
 	//clear: both;
 	display: table;
-	background-color: #eeee00;
-	width:372px;
-	//height: 20%;
+	//background-color: #6202b0;
+	width:378px;
 	margin: auto;
-	//margin-right: auto;
+	margin-bottom: 10px;
+	margin-top: 3px;
 	padding: 0;
 	border: 3px solid #000000;
 	border-radius: 2px;
@@ -27,38 +27,97 @@ body {
 	//content: "";
 	//clear: both;
 	display: table;
-	background-color: #eeee00;
-	width:372px;
-	//height: 20%;
+	#background-color: #6202b0;
+	width:378px;
 	margin: auto;
-	//margin-right: auto;
+	margin-bottom: 10px;
+	margin-top: 3px;
 	padding: 0;
-	border: 3px solid #18f514;
+	border: 3px solid #d06ff2;
+	#border: 3px solid #000000;
 	border-radius: 2px;
 }
 
 
 .column {
+	background-color: #6202b0;
 	float: left;
 	width: 124px;
-	//width: 33.33%;
-	height: 107px;
-	padding: 0;
-	margin: 0;
+
+	height: 124px;
+
+	#padding: 0;
+	margin: auto;
+	position: relative;
+	border: 1px solid #1a0149;
 }
 
-a {
-	padding: 0;
-	margin: 0;
-	//width: 33.33%;
+.blanko {
+	background-color: #380162;
+	float: left;
+	width: 124px;
+	#width: 33.33%;
+	height: 124px;
+	#height: 33.33%;
+	#padding: 0;
+	margin: auto;
+	position: relative;
+	border: 1px solid #1a0149;
 }
 
-.column a:hover {
-	opacity: 0.8;
-	height: 100%;
-	width: 100%;
+.spu2{
+	position: absolute;
+	top: 52%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	margin-left: -13.5%;
+	margin-right: 13.5%;
+	font-family: helvetica;	
+}
+
+
+.numbers .column {
 	color: #eeee00;
+	font-size: 50px;
+} 
+
+.numbers2 .column {
+	color: #eeee00;
+	font-size: 50px;
+} 
+
+.spu{
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	margin-left: 40%;
+	margin-right: 40%;
+	font-family: helvetica;	
 }
+
+a .column {
+	padding: 0;
+	margin: 0;
+	//width: 33.33%;
+	#position: absolute;
+	#top: 50%;
+	#-ms-transform: translateY(-50%);
+	#transform: translateY(-50%);
+	text-decoration: none;
+	color: #eeee00;
+
+}
+
+.numbers .column:hover {
+	#opacity: 0.8;
+	#height: 100%;
+	#width: 100%;
+	color: #1a0149;
+	background-color: #eeee00;
+	text-decoration: none;
+}
+
 
 .score {
 	margin: auto;
@@ -79,14 +138,23 @@ a {
 }
 
 #missingPiece {
-	width: 10%;
-	height: 10%;
 	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 62px;
+	height: 62px;
+	color: #eeee00;
+	background-color: #6202b0;
+	border: 2px solid #1a0149;
+	font-size: 32px;
+	position: relative;
+	font-family: helvetica;
 }
 
 #saveScore {
 	display: none;
-	margin-top: 5px;
+	//margin-top: 5px;
+	background-color: #eeee00;
 }
 
 #scoreBoard {
@@ -105,8 +173,14 @@ a {
 	z-index: 10;
 	background-color: #ffffff;
 	padding: 4px;
+	padding-bottom: 20px;
 	/*padding-left: 5px;
 	padding-right: 5px;*/
+}
+
+#top10 {
+	font-size: 20px;
+	margin-bottom: 5px;
 }
 
 #gameOptions {
@@ -149,4 +223,140 @@ fieldset {
 	float: left;	
 	text-align: center;
 	/*padding-right: 2%;*/
+ }
+
+form fieldset p {
+	margin-top: 0;
+	margin-bottom: 4px;
 }
+
+/*form fieldset input {
+	margin-bottom: 0;
+}*/
+
+fieldset {
+	padding: 4px;
+}
+
+#small {
+	display: none;
+}
+
+
+
+
+/*Start of SMALL MOBILE PHONES*/
+@media all and (min-width: 1px) and (max-width: 500px){
+.blanko {
+	//background-color: #ffffff;
+	width: 70px;
+	height: 70px;
+	}
+
+.row {
+	width: 216px;
+}
+
+.rowWin {
+	width: 216px;
+}
+
+.column {
+	width: 70px;
+	height: 70px;
+}
+
+.numbers .column {
+	font-size: 30px;
+}
+
+.numbers2 .column {
+	font-size: 30px;
+}
+
+.spu{
+	#position: absolute;
+	#top: 50%;
+	#-ms-transform: translateY(-50%);
+	#transform: translateY(-50%);
+	margin-left: 38.5%;
+	#margin-right: 40%;
+}
+
+.spu2{
+	#position: absolute;
+	top: 52%;
+	#-ms-transform: translateY(-50%);
+	#transform: translateY(-50%);
+	margin-left: -11%;
+	#margin-right: 13.5%;
+}
+
+#missingPiece {
+	width: 55px;
+	height: 55px;
+	font-size: 23px;
+}
+
+.scoreLeft {
+	//width: 34%;
+	width: 100%;
+	#text-align: left;
+	padding-bottom: 3px;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.scoreMidL {
+	text-align: left;
+	padding-bottom: 9px;
+	width: 32%;
+}
+
+.scoreMidR {
+	//width: 21%;
+	width: 32%;
+	padding-bottom: 9px;
+	font-size: 13px;
+}
+
+.scoreRight {
+	//width: 24%;
+	width: 36%;
+	padding-bottom: 9px;
+	font-size: 13px;
+	text-align: right;
+}
+
+form fieldset p {
+	margin-top: 0;
+	margin-bottom: 2px;
+	padding: 0;
+}
+
+fieldset {
+	padding-top: 2px;
+	padding-bottom: 6px;
+}
+
+#full {
+	display:none;
+}
+
+#small {
+	display: inline;
+}
+
+}
+
+
+/*Mid test*/
+@media all and (min-width: 501px) and (max-width: 1000px){
+.blanko {
+	#background-color: #000000;
+	}
+}
+
+
+
+

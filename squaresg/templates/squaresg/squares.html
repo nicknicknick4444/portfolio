@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 <!-- bootstrap CSS -->
- <!--<link href="https://cdn.jsdpebmarshelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
- <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
- <script scr="//maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap/min.js"></script>-->
 </head>
 
 
@@ -12,6 +10,7 @@
 <!--<h1>Helloo!</h1>-->
 
 {% block content %}
+
 
 <body>
 
@@ -57,7 +56,7 @@ function hideSave() {
 <a href="#" onclick="getScore();return false;">Leaderboard</a>
 </div>
 
-<br>
+<!--<br>-->
 
 {% if cou == "WIN" %}
  <div class="rowWin">
@@ -69,18 +68,26 @@ function hideSave() {
 {% for squ in nine_squares_list %}
 
  {% if squ in cou %}
-  <div class="column"><a href="{% url "squaresg:squares_rand" %}?square_id={{ squ | urlencode }}"><div class="overhov"></div><img src="../static/squaresg/images/{{ squ }}"></a>
-  </div>
+
+  <!--<div class="column"><a href="{% url "squaresg:squares_rand" %}?square_id={{ squ | urlencode }}"><div class="overhov"></div><img src="../static/squaresg/images/{{ squ }}"></a>-->
+  <a href="{% url "squaresg:squares_rand" %}?square_id={{ squ | urlencode }}"><span class="numbers"><div class="column"><span class="spu">{{ squ }}</span></div></span></a>
+  
 
  {% else %}
 
-  <div class="column"><img src="../static/squaresg/images/{{ squ }}">
-  </div>
+  {% if squ == "blank" %}
+   <div class="blanko"></div>
+  {% else %}
+
+  <!--<div class="column"><img src="../static/squaresg/images/{{ squ }}">-->
+   <span class="numbers2"><div class="column"><span class="spu">{{ squ }}
+  </span></div></span>
+  {% endif %}
  {% endif %}
 {% endfor %}
 </div>
 
-<br>
+<!--<br>-->
 
 {% if cou == "WIN" %}
  <div class="missingPiece">You did it! Number of winning moves: {{ goes }}</div>
@@ -89,37 +96,43 @@ function hideSave() {
   <!--<a href="{% url "squaresg:resetto2" %}">Play Again</a></div>-->
   <a href="{% url "squaresg:resetto2" %}">Play Again</a></div>
 {% else %}
- <div class="missingPiece">Move the numbers into order and win the missing piece:<br><img src="../static/squaresg/images/{{ exceppo }}" id="missingPiece"></div>
+ <div class="missingPiece"><!--Move the numbers into order and win the -->Missing Piece:<br>
+<!--<img src="../static/squaresg/images/{{ exceppo }}" id="missingPiece">-->
+ <div id="missingPiece"><span class="spu2">{{ exceppo }}</span></div>
+
+</div>
+
 {% endif %}
 
 <div id="scoreBoard">
-<p><b>Top 10 Winners</b></p>
+<div style="width: 100%;float: left; text-align: right;"><a href="#" onclick="hideScore();return false;">(Close)</a></div>
+<p id="top10"><b>Top 10 Winners</b></p>
  <div style="padding-bottom: 10px;">
-  <div class="scoreLeft"><strong>Name</strong></div>
-  <div class="scoreMidL"><strong>Moves</strong></div>
-  <div class="scoreMidR"><strong>Resets</strong></div>
-  <div class="scoreRight"><strong>Time</strong></div>
+  <div class="scoreLeft" id="full"><strong>Rank/ Name</strong></div>
+  <div class="scoreMidL" id="full"><strong>Moves</strong></div>
+  <div class="scoreMidR" id="full"><strong>Resets</strong></div>
+  <div class="scoreRight" id="full"><strong>Time</strong></div>
 
  </div>
 
 {% for sk in scores %}
  <div>
- <div class="scoreLeft">{{ forloop.counter }}: {{ sk.namey|title }}</div>
- <div class="scoreMidL">{{ sk.score }}</div>
- <div class="scoreMidR">{{ sk.attempts }}</div>
- <div class="scoreRight">{{ sk.duration }}</div>
- </div>
+ <div class="scoreLeft"><!--<span id="small"><strong>Name:  </strong></span>-->{{ forloop.counter }}: {{ sk.namey|title }}</div>
+ <div class="scoreMidL"><span id="small"><strong>Moves: </strong></span>{{ sk.score }}</div>
+ <div class="scoreMidR"><span id="small"><strong>Resets: </strong></span>{{ sk.attempts }}</div>
+ <div class="scoreRight"><span id="small"><strong>Time: </strong></span>{{ sk.duration }}</div>
+</div>
 {% endfor %}
 
-<div style="width: 100%;float: left;"><a href="#" onclick="hideScore();return false;">(Close)</a></div>
+<!--<div style="width: 100%;float: left;"><a href="#" onclick="hideScore();return false;">(Close)</a></div>-->
 </div>
 
 
-{% if cou == "WIN" %}
+<!--{% if cou == "WIN" %}
 
 {% else %}
  
-{% endif %}
+{% endif %}-->
 
 <div id="saveScore" class="row" style="text-align: center;" style="display:block;">
 <form id="formy" action="{% url "squaresg:scoresyform" %}" method="POST">{% csrf_token %}
@@ -138,5 +151,6 @@ function hideSave() {
 
 
 </body>
+
 
 {% endblock content %}

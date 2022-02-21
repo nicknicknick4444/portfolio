@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("", include("squaresg.urls")),
     path('admin/', admin.site.urls),
+    path("spelling/", include("spelling.urls")),
+    path("", include("squaresg.urls")),
+    
+#     path("", include("squaresg.urls")),
+#     path("spelling/", include("spelling.urls")),
+#     path('admin/', admin.site.urls),
 ]

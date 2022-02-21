@@ -25,12 +25,10 @@ class IndexView(generic.ListView):
 
 def resetty(request):
     sesh = request.session._session_key
-    #Times.objects.filter(sessiony=sesh).all().delete()
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
         Exceppo.objects.filter(sessiony=sesh).delete()
-    #if Times.objects.exists():
     if Times.objects.filter(sessiony=sesh).exists():
         timey = Times.objects.filter(sessiony=sesh).latest("id")
         att = timey.attempts
@@ -65,13 +63,21 @@ class SquaresView(generic.ListView):
                               "form": self.form, "scores": self.scores,}
         
     def get_queryset(self):
-        if not Number.objects.filter(sessiony=self.request.session._session_key).exists():
+        if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
             print("GLUT!", Number.objects.all())
             db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
             db.save()
-        if not Exceppo.objects.filter(sessiony=self.request.session._session_key).exists():
+        else:
+            Number.objects.filter(sessiony=self.request.session._session_key).all().delete()
+            db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            db.save()
+        if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
             exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
             print("BLEEK!")
+            exp.save()
+        else:
+            Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
             exp.save()
         
         return self.listy
@@ -109,11 +115,18 @@ def RandomSquaresView(request):
     print(type(listy2))
     print("LATEST, GREATEST?", listy2)
     nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, sesh)
+    #nine_squares_list2 = [" " for i in nine_squares_list if i == "&nbsp;"]
     db2 = Number.objects.create(wardle=nine_squares_list, sessiony = sesh)
     db2.save()
     context = {"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
                "exceppo":exceppo, "form":form, "scores":scores}
+    print("COU?", cou)
+    
+    
     url = "squaresg/squares.html"
+
+    if cou == "WIN":
+        Number.objects.filter(sessiony=sesh).latest("id").delete()
     if request.method == "POST" and "squares_rand" in request.POST:
         return render(request, url, context)
     else:
@@ -199,7 +212,7 @@ def Scoresy(request, *args, **kwargs):
         print("BLEAT???")
         if form.is_valid():
             print("PINT-SIZED PALS!!!")
-            scores2 = (Number.objects.filter(sessiony=sesh).all().count())-1
+            scores2 = (Number.objects.filter(sessiony=sesh).all().count())
             duration, seconds2, attempts = get_time(request)
             form.instance.score = int(scores2)
             form.instance.duration = str(duration)

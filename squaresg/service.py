@@ -18,4 +18,3 @@ def randomise_squares(squares, excep, clicked, SESS):
     #return randomise2(squares, excep, clicked)
     return listy, cou, goes
 
-    
