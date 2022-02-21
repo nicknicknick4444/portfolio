@@ -92,6 +92,7 @@ class SquaresView(generic.ListView):
         return self.times
 
 def RandomSquaresView(request):
+    #sesh = request.session._session_key
     sesh = request.session._session_key
 
 
