@@ -1,10 +1,14 @@
 from .logico.squares_logic import make_list, randomise2, make_cou
 from .models import Number, Exceppo, Times
+import random
 
 def make_list_for_view():
     listy, excep = make_list()
     return listy, excep
 
+# def make_id():
+#     session_id = random.randint(1000000000000000000000,9999999999999999999999)
+#     return session_id
 
 def initial_cou(listy):
     return make_cou(listy)
