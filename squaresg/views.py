@@ -47,7 +47,8 @@ def resetty(request):
     return HttpResponseRedirect(reverse("squaresg:squares"))
 
 def resetty2(request):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
+    sesh = seshy
     print("I TRAVEL",sesh)
     Number.objects.filter(sessiony=sesh).delete()
     Exceppo.objects.filter(sessiony=sesh).delete()
