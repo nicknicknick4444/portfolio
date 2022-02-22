@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.sessions.backends.db import SessionStore
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.template import loader
@@ -8,9 +9,15 @@ from django.utils import timezone
 from django.db.models import Count
 from django.views.generic.edit import FormMixin
 from .forms import ScoreForm
-from .service import make_list_for_view, randomise_squares, initial_cou
+from .service import make_list_for_view, randomise_squares, initial_cou#, make_id
 from .models import Number, Exceppo, Scores, Times
 from datetime import date, time, datetime, timedelta
+import random
+
+sstore = SessionStore()
+sstore.create()
+seshy = sstore.session_key
+
 
 # Create your views here.
 
@@ -24,7 +31,7 @@ class IndexView(generic.ListView):
         return queryset
 
 def resetty(request):
-    sesh = request.session._session_key
+    sesh = seshy
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
@@ -62,22 +69,33 @@ class SquaresView(generic.ListView):
         self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
                               "form": self.form, "scores": self.scores,}
         
-    def get_queryset(self):
-        if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
-            print("GLUT!", Number.objects.all())
-            db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+    def get_queryset(self):        
+        #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
+        if not Number.objects.filter(sessiony = seshy).exists():
+            #print("GLUT!", Number.objects.all())
+            print("TRAB!", seshy)
+            #print("BRIXS", self.request.session._session_key)
+            #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            db = Number.objects.create(wardle = self.listy, sessiony = seshy)
             db.save()
         else:
-            Number.objects.filter(sessiony=self.request.session._session_key).all().delete()
-            db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            #Number.objects.filter(sessiony = self.request.session._session_key).all().delete()
+            Number.objects.filter(sessiony = seshy).all().delete()
+            #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            db = Number.objects.create(wardle = self.listy, sessiony = seshy)
             db.save()
-        if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
-            print("BLEEK!")
+        #if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
+        if not Exceppo.objects.filter(sessiony = seshy).exists():
+            #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy)
+            print("BLEEK!", seshy)
             exp.save()
         else:
-            Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            #Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
+            Exceppo.objects.filter(sessiony = seshy).all().delete()
+            #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy)
+            print("POASTY!", seshy)
             exp.save()
         
         return self.listy
@@ -93,12 +111,9 @@ class SquaresView(generic.ListView):
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
-    sesh = request.session._session_key
-
-
-    print("I ALSO TRAVEL!", sesh)
+    sesh = seshy
     SquaresInstance = SquaresView()
-
+    print("I ALSO TRAVEL!", sesh)
     #exceppo = Exceppo.objects.latest("id")
     exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
     form = SquaresInstance.get_form()
@@ -133,55 +148,9 @@ def RandomSquaresView(request):
     else:
         return render(request, url, context)
 
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = "squaresg/detail.html"
-#     
-#     def get_queryset(self):
-#         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
-#     
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data()
-#         context["form"] = ChoiceForm()
-#         return context
-
-# class ResultsView(generic.DetailView):
-#     mode = Question
-#     template_name = "squaresg/results.html"
-#     
-#     def get_queryset(self):
-#         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice__id=None)
-
-# def vote(request, question_id):
-#     form = ChoiceForm(initial=request.POST)
-#     question = get_object_or_404(Question, pk=question_id)
-#     if request.method=="POST" and "votey" in request.POST:
-#         print(request.POST)
-#         try:
-#             selected_choice = question.choice_set.get(pk=request.POST["choice"])
-#         except (KeyError, Choice.DoesNotExist):
-#             return render(request, "squaresg/detail.html", {"question":question,"error_message":"POY!!!","form":form})
-#         else:
-#             selected_choice.votes += 1
-#             selected_choice.save()
-#             return HttpResponseRedirect(reverse("squaresg:results", args=(question_id,)))
-#     else:
-#         return render(request, "squaresg/detail.html", {"question":question, "form":form})
-
-# def AddyChoice(request, question_id):
-#     questiony = get_object_or_404(Question, pk=question_id)
-#     if request.method == "POST" and "addey" in request.POST:
-#         form = ChoiceForm(request.POST)
-#         if form.is_valid():
-#             form.instance.question = questiony
-#             form.save()
-#             return HttpResponseRedirect(reverse("squaresg:detail", args=(question_id,)))
-#     else:
-#         form = ChoiceForm()
-#     return render(request, "squaresg/detail.html", {"form":form,"questiony":questiony})
-
 def get_time(request):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
+    sesh = seshy
     timey = Times.objects.filter(sessiony=sesh).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
@@ -206,7 +175,8 @@ def get_time(request):
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
+    sesh = seshy
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
