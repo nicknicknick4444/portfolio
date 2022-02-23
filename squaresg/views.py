@@ -14,10 +14,13 @@ from .models import Number, Exceppo, Scores, Times
 from datetime import date, time, datetime, timedelta
 import random
 
-sstore = SessionStore()
-sstore.create()
-seshy = sstore.session_key
+class Session():
+    def __init__(self):
+        self.sstore = SessionStore()
+        self.sstore.create()
+        self.seshy = self.sstore.session_key
 
+seshy = Session()
 
 # Create your views here.
 
@@ -31,7 +34,7 @@ class IndexView(generic.ListView):
         return queryset
 
 def resetty(request):
-    sesh = seshy
+    sesh = seshy.seshy
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
@@ -48,11 +51,11 @@ def resetty(request):
 
 def resetty2(request):
     #sesh = request.session._session_key
-    sesh = seshy
+    sesh = seshy.seshy
     print("I TRAVEL",sesh)
-    Number.objects.filter(sessiony=sesh).delete()
-    Exceppo.objects.filter(sessiony=sesh).delete()
-    Times.objects.filter(sessiony=sesh).delete()
+    Number.objects.filter(sessiony=sesh).all().delete()
+    Exceppo.objects.filter(sessiony=sesh).all().delete()
+    Times.objects.filter(sessiony=sesh).all().delete()
     return HttpResponseRedirect(reverse("squaresg:squares"))
 
 class SquaresView(generic.ListView):
@@ -72,31 +75,31 @@ class SquaresView(generic.ListView):
         
     def get_queryset(self):        
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
-        if not Number.objects.filter(sessiony = seshy).exists():
+        if not Number.objects.filter(sessiony = seshy.seshy).exists():
             #print("GLUT!", Number.objects.all())
-            print("TRAB!", seshy)
+            print("TRAB!", seshy.seshy)
             #print("BRIXS", self.request.session._session_key)
             #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
-            db = Number.objects.create(wardle = self.listy, sessiony = seshy)
+            db = Number.objects.create(wardle = self.listy, sessiony = seshy.seshy)
             db.save()
         else:
             #Number.objects.filter(sessiony = self.request.session._session_key).all().delete()
-            Number.objects.filter(sessiony = seshy).all().delete()
+            Number.objects.filter(sessiony = seshy.seshy).all().delete()
             #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
-            db = Number.objects.create(wardle = self.listy, sessiony = seshy)
+            db = Number.objects.create(wardle = self.listy, sessiony = seshy.seshy)
             db.save()
         #if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
-        if not Exceppo.objects.filter(sessiony = seshy).exists():
+        if not Exceppo.objects.filter(sessiony = seshy.seshy).exists():
             #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy)
-            print("BLEEK!", seshy)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy.seshy)
+            print("BLEEK!", seshy.seshy)
             exp.save()
         else:
             #Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
-            Exceppo.objects.filter(sessiony = seshy).all().delete()
+            Exceppo.objects.filter(sessiony = seshy.seshy).all().delete()
             #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy)
-            print("POASTY!", seshy)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = seshy.seshy)
+            print("POASTY!", seshy.seshy)
             exp.save()
         
         return self.listy
@@ -112,7 +115,7 @@ class SquaresView(generic.ListView):
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
-    sesh = seshy
+    sesh = seshy.seshy
     SquaresInstance = SquaresView()
     print("I ALSO TRAVEL!", sesh)
     #exceppo = Exceppo.objects.latest("id")
@@ -151,7 +154,7 @@ def RandomSquaresView(request):
 
 def get_time(request):
     #sesh = request.session._session_key
-    sesh = seshy
+    sesh = seshy.seshy
     timey = Times.objects.filter(sessiony=sesh).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
@@ -177,7 +180,7 @@ def get_time(request):
 
 def Scoresy(request, *args, **kwargs):
     #sesh = request.session._session_key
-    sesh = seshy
+    sesh = seshy.seshy
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
