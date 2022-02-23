@@ -62,9 +62,12 @@ def resetty(request):
 def resetty2(request):
     #sesh = request.session._session_key
     print("I TRAVEL",sesh)
-    Number.objects.filter(sessiony=sesh).delete()
-    Exceppo.objects.filter(sessiony=sesh).delete()
-    Times.objects.filter(sessiony=sesh).delete()
+    if Number.objects.filter(sessiony=sesh).exists():
+        Number.objects.filter(sessiony=sesh).delete()
+    if Exceppo.objects.filter(sessiony=sesh).exists():
+        Exceppo.objects.filter(sessiony=sesh).delete()
+    if Times.objects.filter(sessiony=sesh).exists():
+        Times.objects.filter(sessiony=sesh).delete()
     return HttpResponseRedirect(reverse("squaresg:squares"))
 
 class SquaresView(generic.ListView):
