@@ -84,6 +84,7 @@ class SquaresView(generic.ListView):
         self.scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
         self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
                               "form": self.form, "scores": self.scores,}
+        #self.sesh = sesh2
         
     def get_queryset(self):
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
@@ -129,6 +130,7 @@ def RandomSquaresView(request):
 
     print("I ALSO TRAVEL!", sesh)
     SquaresInstance = SquaresView()
+    sesh
 
     #exceppo = Exceppo.objects.latest("id")
     exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
