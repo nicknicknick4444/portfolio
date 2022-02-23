@@ -1,3 +1,5 @@
+from importlib import import_module
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -11,6 +13,24 @@ from .forms import ScoreForm
 from .service import make_list_for_view, randomise_squares, initial_cou
 from .models import Number, Exceppo, Scores, Times
 from datetime import date, time, datetime, timedelta
+from django.contrib.sessions.base_session import AbstractBaseSession
+SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
+
+# class MakeSession(AbstractBaseSession):
+#     def __init__(self):
+#         super().__init__()
+#     @classmethod
+#     def get_session_store_class(cls):
+#         return session_store_class
+
+# if not request.session.exists(request.session.session_key):
+#     request.session.create()
+
+sesho = SessionStore()
+sesho.create()
+sesh = sesho.session_key
+#sesho = Sesho.get_session_store_class()
+print("TARBYTARBYTARBY", sesh)
 
 # Create your views here.
 
@@ -24,7 +44,7 @@ class IndexView(generic.ListView):
         return queryset
 
 def resetty(request):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
@@ -40,7 +60,7 @@ def resetty(request):
     return HttpResponseRedirect(reverse("squaresg:squares"))
 
 def resetty2(request):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
     print("I TRAVEL",sesh)
     Number.objects.filter(sessiony=sesh).delete()
     Exceppo.objects.filter(sessiony=sesh).delete()
@@ -63,21 +83,29 @@ class SquaresView(generic.ListView):
                               "form": self.form, "scores": self.scores,}
         
     def get_queryset(self):
-        if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
+        #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
+        if not Number.objects.filter(sessiony = sesh).exists():
             print("GLUT!", Number.objects.all())
-            db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            db = Number.objects.create(wardle = self.listy, sessiony = sesh)
             db.save()
         else:
-            Number.objects.filter(sessiony=self.request.session._session_key).all().delete()
-            db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            #Number.objects.filter(sessiony = self.request.session._session_key).all().delete()
+            Number.objects.filter(sessiony = sesh).all().delete()
+            #db = Number.objects.create(wardle = self.listy, sessiony = self.request.session._session_key)
+            db = Number.objects.create(wardle = self.listy, sessiony = sesh)
             db.save()
-        if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+        #if not Exceppo.objects.filter(sessiony = self.request.session._session_key).exists():
+        if not Exceppo.objects.filter(sessiony = sesh).exists():
+            #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = sesh)
             print("BLEEK!")
             exp.save()
         else:
-            Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            #Exceppo.objects.filter(sessiony = self.request.session._session_key).all().delete()
+            Exceppo.objects.filter(sessiony = sesh).all().delete()
+            #exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = self.request.session._session_key)
+            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = sesh)
             exp.save()
         
         return self.listy
@@ -93,7 +121,7 @@ class SquaresView(generic.ListView):
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
 
 
     print("I ALSO TRAVEL!", sesh)
@@ -181,7 +209,7 @@ def RandomSquaresView(request):
 #     return render(request, "squaresg/detail.html", {"form":form,"questiony":questiony})
 
 def get_time(request):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
     timey = Times.objects.filter(sessiony=sesh).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
@@ -206,7 +234,7 @@ def get_time(request):
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
-    sesh = request.session._session_key
+    #sesh = request.session._session_key
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
