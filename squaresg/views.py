@@ -28,7 +28,7 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 
 sesho = SessionStore()
-if SessionStore().session_key == None:
+if sesho.session_key == None:
     print("SPECIAL CREATION!")
     sesho.create()
     sesh = sesho.session_key
