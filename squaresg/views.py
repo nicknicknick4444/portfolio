@@ -28,8 +28,11 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 
 sesho = SessionStore()
-sesho.create()
-sesh = sesho.session_key
+if sesho.session_key == None:
+    sesho.create()
+    sesh = sesho.session_key
+else:
+    sesh = sesho.session_key
 #sesho = Sesho.get_session_store_class()
 print("TARBYTARBYTARBY", sesh)
 
