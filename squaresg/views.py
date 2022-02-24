@@ -26,6 +26,10 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 # if not request.session.exists(request.session.session_key):
 #     request.session.create()
 
+if request.session.session_key == None:
+    request.session.create()
+
+print("MARVO CREATION!", request.session.session)
 
 # sesho = SessionStore()
 # if sesho.session_key == None:
