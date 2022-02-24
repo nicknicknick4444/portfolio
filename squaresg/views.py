@@ -31,8 +31,10 @@ sesho = SessionStore()
 if SessionStore().session_key == None:
     print("SPECIAL CREATION!")
     sesho.create()
-sesh = sesho.session_key
-#sesh = str(sesh)
+    sesh = sesho.session_key
+else:
+    sesh = sesho.session_key
+sesh = str(sesh)
 #sesho = Sesho.get_session_store_class()
 print("TARBYTARBYTARBY", sesh)
 
