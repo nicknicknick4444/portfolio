@@ -39,9 +39,20 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 # Create your views here.
 
-#sesh=""
+#sesh = ""
 
+# def foo(request):
+#     num = request.session.get("num")
+#     if num is None:
+#             num = "BLEEE!"
+#     request.session["num"] = num
+#     return render(request, "squares.html")
+# 
+# sesh = ""
 
+#sesh = request.session.get("num")
+
+#sesh = anotherfoo(request)
 
 
 class IndexView(generic.ListView):
@@ -112,6 +123,9 @@ class SquaresView(generic.ListView):
         self.sesh = make_id()
         
     def get_queryset(self):
+        #sesho = self.request.sessino.get("sesh")
+        #sesh = self.request.session.get("num")
+        print("within", sesh)
         #sesh = request.session.get("sesh", self.sesh)
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
         if not Number.objects.filter(sessiony = sesh).exists():
@@ -154,7 +168,7 @@ SquaresInstance = SquaresView()
 # sesh = SquaresInstance.sesh
 # sesh = ""
 sesh = SquaresInstance.sesh
-print("SPOOPZ!!!!!!", SquaresInstance.sesh)
+#print("SPOOPZ!!!!!!", SquaresInstance.sesh)
 print("SPOOKS!!!!!!", sesh)
 
 def RandomSquaresView(request):
