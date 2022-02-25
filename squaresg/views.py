@@ -93,7 +93,8 @@ class SquaresView(generic.ListView):
 #         if globals()["sesh"] == "":
 #             globals()["sesh"] = make_id()
         self.sesh = ""
-        self.sesh = make_id()
+        if self.sesh == self.sesh:
+            self.sesh = make_id()
         
     def get_queryset(self):
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
