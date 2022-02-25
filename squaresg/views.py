@@ -27,7 +27,7 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 #     request.session.create()
 
 
-# sesho = SessionStore()
+#sesho = SessionStore()
 # if sesho.session_key == None or sesho.session_key == sesho.session_key:
 #     sesho.create()
 #     sesh = sesho.session_key
@@ -38,7 +38,7 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 # Create your views here.
 
-sesh = ""
+#sesh = ""
 
 class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
@@ -92,9 +92,12 @@ class SquaresView(generic.ListView):
                               "form": self.form, "scores": self.scores,}
 #         if globals()["sesh"] == "":
 #             globals()["sesh"] = make_id()
-        self.sesh = ""
-        if self.sesh == self.sesh:
-            self.sesh = make_id()
+        self.sesho = SessionStore()
+        self.sesho.create()
+        self.sesh = self.sesho.session_key
+        #self.sesh = ""
+#         if self.sesh == self.sesh:
+#             self.sesh = make_id()
         
     def get_queryset(self):
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
