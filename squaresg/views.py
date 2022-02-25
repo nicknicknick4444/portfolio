@@ -93,6 +93,8 @@ class SquaresView(generic.ListView):
 #         if globals()["sesh"] == "":
 #             globals()["sesh"] = make_id()
         self.sesho = SessionStore()
+        if not self.sesho.session_key == None or not self.sesho.session_key == "":
+            self.sesho.clear()
         self.sesho.create()
         self.sesh = self.sesho.session_key
         #self.sesh = ""
