@@ -38,7 +38,7 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 # Create your views here.
 
-#sesh = ""
+sesh = ""
 
 class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
@@ -92,6 +92,7 @@ class SquaresView(generic.ListView):
                               "form": self.form, "scores": self.scores,}
 #         if globals()["sesh"] == "":
 #             globals()["sesh"] = make_id()
+        self.sesh = ""
         self.sesh = make_id()
         
     def get_queryset(self):
@@ -132,8 +133,8 @@ class SquaresView(generic.ListView):
         return self.times
 
 SquaresInstance = SquaresView()
-sesh = SquaresInstance.sesh
-sesh = ""
+# sesh = SquaresInstance.sesh
+# sesh = ""
 sesh = SquaresInstance.sesh
 
 def RandomSquaresView(request):
