@@ -133,6 +133,8 @@ class SquaresView(generic.ListView):
 
 SquaresInstance = SquaresView()
 sesh = SquaresInstance.sesh
+sesh = ""
+sesh = SquaresInstance.sesh
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
