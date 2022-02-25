@@ -1,6 +1,7 @@
 from importlib import import_module
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
+#import HttpRequest
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.template import loader
@@ -38,7 +39,10 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 # Create your views here.
 
-#sesh = ""
+#sesh=""
+
+
+
 
 class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
@@ -92,16 +96,23 @@ class SquaresView(generic.ListView):
                               "form": self.form, "scores": self.scores,}
 #         if globals()["sesh"] == "":
 #             globals()["sesh"] = make_id()
-        self.sesho = SessionStore()
-        if not self.sesho.session_key == None or not self.sesho.session_key == "":
-            self.sesho.clear()
-        self.sesho.create()
-        self.sesh = self.sesho.session_key
-        #self.sesh = ""
+#        self.sesho = SessionStore()
+#         if not self.sesho.session_key == None or not self.sesho.session_key == "":
+#             self.sesho.clear()
+#         self.sesho.create()
+        #self.sesh = self.sesho.session_key
+        #self.grist = HttpResponse("blame")
+#         self.grist = HttpResponse.session
+#         #self.grist.set_cookie("seshy", make_id())
+#         print("JERROWS!!!!", self.grist)
+#         self.sesh = 222
+
+        #self.sesh = sesh
 #         if self.sesh == self.sesh:
-#             self.sesh = make_id()
+        self.sesh = make_id()
         
     def get_queryset(self):
+        #sesh = request.session.get("sesh", self.sesh)
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
         if not Number.objects.filter(sessiony = sesh).exists():
             print("GLUT!", Number.objects.all())
@@ -137,18 +148,23 @@ class SquaresView(generic.ListView):
     
     def get_duration(self):
         return self.times
+    
 
 SquaresInstance = SquaresView()
 # sesh = SquaresInstance.sesh
 # sesh = ""
 sesh = SquaresInstance.sesh
+print("SPOOPZ!!!!!!", SquaresInstance.sesh)
+print("SPOOKS!!!!!!", sesh)
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
     #sesh = request.session._session_key
+    #sesh = request.session.get("sesh")
 
 
     print("I ALSO TRAVEL!", sesh)
+    print("SCOOOOOPZ2!", SquaresInstance.sesh)
     #SquaresInstance = SquaresView()
     #sesh
 
