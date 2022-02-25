@@ -38,7 +38,7 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 # Create your views here.
 
-sesh = ""
+#sesh = ""
 
 class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
@@ -90,8 +90,9 @@ class SquaresView(generic.ListView):
         self.scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
         self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
                               "form": self.form, "scores": self.scores,}
-        if globals()["sesh"] == "":
-            globals()["sesh"] = make_id()
+#         if globals()["sesh"] == "":
+#             globals()["sesh"] = make_id()
+        self.sesh = make_id()
         
     def get_queryset(self):
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
@@ -129,6 +130,9 @@ class SquaresView(generic.ListView):
     
     def get_duration(self):
         return self.times
+
+SquaresInstance = SquaresView()
+sesh = SquaresInstance.sesh
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
