@@ -140,8 +140,8 @@ def RandomSquaresView(request):
 
 
     print("I ALSO TRAVEL!", sesh)
-    SquaresInstance = SquaresView()
-    sesh
+    #SquaresInstance = SquaresView()
+    #sesh
 
     #exceppo = Exceppo.objects.latest("id")
     exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
