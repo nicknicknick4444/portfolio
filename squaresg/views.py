@@ -114,7 +114,7 @@ class SquaresView(generic.ListView):
         if "sesho" in self.request.COOKIES:
             sesh = self.request.COOKIES["sesho"]
         else:
-            sesh = "GLUPE FIASCO"
+            sesh = "2nd GLUPE FIASCO"
         #sesh = self.sesh
         print("BOOOOOOOOOOOOOOOOOSTY!", sesh)
         if self.request.session.test_cookie_worked():
@@ -253,6 +253,10 @@ def RandomSquaresView(request):
 
 def get_time(request):
     #sesh = request.session._session_key
+    if "sesho" in request.COOKIES:
+        sesh = request.COOKIES["sesho"]
+    else:
+        sesh = "3rd GLUPE"
     timey = Times.objects.filter(sessiony=sesh).latest("id")
     dura = timey.finish_time - timey.start_time
     days = dura.days
@@ -278,6 +282,10 @@ def get_time(request):
 
 def Scoresy(request, *args, **kwargs):
     #sesh = request.session._session_key
+    if "sesho" in request.COOKIES:
+        sesh = request.COOKIES["sesho"]
+    else:
+        sesh = "4th GLUPE"
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         print(form)
