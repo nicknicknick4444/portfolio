@@ -1,7 +1,6 @@
 from importlib import import_module
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
-#import HttpRequest
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.template import loader
@@ -16,6 +15,7 @@ from .models import Number, Exceppo, Scores, Times
 from datetime import date, time, datetime, timedelta
 from django.contrib.sessions.base_session import AbstractBaseSession
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
+#from .logico import browser_cookie3
 
 # class MakeSession(AbstractBaseSession):
 #     def __init__(self):
@@ -27,33 +27,21 @@ SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 # if not request.session.exists(request.session.session_key):
 #     request.session.create()
 
+#cookies = list(browser_cookie3.chrome())
 
-#sesho = SessionStore()
+#print("DELP!!! DORV!!!!!", cookies)
+
+
+# sesho = SessionStore()
 # if sesho.session_key == None or sesho.session_key == sesho.session_key:
 #     sesho.create()
 #     sesh = sesho.session_key
 # else:
 #     sesh = sesho.session_key
-# #sesho = Sesho.get_session_store_class()
-# print("TARBYTARBYTARBY", sesh)
+#sesho = Sesho.get_session_store_class()
+#print("TARBYTARBYTARBY", sesh)
 
 # Create your views here.
-
-#sesh = ""
-
-# def foo(request):
-#     num = request.session.get("num")
-#     if num is None:
-#             num = "BLEEE!"
-#     request.session["num"] = num
-#     return render(request, "squares.html")
-# 
-# sesh = ""
-
-#sesh = request.session.get("num")
-
-#sesh = anotherfoo(request)
-
 
 class IndexView(generic.ListView):
     template_name = "squaresg/index.html"
@@ -66,6 +54,10 @@ class IndexView(generic.ListView):
 
 def resetty(request):
     #sesh = request.session._session_key
+    if "sesho" in request.COOKIES:
+        sesh = request.COOKIES["sesho"]
+    else:
+        sesh = "FIRST GLUPE"
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
@@ -81,15 +73,22 @@ def resetty(request):
     return HttpResponseRedirect(reverse("squaresg:squares"))
 
 def resetty2(request):
+    response = HttpResponseRedirect(reverse("squaresg:squares"))
+    request.session.set_test_cookie()
+    you = request.COOKIES.get("sesho", str(make_id()))
+    sesh = you
+    response.set_cookie("sesho", you)
+    print("BELLINGCAT!", sesh)
     #sesh = request.session._session_key
-    print("I TRAVEL",sesh)
+    print("I TRAVEL", you)
     if Number.objects.filter(sessiony=sesh).exists():
         Number.objects.filter(sessiony=sesh).delete()
     if Exceppo.objects.filter(sessiony=sesh).exists():
         Exceppo.objects.filter(sessiony=sesh).delete()
     if Times.objects.filter(sessiony=sesh).exists():
         Times.objects.filter(sessiony=sesh).delete()
-    return HttpResponseRedirect(reverse("squaresg:squares"))
+    #return HttpResponseRedirect(reverse("squaresg:squares"))
+    return response
 
 class SquaresView(generic.ListView):
     def __init__(self):
@@ -105,28 +104,22 @@ class SquaresView(generic.ListView):
         self.scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
         self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
                               "form": self.form, "scores": self.scores,}
-#         if globals()["sesh"] == "":
-#             globals()["sesh"] = make_id()
-#        self.sesho = SessionStore()
-#         if not self.sesho.session_key == None or not self.sesho.session_key == "":
-#             self.sesho.clear()
-#         self.sesho.create()
-        #self.sesh = self.sesho.session_key
-        #self.grist = HttpResponse("blame")
-#         self.grist = HttpResponse.session
-#         #self.grist.set_cookie("seshy", make_id())
-#         print("JERROWS!!!!", self.grist)
-#         self.sesh = 222
-
-        #self.sesh = sesh
-#         if self.sesh == self.sesh:
-        self.sesh = make_id()
+        #self.sesh = sesh2
+#         if "sesho" in self.request.COOKIES:
+#             self.sesh = self.request.COOKIES["sesho"]
+#         else:
+        #self.sesh = ""
         
     def get_queryset(self):
-        #sesho = self.request.sessino.get("sesh")
-        #sesh = self.request.session.get("num")
-        print("within", sesh)
-        #sesh = request.session.get("sesh", self.sesh)
+        if "sesho" in self.request.COOKIES:
+            sesh = self.request.COOKIES["sesho"]
+        else:
+            sesh = "GLUPE FIASCO"
+        #sesh = self.sesh
+        print("BOOOOOOOOOOOOOOOOOSTY!", sesh)
+        if self.request.session.test_cookie_worked():
+            print("RORBLE BORPLE!!!")
+            self.request.session.delete_test_cookie()
         #if not Number.objects.filter(sessiony = self.request.session._session_key).exists():
         if not Number.objects.filter(sessiony = sesh).exists():
             print("GLUT!", Number.objects.all())
@@ -162,26 +155,21 @@ class SquaresView(generic.ListView):
     
     def get_duration(self):
         return self.times
-    
 
-SquaresInstance = SquaresView()
-# sesh = SquaresInstance.sesh
-# sesh = ""
-sesh = SquaresInstance.sesh
-#print("SPOOPZ!!!!!!", SquaresInstance.sesh)
-print("SPOOKS!!!!!!", sesh)
+#SquaresInstance = SquaresView()
 
 def RandomSquaresView(request):
     #sesh = request.session._session_key
     #sesh = request.session._session_key
-    #sesh = request.session.get("sesh")
 
-
+    SquaresInstance = SquaresView()
+    if "sesho" in request.COOKIES:
+        sesh = request.COOKIES["sesho"]
+    else:
+        sesh = "GLUPE"
+    #sesh = SquaresInstance.sesh
     print("I ALSO TRAVEL!", sesh)
-    print("SCOOOOOPZ2!", SquaresInstance.sesh)
-    #SquaresInstance = SquaresView()
-    #sesh
-
+    
     #exceppo = Exceppo.objects.latest("id")
     exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
     form = SquaresInstance.get_form()
