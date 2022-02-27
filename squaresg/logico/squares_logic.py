@@ -1,55 +1,16 @@
 import random
 import json
-#from ..models import Exceppo
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from datetime import date, time, datetime
 
-# def make_rand_list_number():
-#     if not Rand.exists():
-        
-
 def make_list():
-    #listy = ["square_"+ str(i) +".png" for i in range(1,10)]
     listy = [str(i) for i in range(1,10)]
-    #listy = ["1","3","2","4","5","6","7","8","9"]
-    #rand_num = random.randint(1,10)
     ind = random.randint(0,8)
-    #ind = 5-1
     excep = (listy.pop(ind))
-#     if not data_token.objects.all().exists():
-#         print("PEB!!")
-#         excepsav = data_token.objects.create(exceppy = excep)
-#         excepsav.save()
-    #excep = data_token.objects.latest("id")
     listy.insert(ind, "blank")
-    print(listy[ind])
-    print("TRUE JAWCY?", excep)
-    print("GROOO!", listy)
-#     listy2 = [i for i in listy]
-    #random.shuffle(listy)
-#     if listy == listy2:
-#         return make_list(data_token)
-#     else:
-#         return listy, excep
+    random.shuffle(listy)
     return listy, excep
-
-def rand_choose(listy,listy2):
-    q = random.choice(listy)
-    if q in listy2:
-        return rand_choose(listy, listy2)
-    else:
-        return q
-
-# def randomise(listy):
-#     #listy2 = []
-#     #got = []
-# #     while len(listy2) < len(listy):
-# #         n = rand_choose(listy,listy2)
-# #         listy2.append(n)
-#     random.shuffle(listy)
-    
-    return listy
 
 def make_cou(listy):
     if listy[0] == "blank":
@@ -80,62 +41,26 @@ def win_test(listy, exceppo):
     for index, i in enumerate(listy2):
         if listy2[index] == "blank":
             listy2[index] = str(exceppo)
-#     if listy2 == ["square_1.png","square_2.png","square_3.png",
-#                  "square_4.png","square_5.png","square_6.png",
-#                  "square_7.png","square_8.png","square_9.png"]:
     if listy2 == ["1","2","3","4","5","6","7","8","9"]:
-        print("Belinda Carlisle!")
         return True
     else:
         return False
 
 def randomise2(listy, excep, clicked, data_token2, gases):
     winning_test = False
-    print("START OF RANDOMISE2!", listy)
-    print("EXCEP!", excep)
-    #clicked = "square_2.png"
     tokens = [clicked, "blank"]
     tokens2 = tokens[::-1]
-    print("SWITCH THIS:", tokens)
-    print("WITH THIS:", tokens2)
-    print(tokens2, "TOKENS2 REVERSED ETC")
-    print("BEGIN:", listy)
-    for index, n in enumerate(listy):
-        #for index2, b in enumerate(tokens): 
+    for index, n in enumerate(listy): 
         if n == tokens[0]:
             listy[index] = tokens2[0]
-            print("FIRST SWAP:", listy)
-            #listy[index] = "PUNCE!"
         elif n == tokens[1]:
             listy[index] = tokens2[1]
-            print("SECOND SWAP", listy)
 
     cou = make_cou(listy)
-    #where_now = 
-    print("DONE!", listy)
     if win_test(listy, excep):
-#         listy = ["square_1.png","square_2.png","square_3.png",
-#                  "square_4.png","square_5.png","square_6.png",
-#                  "square_7.png","square_8.png","square_9.png"]
-#         for index, i in enumerate(listy):
-#             if i == "blank":
-#                 listy[index] = str(excep)
-#             else:
-#                 listy[index] = i
-        #listy = [excep for i in listy if i == "blank"]
         listy = ["1","2","3","4","5","6","7","8","9"]
-        #time = data_token2.objects.filter(sessiony=gases).latest("id")
         time = data_token2.objects.filter(sessiony=gases).latest("id")
         time.finish_time = datetime.now()
         time.save()
         cou = "WIN"
-    #finish_time = time.finish_time
-    #listy2 = [i for i in listy]
     return listy, cou
-
-        
-#listy = make_list()
-#listy2 = randomise(listy)
-
-# print(listy)
-# print(listy2)
