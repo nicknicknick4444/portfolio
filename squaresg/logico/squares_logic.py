@@ -9,7 +9,8 @@ def make_list():
     ind = random.randint(0,8)
     excep = (listy.pop(ind))
     listy.insert(ind, "blank")
-    random.shuffle(listy)
+    # Easy mode activated!
+    #random.shuffle(listy)
     return listy, excep
 
 def make_cou(listy):
