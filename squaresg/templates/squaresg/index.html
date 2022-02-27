@@ -1,8 +1,16 @@
+{% extends "base.html" %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+{% block content %}
 
 <h1>Holding Page</h1>
 <p>This will be my portfolio site.</p>
 
 
 <a href="{% url "squaresg:resetto2" %}">9 Squares</a>
+
+{% endblock content %}
