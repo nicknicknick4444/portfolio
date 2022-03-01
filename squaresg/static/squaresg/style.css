@@ -114,7 +114,7 @@ a .column {
 	#opacity: 0.8;
 	#height: 100%;
 	#width: 100%;
-	color: #1a0149;
+	color: #6202b0;
 	background-color: #eeee00;
 	text-decoration: none;
 }
@@ -243,6 +243,44 @@ fieldset {
 #small {
 	display: none;
 }
+
+
+
+
+
+/* Spelling Police */
+
+.the_tweets {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.the_tweets a {
+	text-decoration: none;
+	font-weight: bold;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
