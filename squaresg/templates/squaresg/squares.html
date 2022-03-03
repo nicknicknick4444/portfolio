@@ -47,7 +47,7 @@ function hideSave() {
 
 
 
-{% if request.COOKIES.sesho %}
+
 
 
 
@@ -61,6 +61,18 @@ function hideSave() {
 {% endif %}
 <a href="#" onclick="getScore();return false;">Leaderboard</a>
 </div>
+
+
+
+
+
+
+{% if request.COOKIES.sesho %}
+
+
+
+
+
 
 <!--<br>-->
 
@@ -160,9 +172,9 @@ function hideSave() {
 
 
 
-
-<div class="pad">PLAY GAME</div>
-
+<a href="{% url "squaresg:resetto2" %}">
+ <div class="pad"><span id="playGame">PLAY GAME</span></div>
+</a>
 
 
 {% endif %}
