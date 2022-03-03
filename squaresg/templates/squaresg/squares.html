@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+<link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
@@ -42,6 +42,12 @@ function hideSave() {
 
 {% endblock %}
 
+
+
+
+
+
+{% if request.COOKIES.sesho %}
 
 
 
@@ -146,6 +152,20 @@ function hideSave() {
 
 
 
+
+
+
+
+{% else %}
+
+
+
+
+<div class="pad">PLAY GAME</div>
+
+
+
+{% endif %}
 
 
 
