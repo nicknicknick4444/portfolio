@@ -43,7 +43,6 @@ def resetty(request):
 
 def resetty2(request):
     response = HttpResponseRedirect(reverse("squaresg:squares"))
-    #response = redirect()
     request.session.set_test_cookie()
     you = request.COOKIES.get("sesho", str(make_id()))
     sesh = you
@@ -70,10 +69,8 @@ class SquaresView(generic.ListView):
         self.cou = initial_cou(self.listy)
         self.form = ScoreForm
         self.scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
-        self.grot = False
-        print("GROT 1", self.grot)
         self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
-                              "form": self.form, "scores": self.scores,"cached_yet":self.grot}
+                              "form": self.form, "scores": self.scores}
         
     def get_queryset(self):
         if "sesho" in self.request.COOKIES:
@@ -113,11 +110,6 @@ def RandomSquaresView(request):
         sesh = request.COOKIES["sesho"]
     else:
         sesh = "GLUPE"
-    if sesh == request.COOKIES["sesho"]:
-        grot = True
-    else:
-        grot = False
-    request.session["cached_yet"] = grot
     exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
     form = SquaresInstance.get_form()
     scores = SquaresInstance.get_scores()
@@ -132,17 +124,14 @@ def RandomSquaresView(request):
     nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, sesh)
     db2 = Number.objects.create(wardle=nine_squares_list, sessiony = sesh)
     db2.save()
-    context = {"cached_yet":grot,"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
-               "exceppo":exceppo, "form":form, "scores":scores, "cached_yet":grot}
+    context = {"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
+               "exceppo":exceppo, "form":form, "scores":scores}
     
     url = "squaresg/squares.html"
 
     if cou == "WIN":
         Number.objects.filter(sessiony=sesh).latest("id").delete()
     if request.method == "POST" and "squares_rand" in request.POST:
-        print("GROT 2", SquaresInstance.grot)
-        #SquaresInstance.grot = False
-        print("GROT 3", SquaresInstance.grot)
         return render(request, url, context)
     else:
         return render(request, url, context)
