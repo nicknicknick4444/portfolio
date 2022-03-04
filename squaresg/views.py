@@ -195,13 +195,13 @@ def Scoresy(request, *args, **kwargs):
     return render(request, "squaresg/squares.html", {"form":form})
 
 
-def error_404(request, exception):
-    data = {}
-    return render(request, "squaresg/404.html", status_code=404)
+def handler404(request, exception):
+    #data = {}
+    return render(request, "404.html", status=404)
 
-def error_500(request):
-    data = {}
-    return render(request, "squaresg/500.html", status_code=500)
+def handler500(request):
+    #data = {}
+    return render(request, "500.html", status=500)
 
 # 
 # def custom_page_not_found(request):
