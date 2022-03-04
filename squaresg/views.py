@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.template import loader
@@ -131,6 +131,14 @@ def RandomSquaresView(request):
 
     if cou == "WIN":
         Number.objects.filter(sessiony=sesh).latest("id").delete()
+        
+#     try:
+#         exceppo
+#     except exceppo.DoesNotExist:
+#         print("FUCK!!")
+#         raise Http404("FUCK!")
+
+        
     if request.method == "POST" and "squares_rand" in request.POST:
         return render(request, url, context)
     else:
@@ -185,3 +193,29 @@ def Scoresy(request, *args, **kwargs):
     else:
         form = ScoreForm()
     return render(request, "squaresg/squares.html", {"form":form})
+
+
+def error_404(request, exception):
+    data = {}
+    return render(request, "squaresg/404.html", data)
+
+def error_500(request):
+    data = {}
+    return render(request, "squaresg/500.html", data)
+
+# 
+# def custom_page_not_found(request):
+#     return django.views.defaults.page_not_found(request, None)
+# 
+# def custom_server_error(request):
+#     return django.views.defaults.server_error(request)
+
+# 
+# def error_403(request, exception):
+#     data = {}
+#     return render(request, "squaresg/403.html", data)
+# 
+# def error_400(request, exception):
+#     data = {}
+#     return render(request, "squaresg/400.html", data)
+

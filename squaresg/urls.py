@@ -1,7 +1,14 @@
 from django.urls import path
 from . import views
+import django
 
 app_name = "squaresg"
+
+def custom_page_not_found(request):
+    return django.views.defaults.page_not_found(request, None)
+
+def custom_server_error(request):
+    return django.views.defaults.server_error(request)
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
@@ -15,4 +22,11 @@ urlpatterns = [
 #    path("int:question_id/addey/", views.addeyfunc, name="addy"),
     #path("<int:question_id>/addey/", views.AddyChoice, name="addy"),
     path("saveIt/", views.Scoresy, name="scoresyform"),
+#     path("404/", custom_page_not_found),
+#     path("500/", custom_server_error),
     ]
+
+handler404 = "squaresg.views.error_404"
+handler500 = "squaresg.views.error_500"
+# handler403 = "squaresg.views.error_403"
+# handler400 = "squaresg.views.error_400"
