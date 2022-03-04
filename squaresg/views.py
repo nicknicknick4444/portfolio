@@ -197,11 +197,11 @@ def Scoresy(request, *args, **kwargs):
 
 def error_404(request, exception):
     data = {}
-    return render(request, "squaresg/404.html", data)
+    return render(request, "squaresg/404.html", status_code=404)
 
 def error_500(request):
     data = {}
-    return render(request, "squaresg/500.html", data)
+    return render(request, "squaresg/500.html", status_code=500)
 
 # 
 # def custom_page_not_found(request):
