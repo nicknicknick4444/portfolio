@@ -48,7 +48,7 @@ function hideSave() {
 
 
 
-
+{% if request.COOKIES.sesho %}
 
 
 <div class="missingPiece">
@@ -67,7 +67,7 @@ function hideSave() {
 
 
 
-{% if request.COOKIES.sesho %}
+
 
 
 
@@ -172,10 +172,38 @@ function hideSave() {
 
 
 
+
+
+<div class="missingPiece">
+<a href="{% url "squaresg:index" %}">Home</a>
+<!--{% if cou == "WIN" %}
+ <a href="{% url "squaresg:resetto2" %}">Reset
+{% else %}
+ <a href="{% url "squaresg:resetto" %}">Reset</a>
+{% endif %}
+<a href="#" onclick="getScore();return false;">Leaderboard</a>-->
+</div>
+
+
+
+
+
+
+
 <a href="{% url "squaresg:resetto2" %}">
  <div class="pad"><span id="playGame">PLAY GAME</span></div>
 </a>
 
+<!--<div id="scoreBoard">
+<div style="width: 100%;float: left; text-align: right;"><a href="#" onclick="hideScore();return false;">(Close)</a></div>
+<p id="top10"><b>Top Winners</b></p>
+ <div style="padding-bottom: 10px;">
+  <div class="scoreLeft" id="full"><strong>Rank/ Name</strong></div>
+  <div class="scoreMidL" id="full"><strong>Moves</strong></div>
+  <div class="scoreMidR" id="full"><strong>Resets</strong></div>
+  <div class="scoreRight" id="full"><strong>Time</strong></div>
+
+ </div>-->
 
 {% endif %}
 
