@@ -54,7 +54,8 @@ def randomise2(listy, excep, clicked, data_token2, gases):
     for index, n in enumerate(listy): 
         if n == tokens[0]:
             listy[index] = tokens2[0]
-        elif n == tokens[1]:
+        # Next line is no longer elif, may have caused odd behaviour
+        if n == tokens[1]:
             listy[index] = tokens2[1]
 
     cou = make_cou(listy)
