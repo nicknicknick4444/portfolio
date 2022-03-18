@@ -6,9 +6,9 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('spelling', '0016_alter_tweetlists_twe_time'),
-    ]
+#     dependencies = [
+#         ('spelling', '0016_alter_tweetlists_twe_time'),
+#     ]
 
     operations = [
         migrations.AlterField(
