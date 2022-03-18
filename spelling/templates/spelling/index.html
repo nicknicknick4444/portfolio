@@ -1,1 +1,220 @@
-<h1>Hello!</h1>
+<header>Twitter Spelling Police</header>
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "spelling/style.css" %}" >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space&+ono" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+{% block content %}
+
+<!--<h1>Hello!</h1>
+<Br>
+<a href="http://127.0.0.1:8000/">Back</a><br><br>-->
+
+<body>
+
+
+{% block javascript %}
+<script type="text/javascript">
+function openBox() {
+ <!--var enc = "?tweety_id={{ res.tweet_id | urlencode }}
+&tweety_text={{ res.tweet_text | urlencode }}
+&screen_name={{ res.their_username | urlencode }}"
+ var u = encodeURIComponent(enc)
+ document.getElementbyId("boxy").innerHTML = u-->
+ document.getElementById("boxy").style.display = "block";
+ return true;
+}
+</script>
+
+<script type="text/javascript">
+function closeBox() {
+ document.getElementById("boxy").style.display = "none";
+}
+</script>
+{% endblock %}
+
+
+
+<div class="controls" id="radios">
+<!-- Radio buttons for word picking-->
+<form action="{% url "spelling:wordpicking" %}" method="POST">{% csrf_token %}
+ <div>
+  <!--<label for "thye">Thye</label>-->
+  <label>
+  {% if wordu == "thye" or wordu == "blanku" %}
+   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="thye" value="thye">
+  {% endif %}
+  <!--<label for "thye">-->Thye</label>
+  &nbsp;&nbsp;
+  <label>
+  {% if wordu == "becasue" %}
+   <input type="radio" name="wordpicking" id="becasue" value="becasue" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="becasue" value="becasue">
+  {% endif %}
+  <!--<label for="becasue">-->Becasue</label>
+  &nbsp;&nbsp
+  <label>
+  {% if wordu == "againts" %}
+   <input type="radio" name="wordpicking" id="againts" value="againts" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" if="againts" value="againts">
+  {% endif %}
+  <!--<label for="againts">-->Againts</label>
+<br>
+  
+  <input type="submit" value="Submit">
+ </div>
+</form>
+</div>
+
+
+
+
+{% if wordu == "blanku" %}
+  <div class="hello">Please select a typo!</div>
+{% else %}
+
+
+<div class="controls" id="pages">
+{% if gus > "1" %}
+<a href="{% url "spelling:filtdown" %}" id="prev5">
+Prev 5</a>&nbsp;&nbsp;|&nbsp;&nbsp
+
+{% else %} 
+{% endif %}
+
+{{ whichp }}
+
+{% if gus < "6" %}
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="{% url "spelling:filtup" %}" id="next5">
+Next 5 
+</a>
+{% else %}
+{% endif %}
+</div>
+
+
+{% for res in tweets %}
+
+<div class="the_tweets" id="tweet{{ forloop.counter }}" onclick="openBox();">
+ <a href="{% url "spelling:index" %}?tweety_id={{ res.tweet_id | urlencode }}
+&tweety_text={{ res.tweet_text | urlencode }}
+&screen_name={{ res.their_username | urlencode }}&boxo=TRUE" name="{{ res.tweet_id }}">
+
+
+
+
+
+
+  <!--<div class="deets-top">{{ res.tweet_id }}</div>-->
+  <!--<div class="deets-top">--><strong><div class="deets-left">@{{ res.their_username }}</div><div class="deets-right"><i>{{ res.tweet_date }}</i></div></strong><!--</div>-->
+  <div class="deets-bottom">{{ res.tweet_text }}</div>
+  <!--<div class="deets-bottom"><i>{{ res.tweet_date }}</i></div>-->
+
+
+ </a>
+</div>
+
+<!--<br>-->
+
+{% endfor %}
+
+
+
+
+
+<div class="controls" id="pages">
+{% if gus > "1" %}
+ <a href="{% url "spelling:filtdown" %}" id="prev5">
+Prev 5</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+{% else %}
+{% endif %}
+
+
+{{ whichp }}
+
+{% if gus < "6" %}
+&nbsp;&nbsp;|&nbsp;&nbsp;
+ <a href="{% url "spelling:filtup" %}" id="next5">
+Next 5 
+ </a>
+{% else %}
+{% endif %}
+
+
+{% endif %}
+</div>
+
+
+
+
+
+
+
+{% if boxo == "TRUE" or request.COOKIES.risp == "THANK!" %}
+<div id="boxy" style="display: block;">
+{% else %}
+<div id="boxy" style="display: none;">
+{% endif %}
+
+
+{% if request.COOKIES.risp == "THANK!" %}
+<!--<div id="boxy">-->
+
+<h2>You have sent your Tweet!</h2>
+<p><a href="https://twitter.com/{{ request.COOKIES.namey }}/status/{{ request.COOKIES.done }}/" target="#">View it here.</a></p>
+
+<p id="closer"><a href="{% url "spelling:voted_already" %}">Close (x)</a></p>
+
+<!--</div>-->
+{% elif request.COOKIES.risp == "STOP!" %}
+<!--<div id="boxy">-->
+<h3><i>You have already tweeted!</i></h3>
+<p class="closer"><a href="{% url "spelling:index" %}?boxo=FALSE">Close (x)</a></p>
+<!--</div>-->
+{% elif request.COOKIES.risp == "START!" %}
+
+<!--<div id="boxy">-->
+
+<p class="inst">Your Tweet:</p>
+<p class="words1"><i>{{ words }}</i></p>
+<p class="inst">Replying To:</p>
+<p class="words2"><i>{{ the_text }}</i></p>
+
+<p class="inst">Send Reply?</p>
+<a href="{% url "spelling:sending" %}?tweety_id={{ clicked | urlencode }}&boxo=TRUE" name="clicked">Submit</a><!--{% csrf_token%}
+ <p class="closer"><input type="submit" value="Submit"></form>-->  |  
+<a href="{% url "spelling:index" %}?boxo=FALSE">Cancel</a></p>
+<!--</div>-->
+{% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+{% endblock content %}
