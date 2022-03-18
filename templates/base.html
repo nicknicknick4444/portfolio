@@ -4,13 +4,20 @@
 <html>
 <head>
  <meta charset="utf-8">
- <title>{% block title %}9 Squares Game{% endblock title %}</title>
+ <title>{% block title %}My Portfolio{% endblock title %}</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
+<!--<link rel="stylesheet" type="text/css" href="{% static "spelling/style.css" %}" >-->
 
 </head>
 
-{% block nav-global %}SICK Menu!{% endblock %}
+{% block nav-global %}
+<div class="nav"><!--SICK Menu!-->
+<a href="http://127.0.0.1:8000/">Home</a>&nbsp;&nbsp;&nbsp;
+
+
+Projects</div>
+{% endblock %}
   
    {% block content %}
    {% endblock content %}
