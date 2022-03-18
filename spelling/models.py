@@ -22,6 +22,7 @@ class TweetLists(models.Model):
     twe_dict = models.CharField(max_length=5000, default="")
     twe_term = models.CharField(max_length=20, default="")
     twe_seshn = models.CharField(max_length=200, default="")
-    twe_time = models.DateTimeField(default=datetime.datetime.now(datetime.timezone.utc))
+    #twe_time = models.DateTimeField(default=datetime.datetime.now(datetime.timezone.utc))
+    twe_time = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.twe_seshn
