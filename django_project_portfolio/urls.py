@@ -25,3 +25,6 @@ urlpatterns = [
 #     path("spelling/", include("spelling.urls")),
 #     path('admin/', admin.site.urls),
 ]
+
+# handler404 = "squaresg.views.error_404"
+# handler500 = "squaresg.views.error_500"
