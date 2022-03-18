@@ -5,7 +5,6 @@ from datetime import timedelta
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-import requests
 from .models import Tub, Admonish, TweetLists
 from .service import dicty2u
 from .logico.spelling_logic import search_twittor
