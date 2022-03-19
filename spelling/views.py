@@ -38,10 +38,12 @@ def searchy(request):
 #         seshn = request.COOKIES.get("seshn", make_id())
 #     else:
 #         seshn = request.COOKIES["seshn"]
-    seshn = cookie_help(request.COOKIES, "seshn", make_id())
+    if not "seshn" in request.COOKIES:
+        seshn = cookie_help(request.COOKIES, "seshn", make_id())
     #make_lists(seshn)
     #print("clurt")
-    
+    else:
+        seshn = request.COOKIES["seshn"]
     print("seshn WORKED:", seshn)
     checking = TweetLists.objects.filter(twe_seshn=seshn, twe_term="thye").values_list("twe_time")
     #checking = TweetLists.objects.filter(twe_seshn=seshn, twe_term="thye").values_list("twe_time")
