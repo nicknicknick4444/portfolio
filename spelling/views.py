@@ -212,7 +212,6 @@ def sure(request):
     global gursp
     global words
     #words = "Awesome!"
-    #template = "spelling/to_send.html"
     template = "spelling/index.html"
     clicked = request.GET.get("tweety_id")
     #clicked3 = request.GET.get("screen_name")
