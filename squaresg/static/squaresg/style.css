@@ -662,6 +662,10 @@ fieldset {
 	font-size: 12px;
 }
 
+.controls {
+	font-size: 10px;
+}
+
 .chooseo {
 	width: 30%;
 	display: inline;
