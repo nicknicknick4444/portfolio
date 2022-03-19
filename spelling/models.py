@@ -19,7 +19,7 @@ class Admonish(models.Model):
         return self.adm_text
 
 class TweetLists(models.Model):
-    twe_dict = models.CharField(max_length=5000, default="")
+    twe_dict = models.CharField(max_length=50000, default="")
     twe_term = models.CharField(max_length=20, default="")
     twe_seshn = models.CharField(max_length=200, default="")
     #twe_time = models.DateTimeField(default=datetime.datetime.now(datetime.timezone.utc))
