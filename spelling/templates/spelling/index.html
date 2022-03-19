@@ -22,11 +22,6 @@
 {% block javascript %}
 <script type="text/javascript">
 function openBox() {
- <!--var enc = "?tweety_id={{ res.tweet_id | urlencode }}
-&tweety_text={{ res.tweet_text | urlencode }}
-&screen_name={{ res.their_username | urlencode }}"
- var u = encodeURIComponent(enc)
- document.getElementbyId("boxy").innerHTML = u-->
  document.getElementById("boxy").style.display = "block";
  return true;
 }
