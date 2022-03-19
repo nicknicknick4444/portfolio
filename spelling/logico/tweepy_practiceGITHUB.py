@@ -1,16 +1,15 @@
 import random, ast
 import datetime
-
 import tweepy
-#from django.utils import timezone
+
 from ..models import Admonish, TweetLists
 
 
 client = tweepy.Client(
-consumer_key = SECRET
-consumer_secret = SECRET,
-access_token = SECRET,
-access_token_secret = SECRET
+consumer_key = "SECRET",
+consumer_secret = "SECRET",
+access_token = "SECRET",
+access_token_secret = "SECRET",
 )
 
 auth = tweepy.OAuth1UserHandler(
@@ -20,12 +19,6 @@ auth = tweepy.OAuth1UserHandler(
 api = tweepy.API(auth)
 
 words = ["thye","becasue","againts"]
-
-# public_tweets = api.home_timeline()
-# for tweet in public_tweets:
-#     print(tweet.text)
-
-#user = api.get_user(sincreen_name="JimMFelton")
 
 def cookie_help(reqc, tok, func):
     if not tok in reqc:
@@ -40,10 +33,8 @@ def cookie_help_2(recq, tok, func, elso):
         vari = recq.get(tok, func)
         return vari
     else:
-        #vari = recq[str(elso)]
         vari = elso
         return vari
-
 
 def page_turn(gus, whichp, dicty2):
     if int(gus) > 6:
@@ -53,7 +44,6 @@ def page_turn(gus, whichp, dicty2):
         gus = "1"
         whichp = "1 - 5"
     if gus == "1":
-
         dicty2 = dicty2[:5]
         whichp = "1 - 5"
     elif gus == "2":
@@ -63,7 +53,6 @@ def page_turn(gus, whichp, dicty2):
         dicty2 = dicty2[10:15]
         whichp = "11 - 15"
     elif gus == "4":
-
         dicty2 = dicty2[15:20]
         whichp = "16 - 20"
     elif gus == "5":
@@ -74,17 +63,13 @@ def page_turn(gus, whichp, dicty2):
         whichp = "26 - 30"
     return dicty2, whichp
 
-
-
 def getty(search_term):
     tweets = api.search_tweets(q=search_term, count=300, tweet_mode="extended")
-    
     
     those_tweets = []
     for tweet in tweets:
         ind_tweet = {}
         goose = tweet
-        #print(goose)
         ind_tweet["their_username"] = goose._json["user"]["screen_name"]
         ind_tweet["tweet_text"] = goose._json["full_text"]
         ind_tweet["tweet_id"] = goose._json["id_str"]
@@ -97,10 +82,9 @@ def getty(search_term):
         those_tweets.append(ind_tweet)
     those_tweets2 = [i for i in those_tweets if i["tweet_text"][:4] != "RT @"]
     those_tweets2 = those_tweets2[:30]
-        #goose = "PARCE! " + ind_tweet["tweet_date"]
-    #if not
-    print("YAROOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!")
-    return those_tweets2#, goose
+    
+    print("If you see this, the tweets are being (re)generated!!!!!!!!!!!")
+    return those_tweets2
 
 def make_lists(seshn):
     global words
@@ -110,36 +94,15 @@ def make_lists(seshn):
             db = TweetLists.objects.create(twe_dict = big_list, twe_term = term, \
                                            twe_seshn=seshn, twe_time = datetime.datetime.now())
             db.save()
-#         else:
-#             pass
 
 def get_lists(term, seshn):
-    #if TweetLists.objects.filter(twe_seshn = seshn).exists():
     word_dict = TweetLists.objects.filter(twe_seshn = seshn, twe_term=term).values_list("twe_dict")
     word_dict = word_dict[0][0]
-    #print(type(word_dict))
     word_dict = str(word_dict)[1:-2] + "}"
     word_dict = ast.literal_eval(word_dict)
-    #print("PLASB", type(word_dict), word_dict)
-#     else:
-#         word_dict = [[""][""]]
     return word_dict
 
-
-
-# test = api.update_status("Great, it worked!")
-# 
-# test
-
-# tist = api.update_status(status="That's just something YOU think!", in_reply_to_status_id="1498750250605023234", auto_populate_reply_metadata=True)
-# tist
-
-#EXACT TWEET ID: 1498746354641911812
-
 def send_tweet(word, that_id):
-    #word = "MUSIC"
-    #that_id = 1499853913595555843
-    #ric's tweet=1499871548706275328
     return api.update_status(status=word, in_reply_to_status_id=that_id, auto_populate_reply_metadata=True)
 
 def make_id():
@@ -148,7 +111,6 @@ def make_id():
 
 def get_answers():
     global words
-    #words = ["thye","becasue","againts"]
     ids = [random.randint(1,2) for i in range(1,4)]
     your_words = dict(zip(words, ids))
     print("PRADDLE", your_words)
