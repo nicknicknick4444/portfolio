@@ -299,6 +299,9 @@ a:link {
 
 /* Spelling Police */
 
+body {
+	min-width: 316px;
+}
 
 .the_tweets {
 	#text-decoration: none;
@@ -455,16 +458,41 @@ span .closer:hover {
 	font-family: "Fredoka", sans-serif;
 	#padding: 0;
 	color: #000000;
+	margin: auto;
+	#width: 50%;
+	width: 316px;
 }
 
-.controls a:link, .controls a:visited {
+.controls a:link, .controls a:visited,
+.pages a:link, .pages a:visited {
 	color: #000000;
 }
 
-.controls a:hover {
+.controls a:hover, .pages a:hover {
 	color: #e300a3;
 }
 
+.chooseo {
+	width: 30%;
+	display: inline;
+	float: left;
+	
+	text-align: left;
+}
+
+.leftside {
+	padding-left: 9%;
+	width: 30%;
+	float: left;
+	text-align: left;
+}
+
+.rightside {
+	width: 28%;
+	float: left;
+	text-align: left;
+	#padding-right: 7%;
+}
 
 #radios {
 	border: 2px solid #7703fc;
@@ -473,13 +501,15 @@ span .closer:hover {
 	margin-bottom: 1px;
 }
 
-#pages {
+.pages {
 	//background-color: #fcff3b;
+	text-align: center;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	border: 2px solid #7703fc;
 	#border-top: 1px solid #7703fc;
 	#background-color: #ffd4a6;
+	font-family: "Fredoka", sans-serif;
 }
 
 form {
@@ -495,9 +525,11 @@ form {
 	text-align: center;
 }
 
-#lastclose{
+#lastclose {
 	padding-bottom: 3px;
 }
+
+
 
 
 
@@ -629,6 +661,42 @@ fieldset {
 .deets-bottom {
 	font-size: 12px;
 }
+
+.chooseo {
+	width: 30%;
+	display: inline;
+	float: left;
+	
+	text-align: left;
+}
+
+.leftside {
+	padding-left: 9%;
+	width: 30%;
+	float: left;
+	text-align: left;
+}
+
+.rightside {
+	width: 28%;
+	float: left;
+	text-align: left;
+	#padding-right: 7%;
+}
+
+#radios {
+	border: 2px solid #7703fc;
+	#border-bottom: None;
+	#background-color: #d9d1ff;
+	margin-bottom: 1px;
+
+
+
+
+
+
+
+
 
 }
 

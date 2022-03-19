@@ -39,30 +39,62 @@ function closeBox() {
 <!-- Radio buttons for word picking-->
 <form action="{% url "spelling:wordpicking" %}" method="POST">{% csrf_token %}
  <div>
-  <label>
-  {% if wordu == "thye" or wordu == "blanku" %}
-   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  
+  
+  <div class="leftside"><label>
+  {% if wordu == "againts" or wordu == "blanku" %}
+   <input type="radio" name="wordpicking" id="againts" value="againts" checked>
   {% else %}
-   <input type="radio" name="wordpicking" id="thye" value="thye">
+   <input type="radio" name="wordpicking" if="againts" value="againts">
   {% endif %}
-  Thye</label>
-  &nbsp;&nbsp;
-  <label>
+  Againts</label></div>
+  
+
+  <div class="chooseo"><label>
   {% if wordu == "becasue" %}
    <input type="radio" name="wordpicking" id="becasue" value="becasue" checked>
   {% else %}
    <input type="radio" name="wordpicking" id="becasue" value="becasue">
   {% endif %}
-  Becasue</label>
-  &nbsp;&nbsp
-  <label>
-  {% if wordu == "againts" %}
-   <input type="radio" name="wordpicking" id="againts" value="againts" checked>
+  Becasue</label></div>
+  
+
+  <div class="rightside"><label>
+  {% if wordu == "thye" %}
+   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
   {% else %}
-   <input type="radio" name="wordpicking" if="againts" value="againts">
+   <input type="radio" name="wordpicking" id="thye" value="thye">
   {% endif %}
-  Againts</label>
+  Thye</label></div>
 <br>
+
+  <div class="leftside"><label>
+  {% if wordu == "thye" %}
+   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="thye" value="thye">
+  {% endif %}
+  Thye</label></div>
+  
+
+  <div class="chooseo"><label>
+  {% if wordu == "thye" %}
+   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="thye" value="thye">
+  {% endif %}
+  Thye</label></div>
+  
+
+  <div class="rightside"><label>
+  {% if wordu == "thye" %}
+   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="thye" value="thye">
+  {% endif %}
+  Thye</label></div>
+<br>
+
   
   <input type="submit" value="Submit">
  </div>
@@ -77,7 +109,7 @@ function closeBox() {
 {% else %}
 
 
-<div class="controls" id="pages">
+<div class="pages">
 {% if gus > "1" %}
 <a href="{% url "spelling:filtdown" %}" id="prev5">
 Prev 5</a>&nbsp;&nbsp;|&nbsp;&nbsp
