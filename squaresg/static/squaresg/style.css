@@ -425,6 +425,10 @@ div a {
 	padding: 1px;
 }
 
+#the_buttons {
+	padding-bottom: 5px;
+}
+
 .words1 {
 	font-size: 15px;
 }
@@ -434,7 +438,7 @@ div a {
 }
 
 .closer {
-	padding-bottom: 10px;
+	padding-bottom: 7px;
 	font-weight: bold;
 	color: #FFC300;
 }
@@ -491,7 +495,9 @@ form {
 	text-align: center;
 }
 
-
+#lastclose{
+	padding-bottom: 3px;
+}
 
 
 

@@ -39,14 +39,13 @@ function closeBox() {
 <!-- Radio buttons for word picking-->
 <form action="{% url "spelling:wordpicking" %}" method="POST">{% csrf_token %}
  <div>
-  <!--<label for "thye">Thye</label>-->
   <label>
   {% if wordu == "thye" or wordu == "blanku" %}
    <input type="radio" name="wordpicking" id="thye" value="thye" checked>
   {% else %}
    <input type="radio" name="wordpicking" id="thye" value="thye">
   {% endif %}
-  <!--<label for "thye">-->Thye</label>
+  Thye</label>
   &nbsp;&nbsp;
   <label>
   {% if wordu == "becasue" %}
@@ -54,7 +53,7 @@ function closeBox() {
   {% else %}
    <input type="radio" name="wordpicking" id="becasue" value="becasue">
   {% endif %}
-  <!--<label for="becasue">-->Becasue</label>
+  Becasue</label>
   &nbsp;&nbsp
   <label>
   {% if wordu == "againts" %}
@@ -62,7 +61,7 @@ function closeBox() {
   {% else %}
    <input type="radio" name="wordpicking" if="againts" value="againts">
   {% endif %}
-  <!--<label for="againts">-->Againts</label>
+  Againts</label>
 <br>
   
   <input type="submit" value="Submit">
@@ -108,18 +107,14 @@ Next 5
 
 
 
-
-
-  <!--<div class="deets-top">{{ res.tweet_id }}</div>-->
-  <!--<div class="deets-top">--><strong><div class="deets-left">@{{ res.their_username }}</div><div class="deets-right"><i>{{ res.tweet_date }}</i></div></strong><!--</div>-->
+  <strong><div class="deets-left">@{{ res.their_username }}</div><div class="deets-right"><i>{{ res.tweet_date }}</i></div></strong><!--</div>-->
   <div class="deets-bottom">{{ res.tweet_text }}</div>
-  <!--<div class="deets-bottom"><i>{{ res.tweet_date }}</i></div>-->
+
 
 
  </a>
 </div>
 
-<!--<br>-->
 
 {% endfor %}
 
@@ -164,22 +159,22 @@ Next 5
 
 
 {% if request.COOKIES.risp == "THANK!" %}
-<!--<div id="boxy">-->
 
 <h2>You have sent your Tweet!</h2>
 <p><a href="https://twitter.com/{{ request.COOKIES.namey }}/status/{{ request.COOKIES.done }}/" target="#">View it here.</a></p>
 
-<p id="closer"><a href="{% url "spelling:voted_already" %}">Close (x)</a></p>
+<p class="closer"><a href="{% url "spelling:voted_already" %}">Close (x)</a></p>
 
-<!--</div>-->
+
 {% elif request.COOKIES.risp == "STOP!" %}
-<!--<div id="boxy">-->
+
 <h3><i>You have already tweeted!</i></h3>
-<p class="closer"><a href="{% url "spelling:index" %}?boxo=FALSE">Close (x)</a></p>
-<!--</div>-->
+<p class="closer" id="lastclose"><a href="{% url "spelling:index" %}?boxo=FALSE">Close (x)</a></p>
+
 {% elif request.COOKIES.risp == "START!" %}
 
-<!--<div id="boxy">-->
+
+
 
 <p class="inst">Your Tweet:</p>
 <p class="words1"><i>{{ words }}</i></p>
@@ -187,10 +182,10 @@ Next 5
 <p class="words2"><i>{{ the_text }}</i></p>
 
 <p class="inst">Send Reply?</p>
-<a href="{% url "spelling:sending" %}?tweety_id={{ clicked | urlencode }}&boxo=TRUE" name="clicked">Submit</a><!--{% csrf_token%}
- <p class="closer"><input type="submit" value="Submit"></form>-->  |  
-<a href="{% url "spelling:index" %}?boxo=FALSE">Cancel</a></p>
-<!--</div>-->
+<div id="the_buttons"><a href="{% url "spelling:sending" %}?tweety_id={{ clicked | urlencode }}&boxo=TRUE" name="clicked">Submit</a>  |  
+<a href="{% url "spelling:index" %}?boxo=FALSE">Cancel</a></div></p>
+
+
 {% endif %}
 </div>
 
