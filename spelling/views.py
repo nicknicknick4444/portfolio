@@ -110,19 +110,43 @@ def searchy(request):
         vocab = get_answers()
         cookie_words = request.COOKIES.get("answers", vocab)
     print("POOSE", cookie_words)
-    if wordu != "blanku":
-        words = lookup_answer(vocab[wordu], wordu)
-        #words = "DORP"
-    else:
-        words = ""
+    
+    
+#     if wordu != "blanku":
+#         words = lookup_answer(vocab[wordu], wordu)
+#         get_text = [i["tweet_text"] for i in dicty2 if i["tweet_id"] == str(clicked)]
+#         get_text = "".join(get_text)
+#         #words = "DORP"
+#     else:
+#         words = ""
+#         get_text = ""
+
+
     print("GORP", vocab["thye"])
             
     clicked = request.GET.get("tweety_id")
+    
+    
+    if wordu != "blanku":
+        words = lookup_answer(vocab[wordu], wordu)
+        get_text = "".join([i["tweet_text"] for i in dicty2 if i["tweet_id"] == str(clicked)])
+        #get_text = "".join(get_text)
+        #words = "DORP"
+    else:
+        words = ""
+        get_text = ""
+    
+    
+    
+    
     #clicked2 = request.GET.get("tweety_text")
-    get_text = [i["tweet_text"] for i in dicty2 if i["tweet_id"] == str(clicked)]
-    #get_text = dicty2[3]
-    #clicked2 = dicty2
-    get_text = "".join(get_text)
+#     if "chosen" in request.COOKIES and request.COOKIES["chosen"] != "blanku":
+#         get_text = [i["tweet_text"] for i in dicty2 if i["tweet_id"] == str(clicked)]
+#         #get_text = dicty2[3]
+#         #clicked2 = dicty2
+#         get_text = "".join(get_text)
+#     else:
+#         get_text = ""
     #clicked2 = get_text
     #print("WHELL?", get_text)
     clicked3 = request.GET.get("screen_name")
