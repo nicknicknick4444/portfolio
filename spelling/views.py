@@ -118,7 +118,13 @@ def searchy(request):
     print("GORP", vocab["thye"])
             
     clicked = request.GET.get("tweety_id")
-    clicked2 = request.GET.get("tweety_text")
+    #clicked2 = request.GET.get("tweety_text")
+    get_text = [i["tweet_text"] for i in dicty2 if i["tweet_id"] == str(clicked)]
+    #get_text = dicty2[3]
+    #clicked2 = dicty2
+    get_text = "".join(get_text)
+    #clicked2 = get_text
+    #print("WHELL?", get_text)
     clicked3 = request.GET.get("screen_name")
     #if request.COOKIES["risp"] == "THANK!":
     boxo = request.GET.get("boxo")
@@ -173,7 +179,7 @@ def searchy(request):
     
     
     conetext = {"tweets":dicty2, "gus":gus, "whichp":whichp, "wordu":wordu,
-                "words":words, "clicked": clicked, "the_text":clicked2, "clicked3":clicked3, "boxo": boxo}
+                "words":words, "clicked": clicked, "the_text":get_text, "clicked3":clicked3, "boxo": boxo}
     response = render(request, "spelling/index.html", conetext)
     response.set_cookie("bisp", bisp)
     response.set_cookie("seshn", seshn)
