@@ -51,39 +51,39 @@ function closeBox() {
   
 
   <div class="chooseo"><label>
+  {% if wordu == "alwyas" %}
+   <input type="radio" name="wordpicking" id="alwyas" value="alwyas" checked>
+  {% else %}
+   <input type="radio" name="wordpicking" id="alwyas" value="alwyas">
+  {% endif %}
+  Alwyas</label></div>
+  
+
+  <div class="rightside"><label>
   {% if wordu == "becasue" %}
    <input type="radio" name="wordpicking" id="becasue" value="becasue" checked>
   {% else %}
    <input type="radio" name="wordpicking" id="becasue" value="becasue">
   {% endif %}
   Becasue</label></div>
-  
-
-  <div class="rightside"><label>
-  {% if wordu == "thye" %}
-   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
-  {% else %}
-   <input type="radio" name="wordpicking" id="thye" value="thye">
-  {% endif %}
-  Thye</label></div>
 <br>
 
   <div class="leftside"><label>
-  {% if wordu == "thye" %}
-   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% if wordu == "firend" %}
+   <input type="radio" name="wordpicking" id="firend" value="firend" checked>
   {% else %}
-   <input type="radio" name="wordpicking" id="thye" value="thye">
+   <input type="radio" name="wordpicking" id="firend" value="firend">
   {% endif %}
-  Thye</label></div>
+  Firend</label></div>
   
 
   <div class="chooseo"><label>
-  {% if wordu == "thye" %}
-   <input type="radio" name="wordpicking" id="thye" value="thye" checked>
+  {% if wordu == "realyl" %}
+   <input type="radio" name="wordpicking" id="realyl" value="realyl" checked>
   {% else %}
-   <input type="radio" name="wordpicking" id="thye" value="thye">
+   <input type="radio" name="wordpicking" id="realyl" value="realyl">
   {% endif %}
-  Thye</label></div>
+  Realyl</label></div>
   
 
   <div class="rightside"><label>
@@ -96,7 +96,7 @@ function closeBox() {
 <br>
 
   
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" id="searchy">
  </div>
 </form>
 </div>
@@ -154,7 +154,7 @@ Next 5
 
 
 
-<div class="controls" id="pages">
+<div class="pages">
 {% if gus > "1" %}
  <a href="{% url "spelling:filtdown" %}" id="prev5">
 Prev 5</a>&nbsp;&nbsp;|&nbsp;&nbsp;

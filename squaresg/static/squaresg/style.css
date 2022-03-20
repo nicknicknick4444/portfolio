@@ -457,6 +457,7 @@ span .closer:hover {
 	text-align: center;
 	font-family: "Fredoka", sans-serif;
 	#padding: 0;
+	font-size: 14px;
 	color: #000000;
 	margin: auto;
 	#width: 50%;
@@ -481,7 +482,7 @@ span .closer:hover {
 }
 
 .leftside {
-	padding-left: 9%;
+	padding-left: 6%;
 	width: 30%;
 	float: left;
 	text-align: left;
@@ -499,6 +500,10 @@ span .closer:hover {
 	#border-bottom: None;
 	#background-color: #d9d1ff;
 	margin-bottom: 1px;
+}
+
+#searchy {
+	margin-top: 6px;
 }
 
 .pages {
@@ -667,7 +672,7 @@ fieldset {
 }
 
 .chooseo {
-	width: 30%;
+	width: 29%;
 	display: inline;
 	float: left;
 	
@@ -675,8 +680,8 @@ fieldset {
 }
 
 .leftside {
-	padding-left: 9%;
-	width: 30%;
+	padding-left: 9.6%;
+	width: 29%;
 	float: left;
 	text-align: left;
 }
@@ -692,7 +697,7 @@ fieldset {
 	border: 2px solid #7703fc;
 	#border-bottom: None;
 	#background-color: #d9d1ff;
-	margin-bottom: 1px;
+	margin-bottom: 6px;
 
 
 
