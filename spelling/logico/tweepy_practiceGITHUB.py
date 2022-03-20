@@ -18,7 +18,7 @@ auth = tweepy.OAuth1UserHandler(
 
 api = tweepy.API(auth)
 
-words = ["thye","becasue","againts"]
+words = ["againts", "alwyas", "becasue", "firend", "realyl", "thye"]
 
 def cookie_help(reqc, tok, func):
     if not tok in reqc:
@@ -111,7 +111,7 @@ def make_id():
 
 def get_answers():
     global words
-    ids = [random.randint(1,2) for i in range(1,4)]
+    ids = [random.randint(1,2) for i in range(1,7)]
     your_words = dict(zip(words, ids))
     print("PRADDLE", your_words)
     return your_words
