@@ -6,10 +6,10 @@ from ..models import Admonish, TweetLists
 
 
 client = tweepy.Client(
-consumer_key = "PNeD02vW6jiOxiUR2dTtpt7ml",
-consumer_secret = "pVQx2PLw860o4MgF6VrZvFeF7gwIkGQaj4HHqGe1c5Oct2feU0",
-access_token = "1498738920242225155-kVRPMEvuiRPCQZOY5hT4DnERrPZojs",
-access_token_secret = "nLEOtpGIvamMxML0xe68OwnrxxIA9MsGxLS39UrVKBB2p",
+consumer_key = SECRET,
+consumer_secret = SECRET,
+access_token = SECRET,
+access_token_secret = SECRET,
 )
 
 auth = tweepy.OAuth1UserHandler(
