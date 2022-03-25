@@ -25,3 +25,9 @@ def randomise_squares(squares, excep, clicked, reqc):
 
 def datechange(the_date, functoken):
     return functoken(the_date, "%Y-%m-%d %H:%M:%S.%f")
+
+def cleanup2(reqc, reso):
+    mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery"]
+    for i in mainlist:
+        if i in reqc.COOKIES:
+            reso.delete_cookie(i)

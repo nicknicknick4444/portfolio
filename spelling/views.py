@@ -8,6 +8,7 @@ from django.views import generic
 from .models import Tub, Admonish, TweetLists
 from .logico.tweepy_practice import cookie_help, cookie_help_2, getty, send_tweet, api, make_id, get_answers, \
      lookup_answer, readie, make_lists, get_lists, page_turn
+from .service import cleanup
 import json, datetime
 
 
@@ -22,7 +23,7 @@ def wordPick(request):
 
 def searchy(request):
     nowy = datetime.datetime.now(datetime.timezone.utc)
-    bisp = cookie_help(request.COOKIES, "bisp", "12345")
+    #bisp = cookie_help(request.COOKIES, "bisp", "12345")
     
     if not "seshn" in request.COOKIES:
         seshn = cookie_help(request.COOKIES, "seshn", make_id())
@@ -78,7 +79,8 @@ def searchy(request):
     conetext = {"tweets":dicty2, "gus":gus, "whichp":whichp, "wordu":wordu,
                 "words":words, "clicked": clicked, "the_text":get_text, "clicked3":clicked3, "boxo": boxo}
     response = render(request, "spelling/index.html", conetext)
-    response.set_cookie("bisp", bisp)
+    cleanup(request, response)
+    #response.set_cookie("bisp", bisp)
     response.set_cookie("seshn", seshn)
     response.set_cookie("filtery", gus)
     response.set_cookie("chosen", wordu)

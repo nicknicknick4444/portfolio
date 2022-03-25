@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.views.generic.edit import FormMixin
 from .forms import ScoreForm
 from .service import make_list_for_view, randomise_squares, \
-     initial_cou, make_id, datechange
+     initial_cou, make_id, datechange, cleanup2
 from .logico.squares_logic import cookie_help, cookie_help_2, randular
 from .models import Squaresy, Scores
 from datetime import date, time, datetime, timedelta
@@ -66,6 +66,7 @@ def resetty2(request):
     cou2 = cookie_help(request, "cou", cou)
     print("cou", cou)
     
+    cleanup2(request, response)
     response.set_cookie("squores", numboure)
     response.set_cookie("excepor", excepe)
     response.set_cookie("goesy", 0)
@@ -191,6 +192,7 @@ def Scoresy(request, *args, **kwargs):
 #         sesh = request.COOKIES["sesho"]
 #     else:
 #         sesh = "4th GLUPE"
+
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         
