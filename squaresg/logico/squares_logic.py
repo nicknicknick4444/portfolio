@@ -5,11 +5,11 @@ from django.utils import timezone
 from datetime import date, time, datetime
 
 def make_list():
-    listy = [str(i) for i in range(1,10)]
-    #listy2 = [2,8,5,1,7,3,4,9,6]
-    #listy = [str(i) for i in listy2]
-    ind = random.randint(0,8)
-    #ind = 0
+    #####listy = [str(i) for i in range(1,10)]
+    listy2 = [6,4,2,1,9,3,7,5,8]
+    listy = [str(i) for i in listy2]
+    #####ind = random.randint(0,8)
+    ind = 4
     excep = (listy.pop(ind))
     listy.insert(ind, "blank")
     # Easy mode activated!
