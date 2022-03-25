@@ -6,7 +6,10 @@ from datetime import date, time, datetime
 
 def make_list():
     listy = [str(i) for i in range(1,10)]
+    #listy2 = [2,8,5,1,7,3,4,9,6]
+    #listy = [str(i) for i in listy2]
     ind = random.randint(0,8)
+    #ind = 0
     excep = (listy.pop(ind))
     listy.insert(ind, "blank")
     # Easy mode activated!
@@ -47,7 +50,7 @@ def win_test(listy, exceppo):
     else:
         return False
 
-def randomise2(listy, excep, clicked, data_token2, gases):
+def randomise2(listy, excep, clicked, gases):
     winning_test = False
     tokens = [clicked, "blank"]
     tokens2 = tokens[::-1]
@@ -61,8 +64,26 @@ def randomise2(listy, excep, clicked, data_token2, gases):
     cou = make_cou(listy)
     if win_test(listy, excep):
         listy = ["1","2","3","4","5","6","7","8","9"]
-        time = data_token2.objects.filter(sessiony=gases).latest("id")
-        time.finish_time = datetime.now()
-        time.save()
+#         time = data_token2.objects.filter(sessiony=gases).latest("id")
+#         time.finish_time = datetime.now()
+#         time.save()
         cou = "WIN"
     return listy, cou
+
+def cookie_help(request, tok, func):
+    if not tok in request.COOKIES:
+        vari = request.COOKIES.get(tok, func)
+        return vari
+    else:
+        vari = request.COOKIES[str(tok)]
+        return vari
+
+def cookie_help_2(request, tok, func, elso):
+    if not tok in request.COOKIES:
+        vari = request.COOKIES.get(tok, func)
+    else:
+        vari = elso
+        return vari
+
+def randular(n):
+    return random.randint(1,n)

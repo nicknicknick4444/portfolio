@@ -1,3 +1,4 @@
+<header>9 Squares Game</header>
 {% extends "base.html" %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
@@ -48,7 +49,7 @@ function hideSave() {
 
 
 
-{% if request.COOKIES.sesho %}
+{% if "sesho" in request.COOKIES %}
 
 
 <div class="missingPiece">
@@ -175,8 +176,8 @@ function hideSave() {
 
 
 <div class="missingPiece">
-<a href="{% url "squaresg:index" %}">Home</a>
-<!--{% if cou == "WIN" %}
+<!--<a href="{% url "squaresg:index" %}">Home</a>
+{% if cou == "WIN" %}
  <a href="{% url "squaresg:resetto2" %}">Reset
 {% else %}
  <a href="{% url "squaresg:resetto" %}">Reset</a>

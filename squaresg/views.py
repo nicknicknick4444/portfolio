@@ -9,9 +9,12 @@ from django.utils import timezone
 from django.db.models import Count
 from django.views.generic.edit import FormMixin
 from .forms import ScoreForm
-from .service import make_list_for_view, randomise_squares, initial_cou, make_id
-from .models import Number, Exceppo, Scores, Times
+from .service import make_list_for_view, randomise_squares, \
+     initial_cou, make_id, datechange
+from .logico.squares_logic import cookie_help, cookie_help_2, randular
+from .models import Squaresy, Scores
 from datetime import date, time, datetime, timedelta
+import ast
 
 # Create your views here.
 
@@ -20,144 +23,156 @@ class IndexView(generic.ListView):
     context_object_name = "a_queryset"
     
     def get_queryset(self):
-        queryset = Number.objects.none()
+        queryset = Scores.objects.none()
         return queryset
 
 def resetty(request):
-    if "sesho" in request.COOKIES:
-        sesh = request.COOKIES["sesho"]
-    else:
-        sesh = "FIRST GLUPE"
-    if Number.objects.filter(sessiony=sesh).exists():
-        Number.objects.filter(sessiony=sesh).delete()
-    if Exceppo.objects.filter(sessiony=sesh).exists():
-        Exceppo.objects.filter(sessiony=sesh).delete()
-    if Times.objects.filter(sessiony=sesh).exists():
-        timey = Times.objects.filter(sessiony=sesh).latest("id")
-        att = timey.attempts
-        att += 1
-        timey.attempts = att
-        timey
-        timey.save()
-    return HttpResponseRedirect(reverse("squaresg:squares"))
+#     if "sesho" in request.COOKIES:
+#         sesh = request.COOKIES["sesho"]
+#     else:
+#         sesh = "FIRST GLUPE"
+
+    resety = int(request.COOKIES["resety"])
+    resety += 1
+    numboure, excepe = make_list_for_view()
+    cou = initial_cou(numboure)
+
+    goesy = cookie_help(request, "goesy", 0)
+    response = HttpResponseRedirect(reverse("squaresg:squares"))
+    response.set_cookie("resety", resety)
+    response.set_cookie("goesy", 0)
+    response.set_cookie("squores", numboure)
+    response.set_cookie("excepor", excepe)
+    response.set_cookie("cou", cou)
+    
+    return response
 
 def resetty2(request):
     response = HttpResponseRedirect(reverse("squaresg:squares"))
     request.session.set_test_cookie()
     you = request.COOKIES.get("sesho", str(make_id()))
-    sesh = you
+    #sesh = you
     response.set_cookie("sesho", you)
+    numboure, excepe = make_list_for_view()
+    cou = initial_cou(numboure)
+    squores = cookie_help(request, "squores", numboure)
+    excepc = cookie_help(request, "excepor", excepe)
+    print("excepc", excepc)
+    print("eccepe", excepe)
+    goesy = cookie_help(request, "goesy", 0)
+    resety = cookie_help(request, "resety", 0)
+    finishy_time = cookie_help(request, "finishy_time", 0)
+    starty_time = cookie_help(request, "starty_time", "BEGIN!")
+    cou2 = cookie_help(request, "cou", cou)
+    print("cou", cou)
     
-    request.session["cached_yet"] = True
+    response.set_cookie("squores", numboure)
+    response.set_cookie("excepor", excepe)
+    response.set_cookie("goesy", 0)
+    response.set_cookie("resety", 0)
+    response.set_cookie("starty_time", "BEGIN!")
+    response.set_cookie("finishy_time", 0)
+    response.set_cookie("cou", cou)
+    #request.session["cached_yet"] = True
     
-    if Number.objects.filter(sessiony=sesh).exists():
-        Number.objects.filter(sessiony=sesh).delete()
-    if Exceppo.objects.filter(sessiony=sesh).exists():
-        Exceppo.objects.filter(sessiony=sesh).delete()
-    if Times.objects.filter(sessiony=sesh).exists():
-        Times.objects.filter(sessiony=sesh).delete()
-    #return HttpResponseRedirect(reverse("squaresg:squares"))
     return response
 
-class SquaresView(generic.ListView):
-    def __init__(self):
-        self.template_name = "squaresg/squares.html"
-        self.context_object_name = "nine_squares_list"
-        self.listy = ""
-        self.exceppo = ""
-        self.listy, self.exceppo = make_list_for_view()
-        self.cou = initial_cou(self.listy)
-        self.form = ScoreForm
-        self.scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
-        self.extra_context = {"cou": self.cou, "exceppo": self.exceppo,
-                              "form": self.form, "scores": self.scores}
-        
-    def get_queryset(self):
-        if "sesho" in self.request.COOKIES:
-            sesh = self.request.COOKIES["sesho"]
-        else:
-            sesh = "2nd GLUPE FIASCO"
-        if self.request.session.test_cookie_worked():
-            self.request.session.delete_test_cookie()
-        if not Number.objects.filter(sessiony = sesh).exists():
-            db = Number.objects.create(wardle = self.listy, sessiony = sesh)
-            db.save()
-        else:
-            Number.objects.filter(sessiony = sesh).all().delete()
-            db = Number.objects.create(wardle = self.listy, sessiony = sesh)
-            db.save()
-        if not Exceppo.objects.filter(sessiony = sesh).exists():
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = sesh)
-            exp.save()
-        else:
-            Exceppo.objects.filter(sessiony = sesh).all().delete()
-            exp = Exceppo.objects.create(exceppy = self.exceppo, sessiony = sesh)
-            exp.save()
-        return self.listy
+def SquaresView2(request):
+    template = "squaresg/squares.html"
+#     numboure = ast.literal_eval(request.COOKIES["squores"])
+#     excepe = int(request.COOKIES["excepor"])
+#     else:
+#         pass
+        #numboure, excepe = make_list_for_view()
+        #numboure = ast.literal_eval(request.COOKIES["squores"])
+        #excepe = int(request.COOKIES["excepor"])
+    #if "cou" in request.COOKIES:
+#     else:
+#         pass
+        #cou = initial_cou(numboure)
+    form = ScoreForm
+    scores = Scores.objects.all().order_by("score","all_seconds","attempts").values()[:10]
+    if "squores" in request.COOKIES and "excepor" in request.COOKIES:
+        numboure = ast.literal_eval(request.COOKIES["squores"])
+        excepe = int(request.COOKIES["excepor"])
+        cou = request.COOKIES["cou"]
+        context = {"cou":cou, "exceppo":excepe, "form":form, "scores":scores, "nine_squares_list": numboure}
+    else:
+        context = {"scores":scores}
+    return render(request, template, context)
     
-    def get_form(self):
-        return self.form
     
-    def get_scores(self):
-        return self.scores
-    
-    def get_duration(self):
-        return self.times
 
 def RandomSquaresView(request):
-    SquaresInstance = SquaresView()
-    if "sesho" in request.COOKIES:
-        sesh = request.COOKIES["sesho"]
+#     if "sesho" in request.COOKIES:
+#         sesh = request.COOKIES["sesho"]
+#     else:
+#         sesh = "GLUPE"
+    numbourey = ast.literal_eval(request.COOKIES["squores"])
+    excepe = int(request.COOKIES["excepor"])
+    turny = int(request.COOKIES["goesy"])
+    if request.COOKIES["cou"] == "WIN":
+        turny = turny
     else:
-        sesh = "GLUPE"
-    exceppo = Exceppo.objects.filter(sessiony=sesh).latest("id")
-    form = SquaresInstance.get_form()
-    scores = SquaresInstance.get_scores()
-    clicked = request.GET.get("square_id")
-    if not Times.objects.filter(sessiony=sesh).exists():
-        db3 = Times.objects.create(start_time = datetime.now(), \
-                                   finish_time = datetime.now(), sessiony = sesh)
-        db3.save()
+        turny += 1
 
-    latest = Number.objects.filter(sessiony=sesh).latest("id")
-    listy2 = (str(latest).replace("'","").replace(",","").replace("[","").replace("]","")).split()
-    nine_squares_list, cou, goes = randomise_squares(listy2, exceppo, clicked, sesh)
-    db2 = Number.objects.create(wardle=nine_squares_list, sessiony = sesh)
-    db2.save()
-    context = {"nine_squares_list":nine_squares_list, "cou":cou, "goes":goes,
-               "exceppo":exceppo, "form":form, "scores":scores}
+    
+    #print("MYSTIFY ME", numbourey[3], type(numbourey))
+    
+    form = ScoreForm
+    
+    scores = Scores.objects.all().order_by("score", "all_seconds", "attempts").values()[:10]
+    clicked = request.GET.get("square_id")
+    
+    listy2 = numbourey
+    nine_squares_list = numbourey
+    numbourey, cou = randomise_squares(listy2, excepe, clicked, request)
     
     url = "squaresg/squares.html"
 
     if cou == "WIN":
-        Number.objects.filter(sessiony=sesh).latest("id").delete()
-        
-#     try:
-#         exceppo
-#     except exceppo.DoesNotExist:
-#         print("FUCK!!")
-#         raise Http404("FUCK!")
+        numbourey = [1,2,3,4,5,6,7,8,9]
+    elif numbourey == [1,2,3,4,5,6,7,8,9]:
+        cou = "WIN"
 
-        
+    context = {"nine_squares_list":numbourey, "cou":cou, "goes":turny,
+           "exceppo":excepe, "form":form, "scores":scores}    
     if request.method == "POST" and "squares_rand" in request.POST:
-        return render(request, url, context)
+        response = render(request, url, context)
+        response.set_cookie("squores", numbourey)
+        response.set_cookies("goesy", turny)
+        response.set_cookies("cou", cou)
+        if request.COOKIES["starty_time"] == "BEGIN!":
+            response.set_cookie("starty_time", datetime.now())
+        response.set_cookie("finishy_time", datetime.now())
+        return response
     else:
-        return render(request, url, context)
+        response = render(request, url, context)
+        response.set_cookie("squores", numbourey)
+        response.set_cookie("goesy", turny)
+        response.set_cookie("cou", cou)
+        if request.COOKIES["starty_time"] == "BEGIN!":
+            response.set_cookie("starty_time", datetime.now())
+        response.set_cookie("finishy_time", datetime.now())
+        return response
 
 def get_time(request):
-    if "sesho" in request.COOKIES:
-        sesh = request.COOKIES["sesho"]
-    else:
-        sesh = "3rd GLUPE"
-    timey = Times.objects.filter(sessiony=sesh).latest("id")
-    dura = timey.finish_time - timey.start_time
+#     if "sesho" in request.COOKIES:
+#         sesh = request.COOKIES["sesho"]
+#     else:
+#         sesh = "3rd GLUPE"
+    tok = datetime.strptime
+    dura = datechange(request.COOKIES["finishy_time"], tok) - \
+           datechange(request.COOKIES["starty_time"], tok)
+    
+    print("NEEK!", dura, type(dura))
     days = dura.days
     hours = int(dura.seconds*3600)
     hours2 = round(int(dura.seconds/3600),0)
     seconds = int(round(dura.seconds%60,0))
     minutes = int(round(dura.seconds/60,0))
     seconds2 = dura.seconds
-    attempts = timey.attempts
+    attempts = request.COOKIES["resety"]
     if hours2 < 1:
         duration = str(hours2).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)
     elif days == 1:
@@ -172,15 +187,15 @@ def get_time(request):
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
-    if "sesho" in request.COOKIES:
-        sesh = request.COOKIES["sesho"]
-    else:
-        sesh = "4th GLUPE"
+#     if "sesho" in request.COOKIES:
+#         sesh = request.COOKIES["sesho"]
+#     else:
+#         sesh = "4th GLUPE"
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         
         if form.is_valid():
-            scores2 = (Number.objects.filter(sessiony=sesh).all().count())
+            scores2 = int(request.COOKIES["goesy"])
             duration, seconds2, attempts = get_time(request)
             form.instance.score = int(scores2)
             form.instance.duration = str(duration)
@@ -188,8 +203,7 @@ def Scoresy(request, *args, **kwargs):
             form.instance.attempts = int(attempts)
             form.instance.duration = duration
             form.save()
-            Times.objects.filter(sessiony=sesh).all().delete()
-            return HttpResponseRedirect(reverse("squaresg:resetto"))
+            return HttpResponseRedirect(reverse("squaresg:resetto2"))
     else:
         form = ScoreForm()
     return render(request, "squaresg/squares.html", {"form":form})
