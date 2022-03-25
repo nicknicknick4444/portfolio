@@ -6,8 +6,8 @@ from datetime import date, time, datetime
 
 def make_list():
     #####listy = [str(i) for i in range(1,10)]
-    listy2 = [6,4,2,1,9,3,7,5,8]
-    listy = [str(i) for i in listy2]
+    listy_idea = [6,4,2,1,9,3,7,5,8]
+    listy = [str(i) for i in listy_idea]
     #####ind = random.randint(0,8)
     ind = 4
     excep = (listy.pop(ind))
