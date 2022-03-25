@@ -1,8 +1,8 @@
-from .logico.spelling_logic import search_twittor
+#from .logico.spelling_logic import search_twittor
 from .logico.tweepy_practice import getty
 
-def search_twitter(query, tweet_fields, bearer_token):
-    return search_twittor
+# def search_twitter(query, tweet_fields, bearer_token):
+#     return search_twittor
 
 def getto(search_term):
     return getty(search_term)
