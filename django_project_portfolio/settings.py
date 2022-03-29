@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 INSTALLED_APPS = [
     'squaresg.apps.SquaresgConfig',
     'spelling.apps.SpellingConfig',
-    #'plp.apps.PlpConfig',
+    'plp.apps.PlpConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

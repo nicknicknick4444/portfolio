@@ -536,7 +536,98 @@ form {
 
 
 
+/* PICNIC */
 
+body {
+	
+}
+
+.search_button {
+	text-align: center;
+	font-family: helvetica;
+}
+
+.search_button a:link, .search_button a:visited {
+	color: #0313fc;
+}
+
+.search_button a:hover {
+	color: #d40492;
+}
+
+#pork {
+	margin-top: 23px;
+}
+
+.map {  float: left;
+	width: 387px;
+	/*display: inline;*/
+	
+}
+
+.stats {
+	margin-top: 30px;
+	float: right;
+	font-size: 15px;
+	width: 510px;
+	/*display: inline;*/
+	font-family: helvetica;
+}
+
+.search_button {
+	font-size: 30px;
+}
+
+.welc {
+	text-align: center;
+	font-size: 30px;
+	padding: 3px;
+	/*margin-right: 5px;*/
+	border: 3px solid #0313fc;
+	border-radius: 5px;
+}
+
+.heado {
+	text-align: center;
+}
+
+.best {
+	/*background-color: #00d107;*/
+	border: 3px solid #0eb549;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 34px;
+	margin-bottom: 5px;
+}
+
+.worst {
+	/*background-color: #e33b19;*/
+	border: 3px solid #e33b19;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.one {
+	width: 200px;
+	display: inline;
+	float: left;
+}
+
+.two {
+	width: 125px;
+	display: inline;
+	float: left;
+	text-align: center;
+}
+
+.three {
+	width: 125px;
+	display: inline;
+	float: left;
+	text-align: center;
+}
 
 
 
@@ -698,13 +789,118 @@ fieldset {
 	#border-bottom: None;
 	#background-color: #d9d1ff;
 	margin-bottom: 6px;
+}
+
+/* PICNIC for mobile */
+
+.map {
+	float: none;
+	width: 291px;
+	/*height: 60px;*/
+	margin: auto; 
+	display: block;
+}
+
+.stats {
+	float: none;
+	width: 300px;
+	margin: auto;
+	display: block;
+	font-size: 10px;
+}
+
+#pork {
+	margin-top: 6px;
+}
+
+.one {
+	width: 100px;
+	/*float: left;
+	display: inline;
+	text-align: left;*/
+}
+
+.two {
+	width: 75px;
+	/*float: left;
+	display: inline;
+	text-align: center;*/
+}
+
+.three {
+	width: 75px;
+	/*float: left;
+	display: inline;
+	text-align: center;*/
+}
+
+
+.gap {
+	width: 0px;
+}
 
 
 
 
 
 
+}
 
+/*START OF BIGGER PHONES*/
+@media all and (min-width: 1px) and (max-width: 914px){
+/* PICNIC for bigger mobile */
+
+.map {
+	float: none;
+	width: 291px;
+	/*height: 60px;*/
+	margin: auto; 
+	display: block;
+}
+
+.stats {
+	float: none;
+	width: 300px;
+	margin: auto;
+	margin-top: 0;
+	display: block;
+	font-size: 10px;
+}
+
+.welc {
+	text-align: center;
+	font-size: 30px;
+	margin-top: 26px;
+}
+
+#pork {
+	margin-top: 23px;
+}
+
+.best {
+	margin-top: 0;
+}
+
+.one {
+	width: 100px;
+	/*float: left;
+	display: inline;
+	text-align: left;*/
+}
+
+.two {
+	width: 75px;
+	/*float: left;
+	display: inline;
+	text-align: center;*/
+}
+
+.three {
+	width: 75px;
+	/*float: left;
+	display: inline;
+	text-align: center;*/
+}
 
 
 }
