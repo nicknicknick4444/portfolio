@@ -19,7 +19,7 @@ class TweetListsAdmin(admin.ModelAdmin):
         ("twe_seshn", {"fields":["twe_seshn"]}),
         ("twe_time", {"fields":["twe_time"]}),
         ]
-    list_listplay = ("twe_seshn", "twe_term", "twe_time")
+    list_display = ("twe_seshn", "twe_term", "twe_time")
 
 admin.site.register(Admonish, AdmonishAdmin)
 admin.site.register(TweetLists, TweetListsAdmin)
