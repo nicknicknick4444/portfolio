@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
-import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from .models import Tub, Admonish, TweetLists
-from .logico.tweepy_practice import cookie_help, cookie_help_2, getty, send_tweet, api, make_id, get_answers, \
+from .logico.tweepy_practice2 import cookie_help, cookie_help_2, getty, send_tweet, api, make_id, get_answers, \
      lookup_answer, readie, make_lists, get_lists, page_turn
 from .service import cleanup
 import json, datetime
