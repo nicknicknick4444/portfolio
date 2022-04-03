@@ -105,10 +105,10 @@ def poy(request):
 # # # # #             print("WOW!!", collgood)
 # # # # #             collbad = collbad[0]
             
-            #collgood, collbad = make_lists()
+            collgood, collbad = make_lists()
         
-            collgood = [['Brentwood', 0.9, 0.0, (205, 343)], ['London', 7.9, 0.0, (224, 280)], ['Southend-On-Sea', 7.4, 0.0, (300, 300)]]
-            collbad = [['Manchester', 16.0, 0.0, (400, 0)], ['London', 9.1, 0.0, (300, 0)], ['Chelmsford', 5.1, 0.0, (200, 0)]]
+            ###collgood = [['Brentwood', 0.9, 0.0, (205, 343)], ['London', 7.9, 0.0, (224, 280)], ['Southend-On-Sea', 7.4, 0.0, (300, 300)]]
+            ###collbad = [['Manchester', 16.0, 0.0, (400, 0)], ['London', 9.1, 0.0, (300, 0)], ['Chelmsford', 5.1, 0.0, (200, 0)]]
 
 # #             if not "goody" in request.COOKIES:
 # #                 goody = request.COOKIES.get("goody", collgood)
