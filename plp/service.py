@@ -7,7 +7,7 @@ import requests
 import random
 import io
 
-from .models import SaveQuery
+#from .models import SaveQuery
 from io import BytesIO
 
 def api_call(q):
