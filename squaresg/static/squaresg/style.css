@@ -545,6 +545,7 @@ body {
 .search_button {
 	text-align: center;
 	font-family: helvetica;
+	margin-top: 5px;
 }
 
 .search_button a:link, .search_button a:visited {
@@ -564,6 +565,7 @@ body {
 
 .map {  
 	float: left;
+	margin-top: 5px;
 	width: 258px;
 	/*display: inline;*/
 	
