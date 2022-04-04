@@ -556,20 +556,20 @@ body {
 }
 
 #pork {
-	margin-top: 47px;
+	margin-top: 5px;
 	margin-left: 17px;
 	position: relative;
 }
 
 
 .map {  float: left;
-	width: 387px;
+	width: 258px;
 	/*display: inline;*/
 	
 }
 
 .stats {
-	margin-top: 30px;
+	margin-top: 5px;
 	float: right;
 	font-size: 15px;
 	width: 510px;
@@ -600,7 +600,7 @@ body {
 	border-radius: 5px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	margin-top: 34px;
+	margin-top: 35x;
 	margin-bottom: 5px;
 }
 
@@ -808,7 +808,7 @@ fieldset {
 
 .map {
 	float: none;
-	width: 291px;
+	width: 258px;
 	/*height: 60px;*/
 	margin: auto; 
 	display: block;
@@ -823,8 +823,9 @@ fieldset {
 }
 
 #pork {
-	margin-top: 48px;
-	margin-left: 31px;
+	margin: auto;
+	margin-top: 5px;
+	/*margin-left: 31px;*/
 }
 
 .one {
@@ -861,12 +862,12 @@ fieldset {
 }
 
 /*START OF BIGGER PHONES*/
-@media all and (min-width: 1px) and (max-width: 914px){
+@media all and (min-width: 1px) and (max-width: 930px){
 /* PICNIC for bigger mobile */
 
 .map {
 	float: none;
-	width: 291px;
+	width: 258px;
 	/*height: 60px;*/
 	margin: auto; 
 	display: block;
@@ -888,8 +889,11 @@ fieldset {
 }
 
 #pork {
-	margin-top: 48px;
-	margin-left: 31px;
+	margin: auto;
+	margin-top: 5px;
+	/*margin-left: 31px;*/
+	float: none;
+	
 }
 
 .best {
