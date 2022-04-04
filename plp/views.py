@@ -107,9 +107,14 @@ def poy(request):
             
             collgood, collbad = make_lists()
         
-            ###collgood = [['Brentwood', 0.9, 0.0, (205, 343)], ['London', 7.9, 0.0, (224, 280)], ['Southend-On-Sea', 7.4, 0.0, (300, 300)]]
-            ###collbad = [['Manchester', 16.0, 0.0, (400, 0)], ['London', 9.1, 0.0, (300, 0)], ['Chelmsford', 5.1, 0.0, (200, 0)]]
-
+# #             collgood1 = [['Brentwood', 6.9, 0.5, (205, 343)], ['London', 7.9, 0.3, (224, 280)], ['Southend-On-Sea', 7.9, 0.1, (180, 300)]]
+# #             collbad2 = [['Manchester', 16.0, 0.0, (132, 0)], ['London', 9.1, 0.0, (150, 0)], ['Chelmsford', 5.1, 0.0, (200, 0)]]
+# #             
+# #             coll_proto1 = sorted(collgood1, key=lambda x: float(x[2]), reverse=True)
+# #             coll_proto2 = sorted(coll_proto1, key=lambda x: float(x[1]), reverse=True)
+            
+# #             print("BWIMPH!", coll_proto2)
+            
 # #             if not "goody" in request.COOKIES:
 # #                 goody = request.COOKIES.get("goody", collgood)
             goody = cookie_help2(request.COOKIES, "goody", collgood)

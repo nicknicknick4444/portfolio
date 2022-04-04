@@ -562,7 +562,8 @@ body {
 }
 
 
-.map {  float: left;
+.map {  
+	float: left;
 	width: 258px;
 	/*display: inline;*/
 	

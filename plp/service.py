@@ -94,8 +94,8 @@ def time_check(a, reqc, b, c, d):
 #placey = ["London","Manchester","Brentwood","Southend-On-Sea","Chelmsford"]
 
 def make_lists():
-    locdict = {"London":(100, 65), "Manchester":(90,150), "Brentwood":(185, 80),
-           "Southend-On-Sea":(195,115), "Chelmsford":(212, 200)}
+    locdict = {"London":(100, 65), "Manchester":(90,150), "Brentwood":(205, 343),
+           "Southend-On-Sea":(195,115), "Chelmsford":(210, 337)}
     
     
     
@@ -129,14 +129,19 @@ def make_lists():
         litoure.append(coord)
         collection.append(litoure)
         
-    coll_proto1 = sorted(collection, key=lambda x: int(x[1]))
+    coll_proto1 = sorted(collection, key=lambda x: float(x[2]), reverse=True)
+    #coll_proto1 = sorted(collection)
     print("CLUSE", collection)
     print("GRUSE", coll_proto1)
-    coll_proto2 = sorted(coll_proto1, key=lambda x: int(x[2]))
+    coll_proto2 = sorted(coll_proto1, key=lambda x: float(x[1]), reverse=True)
     print("BRUSE", coll_proto2)
-    collgood = [coll_proto2[-3:]]
-    collbad = [coll_proto2[:3]]
-    collgood = [i for i in reversed(collgood[0])]
+    collgood = [coll_proto2[:3]]
+    collbad = [coll_proto2[:-4:-1]]
+    ###collgood = [coll_proto1[:3]]
+    ###collbad = [coll_proto1[-3:]]
+    ##collgood = [i for i in reversed(collgood[0])]
     print("WOW!!", collgood)
+    print("WORITA!", collbad)
+    collgood = collgood[0]
     collbad = collbad[0]
     return collgood, collbad
