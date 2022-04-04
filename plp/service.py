@@ -129,7 +129,7 @@ def make_lists():
         litoure.append(coord)
         collection.append(litoure)
         
-    coll_proto1 = sorted(collection, key=lambda x: float(x[2]), reverse=True)
+    coll_proto1 = sorted(collection, key=lambda x: float(x[2]))
     #coll_proto1 = sorted(collection)
     print("CLUSE", collection)
     print("GRUSE", coll_proto1)
