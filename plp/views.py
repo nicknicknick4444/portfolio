@@ -52,16 +52,16 @@ def poy(request):
             collgood = ast.literal_eval(request.COOKIES["goody"])
             collbad = ast.literal_eval(request.COOKIES["baddy"])
         response = render(request, "plp/index.html", {"best":collgood, "worst":collbad,
-                            "g1top": int(collgood[0][3][0]), "g1left": int(collgood[0][3][1]),
-                            "g2top": int(collgood[1][3][0]), "g2left": int(collgood[1][3][1]),
-                            "g3top": int(collgood[2][3][0]), "g3left": int(collgood[2][3][1]),
-                            "g4top": int(collgood[3][3][0]), "g4left": int(collgood[3][3][1]),
-                            "g5top": int(collgood[4][3][0]), "g5left": int(collgood[4][3][1]),
-                            "b1top": int(collbad[0][3][0]), "b1left": int(collbad[0][3][1]),
-                            "b2top": int(collbad[1][3][0]), "b2left": int(collbad[1][3][1]),
-                            "b3top": int(collbad[2][3][0]), "b3left": int(collbad[2][3][1]),
-                            "b4top": int(collbad[3][3][0]), "b4left": int(collbad[3][3][1]),
-                            "b5top": int(collbad[4][3][0]), "b5left": int(collbad[4][3][1])}
+                            "g1left": int(collgood[0][3][0]), "g1top": int(collgood[0][3][1]),
+                            "g2left": int(collgood[1][3][0]), "g2top": int(collgood[1][3][1]),
+                            "g3left": int(collgood[2][3][0]), "g3top": int(collgood[2][3][1]),
+                            "g4left": int(collgood[3][3][0]), "g4top": int(collgood[3][3][1]),
+                            "g5left": int(collgood[4][3][0]), "g5top": int(collgood[4][3][1]),
+                            "b1left": int(collbad[0][3][0]), "b1top": int(collbad[0][3][1]),
+                            "b2left": int(collbad[1][3][0]), "b2top": int(collbad[1][3][1]),
+                            "b3left": int(collbad[2][3][0]), "b3top": int(collbad[2][3][1]),
+                            "b4left": int(collbad[3][3][0]), "b4top": int(collbad[3][3][1]),
+                            "b5left": int(collbad[4][3][0]), "b5top": int(collbad[4][3][1])}
                           )
         cleanup_cookies(request, response)
         if not "my_sesh" in request.COOKIES:
