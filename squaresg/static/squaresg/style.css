@@ -577,10 +577,10 @@ body {
 }
 
 .stats {
-	margin-top: 5px;
 	/*float: right;*/
 	float: none;
 	margin: auto;
+	margin-top: 2px;
 	font-size: 15px;
 	width: 510px;
 	/*display: inline;*/
@@ -930,7 +930,6 @@ fieldset {
 	float: none;
 	width: 300px;
 	margin: auto;
-	margin-top: 0;
 	display: block;
 	font-size: 8px;
 }
