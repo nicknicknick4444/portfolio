@@ -851,7 +851,7 @@ fieldset {
 	border: 2px solid #7703fc;
 	#border-bottom: None;
 	#background-color: #d9d1ff;
-	margin-bottom: 6px;
+	/*margin-bottom: 2px;*/
 }
 
 /* PICNIC for mobile */
@@ -932,7 +932,7 @@ fieldset {
 	margin: auto;
 	margin-top: 0;
 	display: block;
-	font-size: 10px;
+	font-size: 8px;
 }
 
 .welc {
@@ -954,21 +954,21 @@ fieldset {
 }
 
 .one {
-	width: 100px;
+	width: 130px;
 	/*float: left;
 	display: inline;
 	text-align: left;*/
 }
 
 .two {
-	width: 75px;
+	width: 60px;
 	/*float: left;
 	display: inline;
 	text-align: center;*/
 }
 
 .three {
-	width: 75px;
+	width: 60px;
 	/*float: left;
 	display: inline;
 	text-align: center;*/

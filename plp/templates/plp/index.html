@@ -42,12 +42,12 @@
  <!--<div class="heading"><div class="one">Where</div><div class="two">Temp</div>
 	<div class="three">Rain</div></div><br>-->
 <ol>
-<label><b><div class="one">Where</div><div class="two">Air Temp (ºC)</div><div class="three">Rain (mm)</div></b></label><br>
+<label><b><div class="one">Where</div><div class="two">Rain (mm)</div><div class="three">Air Temp (ºC)</div></b></label><br>
 {% for one, two, three, four in best %}
 
  <li>
-  <div class="one">{{ one }}</div><div class="two">{{ two }}</div>
-       <div class="three">{{ three }}</div>
+  <div class="one">{{ one }}</div><div class="two">{{ three }}</div>
+       <div class="three">{{ two }}</div>
  </li>
 
 {% endfor %}
@@ -58,12 +58,12 @@
 <p class = "heado"><strong>Worst Picnic Locations:</strong></p>
 
 <ol>
-<label><b><div class="one">Where</div><div class="two">Air Temp (ºC)</div><div class="three">Rain (mm)</div></label></b><br>
+<label><b><div class="one">Where</div><div class="two">Rain (mm)</div><div class="three">Air Temp (ºC)</div></label></b><br>
 {% for one2, two2, three2, four2 in worst %}
 
 
 <li>
-  <div class="one">{{ one2 }}</div><div class="two">{{ two2 }}</div><div class="three">{{ three2 }}</div>
+  <div class="one">{{ one2 }}</div><div class="two">{{ three2 }}</div><div class="three">{{ two2 }}</div>
 </li>
 
 {% endfor %}

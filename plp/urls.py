@@ -1,9 +1,9 @@
 from django.urls import path
-from . import views
+from . import views2
 
 app_name = "plp"
 
 urlpatterns = [
-    path("submity/",views.subbo, name="submity"),
-    path("", views.poy, name="index"),
+    path("submity/",views2.subbo, name="submity"),
+    path("", views2.poy, name="index"),
     ]

@@ -13,66 +13,9 @@ from io import BytesIO
 def api_call(q):
     return requests.get("http://api.weatherapi.com/v1/current.json?key=b2bf55e4a6c24c55abe104821222603&q={}".format(q))
 
-# badloc = [[1,51,290],[2,202,303],[3,253,340]]
-# goodloc = [[1,363,162],[2,376,98],[3,285,19]]
 
-def plotto(goodloc, badloc):
-    #plt.rcParams["figure.figsize"] = [6.00,3.87]
-    plt.rcParams["figure.autolayout"] = True
-    im = plt.imread("./static/images/uk3.png")
-    fig, ax = plt.subplots()
-    #ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%1f"))
-    im = ax.imshow(im, extent=[0, 387, 0, 600])
-    #plt.figure()
-# # #     for index, i in enumerate(goodloc):
-# # #         x=i[3][0]
-# # #         y=i[3][1]
-# # #         plt.scatter(x,y,marker=".",color="#07e32b")
-# # #         plt.text(x+4, y+1, str(index+1), fontsize=9)
-# # #     
-# # #     for index, i in enumerate(badloc):
-# # #         #x = np.array(range(258))
-# # #         x=i[3][0]
-# # #         y=i[3][1]
-# # #         #https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point
-# # #         
-# # #         #plt.text(x, y, "YURKLE", fontdict=None, fontsize=12, ha="center", va="center")
-# # #         #plt.scatter(x, y, ls=4, c="#ee0000")
-# # #         plt.scatter(x,y, marker=".", color="#f70707")
-# # #         plt.text(x+4, y+1, str(index+1), fontsize=9)
-# # #         #ax.annotate(txt, x[1], y[1])
-# # #         #ax.plot(x, x, ls="dotted", linewidth=2, color="#ee0000")
-
-    plt.axis("off")
-    plt.grid()
-    major_ticks_top=np.linspace(0,400,9)
-    #minor_ticks_top=np.linspace(0,400,9)
-    major_ticks_bottom=np.linspace(0,600,13)
-    ax.set_xticks(major_ticks_top)
-    ax.set_yticks(major_ticks_bottom)
-    ax.tick_params(axis="both", which="major", labelsize=8)
-    fig.set_size_inches(2.58,4)
-    fig.savefig("./static/images/uk3.png",bbinches="tight", dpi=113)
-    print(fig)
-    #print(picco)
-# #     with io.BytesIO() as output:
-# #         fig.set_size_inches(2.58,4).save(output, format="PNG")
-# #         contents = output.getvalue()
-# #     print(contents)
-# # # #     picco_str = imagey(fig)
-# # # #     print("GEEST", picco_str)
-# # # #     db = SaveImage.objects.create(session_id = str(request.COOKIES["my_sesh"]), image = picco_str)
-# # # #     db.save()
-    
-        #plt.show()
-        #return ax.plot
 def make_id():
     return random.randint(10000000000000000000, 99999999999999999999)
-    
-def imagey(my_image):
-    with io.BytesIO() as output:
-        image.save(output, format="PNG")
-        contents = output.getvalue()
 
 def cookie_help1(reqc, name, func):
     if name not in reqc:
@@ -89,39 +32,26 @@ def cookie_help2(reqc, name, func):
 def time_check(a, reqc, b, c, d):
     if a in reqc and b - c > d:
         return True
-    
-
-#placey = ["London","Manchester","Brentwood","Southend-On-Sea","Chelmsford"]
 
 def make_lists():
-    locdict = {"London":(100, 65), "Manchester":(90,150), "Brentwood":(205, 343),
-           "Southend-On-Sea":(195,115), "Chelmsford":(210, 337)}
+    placey2 = {"Aberdeen": (188, 63),"Bath": (123, 340),"Brighton & Hove": (192, 379),"Chester": (134, 253),"Chelmsford": (209, 338),"Stortford": (198, 335),"Brentwood": (204, 345),"Billericay": (208, 345),"Southend-On-Sea": (221, 348),"Bristol": (118, 337),"Armagh": (37, 179),
+             "Bangor": (96, 248),"Belfast": (59, 172),"Birmingham": (149, 284),"Cambridge": (203, 315),"Cantebury": (227, 364),"Cardiff": (104, 336),"Carlisle": (144, 177),"Chichester": (173,375),"Coventry": (148, 291),"Derby": (162, 278),"Derry": (27, 147),
+             "Dundee": (155, 106),"Durham": (169, 185),"Edinburgh": (141, 125),"Ely": (210, 310),"Exeter": (87, 366),"Glasgow": (110, 121),"Gloucester": (126, 328),"Hereford": (119, 311),"Inverness": (130, 48),"Kingston-Upon-Hull": (206, 244),
+             "Lancaster": (140, 213),"Leeds": (165, 228),"Leicester": (169, 289),"Lichfield": (160, 286),"Lincoln": (192, 270),"Lisburn": (54, 177),"Liverpool": (129, 244),"Manchester": (153, 245),"Newcastle-Upon-Tyne": (172, 180),
+             "Newport": (109, 331),"Newry": (44, 191),"Norwich": (241, 305),"Nottingham": (168, 283),"Oxford": (160, 336),"Perth": (140, 107),"Peterborough": (194, 303),"Plymouth": (63, 380),"Portsmouth": (170, 379),"Preston": (138, 229),"Ripon": (167, 212),
+             "St Albans": (189, 340),"St Asaph": (114, 250),"St Davids": (51, 300),"Salford": (151, 243),"Salisbury": (142, 359),"Sheffield": (170, 246),"Southampton": (152, 368),"Stirling": (125, 112),"Stoke-on-Trent": (151, 270),
+             "Sunderland": (178, 187),"Swansea": (85, 321),"Truro": (42, 376),"Wakefield": (166, 232),"Wells": (118, 345),"Wickford": (210, 344),"Winchester": (155, 361),"Wolverhampton": (145, 280),"Worcester": (143, 302),"York": (184, 226)}
     
-    
-    
-    
-    
-# # # # #     placey2 = {"Aberdeen": (189, 62),"Bath": (124, 339),"Brighton & Hove": (193, 378),"Chester": (135, 252),"Chelmsford": (210, 337),"Stortford": (199, 334),"Brentwood": (205, 343),"Billericay": (209, 343),"Southend-On-Sea": (),"Bristol": (),"Armagh": (),
-# # # # #              "Bangor": (),"Belfast": (),"Birmingham": (),"Cambridge": (),"Cantebury": (),"Cardiff": (),"Carlisle": (),"Chichester": (),"Coventry": (),"Derby": (),"Derry": (),
-# # # # #              "Dundee": (),"Durham": (),"Edinburgh": (),"Ely": (),"Exeter": (),"Glasgow": (),"Gloucester": (),"Hereford": (),"Inverness": (),"Kingston-Upon-Hull": (),
-# # # # #              "Lancaster": (),"Leeds": (),"Leicester": (),"Lichfield": (),"Lincoln": (),"Lisburn": (),"Liverpool": (),"Manchester": (),"Newcastle-Upon-Tyne": (),
-# # # # #              "Newport": (),"Newry": (),"Norwich": (),"Nottingham": (),"Oxford": (),"Perth": (),"Peterborough": (),"Plymouth": (),"Portsmouth": (),"Preston": (),"Ripon": (),
-# # # # #              "St Albans": (),"St Asaph": (),"St Davids": (),"Salford": (),"Salisbury": (),"Sheffield": (),"Southampton": (),"Stirling": (),"Stoke-on-Trent": (),
-# # # # #              "Sunderland": (),"Swansea": (),"Truro": (),"Wakefield": (),"Wells": (),"Wickford": (),"Winchester": (),"Wolverhampton": (),"Worcester": (),"York": ()}
-# # # # #     
-    
-    
-    #placey = ["London","Manchester","Brentwood","Southend-On-Sea","Chelmsford"]
     collection = []
     collgood = []
     collbad = []
-    for p in locdict:
+    for p in placey2:
         litoure = []
         response = api_call(p)
         name = response.json()["location"]["name"]
         temp = response.json()["current"]["feelslike_c"]
         rainfall = response.json()["current"]["precip_mm"]
-        coord = locdict[p]
+        coord = placey2[p]
         
         litoure.append(name)
         litoure.append(temp)
@@ -129,19 +59,17 @@ def make_lists():
         litoure.append(coord)
         collection.append(litoure)
         
-    coll_proto1 = sorted(collection, key=lambda x: float(x[2]))
-    #coll_proto1 = sorted(collection)
-    print("CLUSE", collection)
-    print("GRUSE", coll_proto1)
-    coll_proto2 = sorted(coll_proto1, key=lambda x: float(x[1]), reverse=True)
-    print("BRUSE", coll_proto2)
-    collgood = [coll_proto2[:3]]
-    collbad = [coll_proto2[:-4:-1]]
-    ###collgood = [coll_proto1[:3]]
-    ###collbad = [coll_proto1[-3:]]
-    ##collgood = [i for i in reversed(collgood[0])]
-    print("WOW!!", collgood)
-    print("WORITA!", collbad)
+    coll_proto1 = sorted(collection, key=lambda x: float(x[1]), reverse=True)
+    coll_proto2 = sorted(coll_proto1, key=lambda x: float(x[2]))
+    collgood = [coll_proto2[:5]]
+    collbad = [coll_proto2[:-6:-1]]
     collgood = collgood[0]
     collbad = collbad[0]
     return collgood, collbad
+
+def cleanup_cookies(reqc, resp):
+    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", "goesy",
+                "namey", "boxo", "bisp", "chosen", "risp", "filtery"]
+    for i in mainlist:
+        if i in reqc.COOKIES:
+            resp.delete_cookie(i)
