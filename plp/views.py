@@ -27,7 +27,7 @@ def subbo(request):
 
     return response
     
-def poy(request):
+def picn(request):
     my_sesh = cookie_help1(request.COOKIES, "my_sesh", make_id())
     right_now = datetime.now()
     if "time_stamp" in request.COOKIES:
