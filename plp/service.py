@@ -34,7 +34,7 @@ def time_check(a, reqc, b, c, d):
         return True
 
 def make_lists():
-    placey2 = {"Aberdeen": (188, 63),"Bath": (123, 340),"Brighton & Hove": (192, 379),"Chester": (136, 255),"Chelmsford": (209, 338),"Stortford": (198, 335),"Brentwood": (204, 345),"Billericay": (208, 345),"Southend-On-Sea": (221, 348),"Bristol": (118, 337),"Armagh": (37, 179),
+    placey2 = {"Aberdeen": (188, 63),"Bath": (123, 340),"Brighton & Hove": (192, 379),"Chester": (136, 255),"Chelmsford": (213, 334),"Stortford": (198, 335),"Brentwood": (204, 344),"Billericay": (208, 344),"Southend-On-Sea": (221, 348),"Bristol": (118, 337),"Armagh": (37, 179),
              "Bangor": (96, 248),"Belfast": (59, 172),"Birmingham": (149, 284),"Cambridge": (203, 315),"Cantebury": (227, 364),"Cardiff": (104, 336),"Carlisle": (144, 177),"Chichester": (174,375),"Coventry": (148, 291),"Derby": (162, 278),"Derry": (27, 147),
              "Dundee": (155, 106),"Durham": (169, 185),"Edinburgh": (141, 125),"Ely": (210, 310),"Exeter": (87, 366),"Glasgow": (110, 121),"Gloucester": (126, 328),"Hereford": (119, 311),"Inverness": (130, 48),"Kingston-Upon-Hull": (206, 244),
              "Lancaster": (140, 213),"Leeds": (165, 228),"Leicester": (169, 289),"Lichfield": (160, 286),"Lincoln": (192, 270),"Lisburn": (54, 177),"Liverpool": (129, 244),"Manchester": (153, 245),"Newcastle-Upon-Tyne": (172, 180),
