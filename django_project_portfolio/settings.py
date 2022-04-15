@@ -36,9 +36,10 @@ ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    'squaresg.apps.SquaresgConfig',
-    'spelling.apps.SpellingConfig',
-    'plp.apps.PlpConfig',
+#     'squaresg.apps.SquaresgConfig',
+#     'spelling.apps.SpellingConfig',
+#     'plp.apps.PlpConfig',
+#     'diary.apps.DiaryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    #Local
+    'squaresg.apps.SquaresgConfig',
+    'spelling.apps.SpellingConfig',
+    'plp.apps.PlpConfig',
+    'diary.apps.DiaryConfig',
+    'accounts.apps.AccountsConfig',
+    #3rd Party
+    'crispy_forms',
+    'crispy_bootstrap',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +150,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_REDIRECT_URL = "../../diary"
+LOGOUT_REDIRECT_URL= "../../diary"
+
+
+
+
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
