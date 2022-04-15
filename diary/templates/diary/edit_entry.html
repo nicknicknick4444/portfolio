@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+<h1>YULK!</h1>
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="page_contents">
+
+{% if entry.is_old %}
+
+Parthia.
+
+<strong>{{ entry.date_for }}<br>{{ entry.title }}</strong>
+<p>{{ entry.user }}</p>
+<p>{{ entry.detail }}</p>
+<p style="color:#ee0000;"><i>Can't edit diary notes from the past.</i></p>
+<br>
+
+{% else %}
+
+<form action="" method="POST" style="width: 300px;">{% csrf_token %}
+ {{ form|crispy }}
+ <div><br><br><br><br><br><br><button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp;|&nbsp;&nbsp;   
+ {% endif %}
+<button><a href="{% url "diary:home" %}">Cancel</a></button></div><br><br><br><br><br>
+</form>
+ <div class="page_contents">Or <button><a href="{% url "diary:delete" entry.pk %}">Delete</a>
+ </button>
+ </div>
+
+
+
+
+</div>
+
+{% endblock content %}

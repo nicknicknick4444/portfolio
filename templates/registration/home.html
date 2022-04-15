@@ -1,0 +1,18 @@
+<!-- templates/registration/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Welcome! Head to the <a href="{% url "diary:home" %}">diary.</a>
+
+{% else %}
+
+ <p>You are not logged in!</p>
+ <a href="{% url "login" %}">Log In</a>  |  
+ <a href="{% url "signup" %}"><a/>
+
+{% endif %}
+
+{% endblock content %}
