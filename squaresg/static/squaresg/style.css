@@ -698,7 +698,36 @@ body {
 }
 
 
+/* DIARY */
 
+.dateinput {
+	width:200px;
+}
+
+ul.errorlist.nonfield {
+	text-align: center;
+	list-style-type: none;
+	color: #ee0000;
+	font-weight: bold;
+}
+
+label {
+	float: left;
+	width: 100px;
+	line-height: 21px;
+}
+
+input {
+	float: right;
+	width: 200px;
+}
+
+.page_contents {
+	text-align: center;
+	margin: auto;
+	width: 300px;
+	#display: block;
+}
 
 
 
