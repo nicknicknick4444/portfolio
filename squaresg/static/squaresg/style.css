@@ -711,7 +711,7 @@ ul.errorlist.nonfield {
 	font-weight: bold;
 }
 
-label {
+#labely {
 	float: left;
 	width: 100px;
 	line-height: 21px;
