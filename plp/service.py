@@ -58,9 +58,13 @@ def make_lists():
         litoure.append(rainfall)
         litoure.append(coord)
         collection.append(litoure)
-        
-    coll_proto1 = sorted(collection, key=lambda x: float(x[1]), reverse=True)
+    
+    coll_proto0 = sorted(collection, key=lambda x: x[0])
+    coll_proto1 = sorted(coll_proto0, key=lambda x: float(x[1]), reverse=True)
+    
+    ## BELOW: was coll_proto2
     coll_proto2 = sorted(coll_proto1, key=lambda x: float(x[2]))
+    #coll_proto2 = sorted(coll_proto1_5, key=lambda x: x[0])
     collgood = [coll_proto2[:5]]
     collbad = [coll_proto2[:-6:-1]]
     collgood = collgood[0]
