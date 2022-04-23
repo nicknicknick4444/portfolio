@@ -16,6 +16,8 @@ from datetime import date
 User._meta.get_field("first_name")._unique = True
 User._meta.get_field("last_name")._unique = True
 User._meta.get_field("last_name").verbose_name = "Initial"
+User._meta.get_field("first_name")._required = True
+User._meta.get_field("last_name")._required = True
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=CASCADE)
@@ -30,7 +32,7 @@ class Entry(models.Model):
     detail = models.CharField(max_length=1000)
     #user = models.CharField(max_length=100)
     by = models.CharField(max_length=100, default="")
-    user = models.CharField(max_length=5, choices = USER_CHOICES)
+    user = models.CharField(max_length=20, choices = USER_CHOICES)
     #user = models.OneToOneField(User, to_field="first_name", on_delete=models.CASCADE)
     ###user = models.ForeignKey(User, on_delete=models.CASCADE)
     #user = models.ModelMultipleChoiceField(queryset=Users.objects.all())
