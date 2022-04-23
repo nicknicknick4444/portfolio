@@ -10,9 +10,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import date
 
+
 # Create your models here.
 
 User._meta.get_field("first_name")._unique = True
+User._meta.get_field("last_name")._unique = True
+User._meta.get_field("last_name").verbose_name = "Initial"
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=CASCADE)
