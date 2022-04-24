@@ -34,7 +34,8 @@ class EntryListView(ListView):
 # #     users_list = [i for i in USER_CHOICES]
 # #     print(len(users_list))
     saved = ""
-    extra_context = {"today": today, "saved": saved,}
+    #time_saved = ""
+    extra_context = {"today": today, "saved": saved}
     
     def get_context_data(self, *args, **kwargs):
         user_query = User.objects.values_list("first_name", "last_name")
@@ -228,8 +229,12 @@ def set_time(request):
             else:
                 SendTime.objects.create(send_time=time)
             print(time)
+            time_saved = "Time saved!"
+    else:
+        time_saved = ""
+            
     template = "diary/set_time.html"
-    return render(request, template, {"form": form})
+    return render(request, template, {"form": form, "time_saved": time_saved})
     
 def added_user(request):
     saved = "SAVED!"

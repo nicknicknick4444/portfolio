@@ -6,6 +6,7 @@
 
 <div class="page_contents">
 
+{% if time_saved == "" %}
 
 <form action="{% url "diary:set_time" %}" method="POST" name="set_time" value="set_time">{% csrf_token %}
 
@@ -15,6 +16,13 @@
 <button><a href="{% url "diary:home" %}">Cancel</a></button>
 
 </form>
+
+{% else %}
+
+<p>{{ time_saved }}</p>
+<button><a href="{% url "diary:home" %}">Back to Diary</a></button>
+
+{% endif %}
 
 </div>
 
