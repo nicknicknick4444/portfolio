@@ -216,14 +216,15 @@ def add_user(request):
 
 def set_time(request):
     form = SetTimeForm(request.POST)
-
+   # the_time = get_object_or_404(SendTime, pk=1)
     if request.method == "POST":
         if form.is_valid():
             hour = request.POST.get("hour")
             minute = request.POST.get("minute")
             time = "".join([hour, ":", minute])
             if len(SendTime.objects.all()) > 0:
-                the_time = get_object_or_404(SendTime, pk=1)
+                #the_time = get_object_or_404(SendTime, pk=1)
+                the_time = get_object_or_404(SendTime, pk=2)
                 the_time.send_time = time
                 the_time.save()
             else:
@@ -232,9 +233,13 @@ def set_time(request):
             time_saved = "Time saved!"
     else:
         time_saved = ""
+    if len(SendTime.objects.all()) > 0:
+        curr_time = SendTime.objects.get(id=2)
+    else:
+        curr_time = "NOPE"
             
     template = "diary/set_time.html"
-    return render(request, template, {"form": form, "time_saved": time_saved})
+    return render(request, template, {"form": form, "time_saved": time_saved, "curr_time": curr_time})
     
 def added_user(request):
     saved = "SAVED!"

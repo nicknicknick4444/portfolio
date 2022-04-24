@@ -24,6 +24,12 @@
 
 {% endif %}
 
+{% if curr_time != "NOPE" %}
+
+<p>Current send-time for emails:<br><b>{{ curr_time }}</b></p>
+
+{% endif %}
+
 </div>
 
 {% endblock content %}
