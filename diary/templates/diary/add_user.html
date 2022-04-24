@@ -1,0 +1,25 @@
+<header>Add User</header>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page_contents">
+
+{% if saved != "SAVED!" %}
+
+<form action="{% url "diary:add_user" %}" method="POST" name="CreateUserForm" value="add_user">{% csrf_token %}
+
+{{ form.as_p }}
+
+<br>
+<button type="submit">Create</button>&nbsp;&nbsp;|&nbsp;&nbsp;
+<button><a href="{% url "diary:home" %}">Cancel</a></button>
+</form>
+
+{% endif %}
+
+</div>
+
+{% endblock content %}
+

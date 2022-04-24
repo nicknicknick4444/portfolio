@@ -3,13 +3,14 @@ import datetime
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, \
      DetailView, TemplateView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from .models import Entry, USER_CHOICES
-from .forms import NewEntryForm
+from .models import Entry
+from .forms import NewEntryForm, CreateUserForm
 from .service import convert_date
 
 
@@ -17,30 +18,39 @@ from .service import convert_date
 
 today = datetime.datetime.now().date()
 
-def user_choice_inits():
-    return [i for i in USER_CHOICES]
-    #inits = [i[1] for i in USER_CHOICES]
+# def user_choice_inits():
+#     #USER_CHOICES
+#     return [i for i in USER_CHOICES]
+#     #inits = [i[1] for i in USER_CHOICES]
     
 
 class EntryListView(ListView):
     model = Entry
     template_name = "diary/list_entries.html"
     #today = datetime.datetime.now().date()
-    users_list = user_choice_inits()
-    extra_context = {"today": today, "users_list": users_list}
+    #users_list = user_choice_inits()
+# #     user_query = User.objects.values_list("first_name", "last_name")
+# #     USER_CHOICES = [i for i in user_query]
+# #     users_list = [i for i in USER_CHOICES]
+# #     print(len(users_list))
+    saved = ""
+    extra_context = {"today": today, "saved": saved,}
+    
+    def get_context_data(self, *args, **kwargs):
+        user_query = User.objects.values_list("first_name", "last_name")
+        USER_CHOICES2 = [i for i in user_query]
+        context = super().get_context_data(*args, **kwargs)
+        context["users_list"] = [i for i in USER_CHOICES2]
+        return context
     
     def get_queryset(self):
         return Entry.objects.all().order_by("date_for")
 
 def searching(request):
-#     if not "searching" in request.COOKIES:
-#         search = request.COOKIES.get("searching", "searching")
-#     else:
-#         search = request.COOKIES["searching"]
-    #response = request(render, "diary/entries_list.html", {"searcho": searcho})
-    #response.set_cookie("searching", search)
-    #return response
-    users_list = user_choice_inits()
+    ##users_list = user_choice_inits()
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    users_list = [i for i in USER_CHOICES2]
     query_s = request.POST.get("term_search")
     query_u = request.POST.get("sort_user")
     raw_query_d = request.POST.get("by_date")
@@ -48,88 +58,71 @@ def searching(request):
         query_d = convert_date(raw_query_d)
     else:
         query_d = ""
-    #query_d = request.POST.get("by_date")
-    print("BIRD POO", query_d)
-    print("BIRD PISS", (query_d == Entry.objects.filter(id__exact=6).values()[0]["date_for"]))
-    #if query_d != None:
-    print("plant!", query_d)
-    print("SOFFIT", query_s)
-    print("START", query_u)
-    
-    
-
     if request.method == "POST":
         if query_s != "":
             que1=Entry.objects.filter(detail__icontains=query_s).order_by("date_for")
-            print("LOOK!", que1)
         else:
-            que1=Entry.objects.all().order_by("date_for")
-            #print("CABBAGE!", type(query_s))
-            #print("GANT!")
-        
+            que1=Entry.objects.all().order_by("date_for")        
         if query_u != None:
             que2 = que1.filter(user__exact=query_u).order_by("date_for")
-            print("Little ones chewed on the fucking bones!", que2)
         else:
             que2 = que1
-            print("PArBit", que2)
-            
         if query_d != "":
             que3 = que2.filter(date_for__exact=query_d).order_by("user", "title")
         elif query_s != "" or query_u != None:
-            
             que3 = que2
         else:
             que3 = Entry.objects.none()
-    
-        print("BOPEN! OXIDE! XANADU!", que3)
-        
-    
+            
     if len(que3) == 0:
         searcho = "EMPTY!"
     else:
         searcho = "SEARCHING!"
-        
-    print("TRASS", que2)
-        
-    #today = datetime.datetime.now().date()
-    return render(request, "diary/list_entries.html", {"searchu": searcho, "object_listy":que3,
+    saved = ""
+    
+    return render(request, "diary/list_entries.html", {"searchu": searcho, "object_listy": que3,
                                                         "today": today, "users_list": users_list,
                                                        "word_query": query_s, "user_query": query_u,
-                                                       "date_query": query_d})
+                                                       "date_query": query_d, "saved": saved,})
     
 
-def sort_user(request):
-    users_list = user_choice_inits()
-    query_u = request.POST.get("sort_user")
-    print("START", query_u)
-    if request.method == "POST":
-#         if query == "":
-#             usero = "it_is__EMPTY!"
-#             quer = ""
-#         elif
-        if query_u != "":
-            quer_user = Entry.objects.filter(user__exact=query_u).order_by("date_for")
-            searcho = "YOF!"
-    print("HERE IT IS!!!", quer_user)
-    print("And now: ", query_u)
-    template = "diary/list_entries.html"
-#     if not "query_u" in request.COOKIES:
-#         queru = request.COOKIES.get("query_u", query_u)
-#     else:
-#         queru = request.COOKIES["query_u"]
-        #today = date_time.date_time.now().date()
-    return render(request, template, {"searchu": searcho, "object_listy": quer_user,
-                                                       "today":today, "users_list": users_list,
-                                                       "user_query": query_u})
+# # def sort_user(request):
+# #     users_list = user_choice_inits()
+# #     query_u = request.POST.get("sort_user")
+# #     print("START", query_u)
+# #     if request.method == "POST":
+# # #         if query == "":
+# # #             usero = "it_is__EMPTY!"
+# # #             quer = ""
+# # #         elif
+# #         if query_u != "":
+# #             quer_user = Entry.objects.filter(user__exact=query_u).order_by("date_for")
+# #             searcho = "YOF!"
+# #     print("HERE IT IS!!!", quer_user)
+# #     print("And now: ", query_u)
+# #     template = "diary/list_entries.html"
+# # #     if not "query_u" in request.COOKIES:
+# # #         queru = request.COOKIES.get("query_u", query_u)
+# # #     else:
+# # #         queru = request.COOKIES["query_u"]
+# #         #today = date_time.date_time.now().date()
+# #     return render(request, template, {"searchu": searcho, "object_listy": quer_user,
+# #                                                        "today":today, "users_list": users_list,
+# #                                                        "user_query": query_u})
+
 def clear_query(request):
     cleared_query = Entry.objects.all().order_by("date_for")
     print("Preeve!", cleared_query)
-    users_list = user_choice_inits()
+    #users_list = user_choice_inits()
+    saved = ""
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    users_list = [i for i in USER_CHOICES2]
     searcho = "CLEARED!"
     template = "diary/list_entries.html"
     return render(request, template, {"searchu": searcho, "object_listy": cleared_query,
-                                        "today": today, "users_list": users_list})
+                                        "today": today, "users_list": users_list,
+                                      "saved": saved,})
     #return HttpResponseRedirect(reverse("diary:home"))
         
 
@@ -184,6 +177,39 @@ class UpdateEntryView(LoginRequiredMixin, UpdateView):
         #print(form.instance.date_for < datetime.datetime.now().y())
         
         return super().form_valid(form)
+
+def add_user(request):
+    #query = request.POST.get("add_user")
+    form = CreateUserForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            print("BAUS!!")
+            new_user = User.objects.create_user(form.instance.username,
+                                           form.instance.email,
+                                           form.instance.password,)
+            new_user.first_name = form.instance.first_name
+            new_user.last_name = form.instance.last_name
+            new_user.save()
+            saved = "SAVED!"
+            return HttpResponseRedirect(reverse("diary:added_user"))
+        else:
+            saved = "UNSAVED!"
+    else:
+        saved = "UNSAVED!"
+    template = "diary/add_user.html"
+    return render(request, template, {"saved": saved, "form": form})
+    #return HttpResponseRedirect(reverse("diary:added_user"))
+    
+def added_user(request):
+    saved = "SAVED!"
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    users_list = [i for i in USER_CHOICES2]
+    all_entries = Entry.objects.all().order_by("date_for")
+    searcho = "USER_ADDED!"
+    template = "diary/list_entries.html"
+    return render(request, template, {"object_listy": all_entries, "users_list": users_list, 
+                                      "today": today, "saved": saved, "searchu": searcho})
     
 # class HomePageView(TemplateView):
 #     template_name = "diary/home2.html"

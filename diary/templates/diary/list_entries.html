@@ -13,6 +13,8 @@
 
 {% if user.is_authenticated %}
 
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "diary:add_user" %}">Add User</a>
+
  &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "logout" %}">Log Out</a>
 
 {% else %}
@@ -26,6 +28,12 @@
 <br>
 <div class="page_contents">
 Today is {{ today }}
+
+{% if saved == "SAVED!" %}
+ <p>
+  User saved successfully!<br>
+ </p>
+{% endif %}
 
 {% if searchu == "SEARCHING!" or searchu == "EMPTY!" and searchu != "CLEARED!" %}
  {% if word_query != "" %}
@@ -83,14 +91,9 @@ Today is {{ today }}
 	{% endif %}
 
 
-{% if searchu == "SEARCHING!" or searchu == "CLEARED!" %}
+{% if searchu == "SEARCHING!" or searchu == "CLEARED!" or searchu == "USER_ADDED!" %}
 
 <div class="page_contents"><br>
-
-
-
-
-
 
 
 {% for find in object_listy %}
