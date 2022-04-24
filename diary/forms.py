@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import Form, ModelForm, DateField, ModelMultipleChoiceField
+from django.forms import Form, ModelForm, DateField, ModelMultipleChoiceField, PasswordInput, EmailInput
 from django.contrib.auth.models import User
 #from django.forms.extras.widgets import SelectDateWidget
 from .models import Entry
@@ -20,11 +20,11 @@ class UserChoiceField(ModelMultipleChoiceField):
     
 #DateInput = partial(forms.DateInput, {"class":"datepicker"})
 
-que = User.objects.values_list("first_name", flat=True)
-que2 = User.objects.values_list("first_name", "last_name")
+queryo = User.objects.values_list("first_name", flat=True)
+queryo2 = User.objects.values_list("first_name", "last_name")
 #que2 = [((i for i in que) i in que) for i in que]
-print([(i,i) for i in que])
-print([i for i in que2])
+print([(i,i) for i in queryo])
+print([i for i in queryo2])
 #print(que2)
 
 class NewEntryForm(ModelForm):
@@ -32,7 +32,7 @@ class NewEntryForm(ModelForm):
 #         super(NewEntryForm, self).__init__(*args, **kwargs)
 #         self.fields["user"] = forms.ModelMultipleChoiceField(queryset=User.objects.filter(username__startswith="M"))
     
-    user = forms.ChoiceField(choices=que)
+    user = forms.ChoiceField(choices=queryo)
     #user = UserChoiceField
     #forms.ChoiceField.input_type="select"
     #forms.ChoiceField( choices=tuple_of_tuples)
@@ -72,11 +72,20 @@ class NewEntryForm(ModelForm):
 #             self.fields["user"].queryset = User.objects.all()
 #             self.fields["user"].label_from_instance = lambda obj: obj.first_name
         
-
+class CreateUserForm(ModelForm):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=PasswordInput)
+    email = forms.CharField(widget=EmailInput)
+    #first_name = forms.CharField(max_length=100, label="Name")
+    #last_name_ = forms.CharField(max_length=100, label="Initial")
+    
+    class Meta:
+        model = User
+        fields = ["username", "password", "email", "first_name", "last_name"]
 
 
 # class SearchForm(forms.Form):
 #     class Meta:
 #         termy = forms.CharField(max_length=1000, default="")
-    
+
     
