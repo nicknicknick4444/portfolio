@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -9,8 +9,8 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView, \
      DetailView, TemplateView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from .models import Entry
-from .forms import NewEntryForm, CreateUserForm
+from .models import Entry, SendTime
+from .forms import NewEntryForm, CreateUserForm, SetTimeForm
 from .service import convert_date
 
 
@@ -149,6 +149,8 @@ class NewEntryView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.created = datetime.datetime.now().date()
         form.instance.last_modified = datetime.datetime.now().date()
+        form.instance.by = self.request.user.first_name
+        form.instance.mod_by = self.request.user.first_name
         print(form.instance.created)
         
         print(form.instance.date_for)
@@ -170,13 +172,24 @@ class UpdateEntryView(LoginRequiredMixin, UpdateView):
               "detail",
               "user",
               "date_for")
+    #user_query = User.objects.values_list("first_name", "last_name")
     template_name = "diary/edit_entry.html"
     
     def form_valid(self, form):
         form.instance.last_modified = datetime.datetime.now().date()
+        form.instance.mod_by = self.request.user.first_name
         #print(form.instance.date_for < datetime.datetime.now().y())
         
         return super().form_valid(form)
+
+    
+#     def get_queryset(self):
+#         user_query = User.objects.values_list("first_name", "last_name")
+#         USER_CHOICES = [i for i in user_query]
+#         return user_query
+
+#def set_time(request):
+    
 
 def add_user(request):
     #query = request.POST.get("add_user")
@@ -199,6 +212,24 @@ def add_user(request):
     template = "diary/add_user.html"
     return render(request, template, {"saved": saved, "form": form})
     #return HttpResponseRedirect(reverse("diary:added_user"))
+
+def set_time(request):
+    form = SetTimeForm(request.POST)
+
+    if request.method == "POST":
+        if form.is_valid():
+            hour = request.POST.get("hour")
+            minute = request.POST.get("minute")
+            time = "".join([hour, ":", minute])
+            if len(SendTime.objects.all()) > 0:
+                the_time = get_object_or_404(SendTime, pk=1)
+                the_time.send_time = time
+                the_time.save()
+            else:
+                SendTime.objects.create(send_time=time)
+            print(time)
+    template = "diary/set_time.html"
+    return render(request, template, {"form": form})
     
 def added_user(request):
     saved = "SAVED!"

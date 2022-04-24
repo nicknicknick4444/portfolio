@@ -1,0 +1,21 @@
+<header>Set Time</header>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page_contents">
+
+
+<form action="{% url "diary:set_time" %}" method="POST" name="set_time" value="set_time">{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">Save</button>&nbsp;&nbsp;|&nbsp;&nbsp;
+<button><a href="{% url "diary:home" %}">Cancel</a></button>
+
+</form>
+
+</div>
+
+{% endblock content %}
