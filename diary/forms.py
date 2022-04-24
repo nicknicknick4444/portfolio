@@ -1,8 +1,10 @@
 from django import forms
-from django.forms import Form, ModelForm, DateField, ModelMultipleChoiceField, PasswordInput, EmailInput
+from django.forms import Form, ModelForm, DateField, ModelMultipleChoiceField, \
+     PasswordInput, EmailInput
+from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 #from django.forms.extras.widgets import SelectDateWidget
-from .models import Entry
+from .models import Entry, SendTime
 from functools import partial
 #from django.forms.widgets import DateInput
 
@@ -65,7 +67,7 @@ class NewEntryForm(ModelForm):
         model = Entry
         #borce = MyModelChoiceField(queryset=Entry.objects.all())
         fields = "__all__"
-        exclude = ("by", "date_written")
+        exclude = ("by", "mod_by", "date_written")
     
 #        def __init__(self, *args, **kwargs):
 #             super(NewEntryForm, self).__init__(*args, **kwargs)
@@ -76,13 +78,33 @@ class CreateUserForm(ModelForm):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=PasswordInput)
     email = forms.CharField(widget=EmailInput)
-    #first_name = forms.CharField(max_length=100, label="Name")
-    #last_name_ = forms.CharField(max_length=100, label="Initial")
+    first_name = forms.CharField(max_length=100, label="Name")
+    last_name_ = forms.CharField(max_length=100, label="Initial")
     
     class Meta:
         model = User
         fields = ["username", "password", "email", "first_name", "last_name"]
 
+# class MyUserChangeForm(UserChangeForm):
+#     def __init__(aelf, *args, **kwargs):
+#         super(MyUserChangeForm, self).__init__(*args, **kwargs)
+#     
+#         self.fields["first_name"].required = True
+
+class SetTimeForm(forms.Form):
+    HOUR_OPTIONS = [("01", "01"), ("02", "02"), ("05", "03"), ("04", "04"), ("05", "05"), ("06", "06")]
+    MINUTE_OPTIONS = [("00", "00"), ("15", "15"), ("30", "30"), ("45", "45")]
+    #hour = forms.CharField(label="Hour", widget=forms.Select(choices=HOUR_OPTIONS))
+    #minute = forms.CharField(label="Minute", widget=forms.Select(choices=MINUTE_OPTIONS))
+    hour = forms.ChoiceField(choices=HOUR_OPTIONS)
+    minute = forms.ChoiceField(choices=MINUTE_OPTIONS)
+    #proto_send_time = "".join((send_time, ":", minute))
+    #print(proto_send_time)
+    #send_time = 
+    
+    class Meta:
+        #model = SendTime
+        fields = ["hour", "minute"]
 
 # class SearchForm(forms.Form):
 #     class Meta:
