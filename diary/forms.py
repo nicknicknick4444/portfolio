@@ -92,7 +92,10 @@ class CreateUserForm(ModelForm):
 #         self.fields["first_name"].required = True
 
 class SetTimeForm(forms.Form):
-    HOUR_OPTIONS = [("01", "01"), ("02", "02"), ("05", "03"), ("04", "04"), ("05", "05"), ("06", "06")]
+    HOUR_OPTIONS = [("00", "12pm"), ("01", "1am"), ("02", "2am"), ("03", "3am"), ("04", "4am"), ("05", "5am"), ("06", "6am"),
+                    ("07", "7am"), ("08", "8am"), ("09", "9am"), ("10", "10am"), ("11", "11am"), ("12", "12am"),
+                    ("13", "1pm"), ("14", "2pm"), ("15", "3pm"), ("16", "4pm"), ("17", "5pm"), ("18", "6pm"),
+                    ("19", "7pm"), ("20", "8pm"), ("21", "9pm"), ("22", "10pm"), ("23", "11pm")]
     MINUTE_OPTIONS = [("00", "00"), ("15", "15"), ("30", "30"), ("45", "45")]
     #hour = forms.CharField(label="Hour", widget=forms.Select(choices=HOUR_OPTIONS))
     #minute = forms.CharField(label="Minute", widget=forms.Select(choices=MINUTE_OPTIONS))
