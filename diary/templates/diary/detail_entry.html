@@ -15,8 +15,8 @@
  <p>Emailing Date: {{ entry.date_for }}</p>
  <p>For: {{ entry.user }}</p>
  <p>Message: {{ entry.detail }}</p>
- <p style="font-size: 10px;">(Date Added: {{ entry.created }})</p> 
- <p style="font-size: 10px;">(Last Modified: {{ entry.last_modified }})</p>
+ <p style="font-size: 10px;">(Date Added: {{ entry.created }}) by {{ entry.by }}</p> 
+ <p style="font-size: 10px;">(Last Modified: {{ entry.last_modified }}) by {{ entry.mod_by }}</p>
 
 <button><a href="{% url "diary:home" %}">Back to main list</a></button><br><br><br><br><br><br>
 
