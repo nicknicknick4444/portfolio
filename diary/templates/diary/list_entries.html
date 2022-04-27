@@ -23,9 +23,7 @@
 
 {% endif %}
 </div>
-
-
-<br>
+<div class="gap"></div>
 <div class="page_contents">
 Today is {{ today }}
 
@@ -45,18 +43,21 @@ Today is {{ today }}
  {% if date_query != "" %}
   <p>Filtering by date: {{ date_query }}</p>
  {% endif %}
+ {% if all_query != "" %}
+  <p>Searching all entries</p>
+ {% endif %}
 <!--<p></p>-->
 
 {% endif %}
 
  <form action="{% url "diary:searchy" %}" method="POST" name="s" value="s">{% csrf_token %}
-  <input type="text" name="term_search"></input>
-  <!--<button type="submit">Search</button>--> Search: <br><br>
-
-   
+  <label class="labelo2">Search:</label><input type="text" name="term_search"></input>
+  <!--<button type="submit">Search</button> Search: --><br>
+<div class="gap"></div>
+User Filter:<br>
 {% for the_user in users_list %}
 
-  <label>{{ the_user.0 }}
+  <label class="labelo2">{{ the_user.0 }}</label>
 
 {% comment %}
     {% if user_query == the_user.0 %}
@@ -67,17 +68,18 @@ Today is {{ today }}
 {% endcomment %}
      <input type="radio" name="sort_user" value="{{ the_user.0 }}">
   
-  </label><br>
+  <!--</label>--><br>
 
 {% endfor %}
 
-<br>
+<div class="gap"></div>
 
-<label>Pick Date: 
+<label class="labelo2">Pick Date:</label>
  <input name="by_date" type="date">
-</label>
+
 <br><br>
  <button type="submit">Search & Filter</button>
+ <!--<button><a href="{% url "diary:search_all" %}">Search All</a></button>-->
 </form>
 
 
@@ -85,6 +87,7 @@ Today is {{ today }}
 
 	{% if searchu == "SEARCHING!" and searchu != "CLEARED!" %}
 <div class="page_contents">
+
 <button><a href="{% url "diary:clear_query" %}">Clear</a></button><br><br>
 {{ searchu }}<br>
 </div>
@@ -122,7 +125,7 @@ Today is {{ today }}
 {{ find.user }}</a><br>
 <a href="{% url "diary:detail" find.pk %}">View Entry</a><br>
 {% if user.is_authenticated %}
- <a href="{% url "diary:edit" find.pk %}">Edit Entry</a>  |  
+ <a href="{% url "diary:edit2" find.pk %}">Edit Entry</a>  |  
  <a href="{% url "diary:delete" find.pk %}">Delete Entry</a>
 
  
@@ -173,7 +176,7 @@ Today is {{ today }}
 {{ entry.user }}</a><br>
 <a href="{% url "diary:detail" entry.pk %}">View Entry</a><br> 
 {% if user.is_authenticated %}
- <a href="{% url "diary:edit" entry.pk %}">Edit Entry</a>  |  
+ <a href="{% url "diary:edit2" entry.pk %}">Edit Entry</a>  |  
  <a href="{% url "diary:delete" entry.pk %}">Delete Entry</a>
 <br><br>
 {% else %}

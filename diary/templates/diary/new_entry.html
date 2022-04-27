@@ -10,13 +10,17 @@
 
 <div class="page_contents">
   <form action="" method="POST" style="width: 300px; margin: auto; display: block;">{% csrf_token %}
-  <i>*required</i><br><br>
-  <!--<label>Order Number:<input type="text" id="title" name="title" style="float: right;" required>*</label><br><br>
-  <label id="labely">Detail:<input type="text" id="detail" name="detail" style="float: right;" required>*</label><br><br>
-  <label id="labely">Who For:<input type="text" id="user" name="user" style="float: right;" required>*</label><br><br>
-  <label id="labely">When For:<input type="date" id="date_for" name="date_for" style="float: right; width:170px;" required>*</label><br>-->
-  {{ form.as_p }}
-  <br><br><br><br><br><br><button class="btn btn-success ml-2" type="submit">Save</button>
+  <i style="font-size: 10px;">All fields are mandatory</i><br><br>
+  <label class="labelo2">Order:</label><input type="text" id="title" name="new_title" required><br>
+  <label class="labelo2">Detail:</label><input type="text" id="detail" name="new_detail" required><br>
+  <p>Select who this is for:</p>
+  {% for the_user in users_list %}
+    <label class="labelo2">{{ the_user.0 }}</label><input type="radio" id="user" name="new_user" value="{{ the_user.0 }}" required><br>
+  {% endfor %}
+  <div class="gap"></div>
+  <label class="labelo2">When For:</label><input type="date" id="date_for" name="new_date" required><br>
+  <!--{{ form.as_p }}-->
+  <br><button class="btn btn-success ml-2" type="submit">Save</button>
    &nbsp;&nbsp;|&nbsp;&nbsp;
   <button><a href="{% url "diary:home" %}">Cancel</a></button>
  </form>

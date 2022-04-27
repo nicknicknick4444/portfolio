@@ -10,7 +10,7 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView, \
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from .models import Entry, SendTime
-from .forms import NewEntryForm, CreateUserForm, SetTimeForm
+from .forms import NewEntryForm, CreateUserForm, SetTimeForm, UpdateViewForm
 from .service import convert_date
 
 
@@ -41,7 +41,7 @@ class EntryListView(ListView):
         user_query = User.objects.values_list("first_name", "last_name")
         USER_CHOICES2 = [i for i in user_query]
         context = super().get_context_data(*args, **kwargs)
-        context["users_list"] = [i for i in USER_CHOICES2]
+        context["users_list"] = USER_CHOICES2
         return context
     
     def get_queryset(self):
@@ -82,9 +82,10 @@ def searching(request):
     saved = ""
     
     return render(request, "diary/list_entries.html", {"searchu": searcho, "object_listy": que3,
-                                                        "today": today, "users_list": users_list,
+                                                        "today": today, "users_list": USER_CHOICES2,
                                                        "word_query": query_s, "user_query": query_u,
-                                                       "date_query": query_d, "saved": saved,})
+                                                       "date_query": query_d, "saved": saved,
+                                                       "all_query": ""})
     
 
 # # def sort_user(request):
@@ -122,7 +123,7 @@ def clear_query(request):
     searcho = "CLEARED!"
     template = "diary/list_entries.html"
     return render(request, template, {"searchu": searcho, "object_listy": cleared_query,
-                                        "today": today, "users_list": users_list,
+                                        "today": today, "users_list": USER_CHOICES2,
                                       "saved": saved,})
     #return HttpResponseRedirect(reverse("diary:home"))
         
@@ -166,15 +167,101 @@ class DeleteEntryView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(DeleteEntryView, self).delete(request, *args, **kwargs)
+    
+# # def UpdateEntryView2(request):
+# #     form = UpdateViewForm
+# #     template = "diary/edit_entry.html"
+# #     pk = request.GET.get("pk")
+# #     return render(request, template, {"form":form, "pk":pk})
+
+def NewEntryView2(request):
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    new_title = request.POST.get("new_title")
+    new_detail = request.POST.get("new_detail")
+    new_user = request.POST.get("new_user")
+    new_date = request.POST.get("new_date")
+    
+    if request.method == "POST":
+        Entry.objects.create(title=new_title, detail=new_detail, 
+                                    user=new_user, date_for=convert_date(new_date),
+                             created=today, last_modified=today, mod_by=request.user.first_name,
+                             by=request.user.first_name)
+        messages.success(request, "Entry saved!")
+        return HttpResponseRedirect(reverse("diary:home"))
+    else:
+        return render(request, "diary/new_entry.html", {"today": today, "users_list": USER_CHOICES2})
+
+def UpdateEntryView2(request, pk):
+    #form = request.POST.get("ebbo")
+    #form = UpdateViewForm()
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    the_entry = get_object_or_404(Entry, pk=pk)
+    title = request.POST.get("edit_title")
+    detail = request.POST.get("edit_detail")
+    user = request.POST.get("edit_user")
+    print("spooks! WOO!", the_entry.user)
+    date = request.POST.get("edit_date")
+    print("SATE", the_entry.date_for)
+    if request.method == "POST":
+        #if form.is_valid():
+#         for i in (title, detail, user, date):
+#             print(i)
+        the_entry.title = title
+        the_entry.detail = detail
+        the_entry.user = user
+        the_entry.mod_by = request.user.first_name
+        the_entry.date_for = convert_date(date)
+        the_entry.last_modified = convert_date(date)
+        #the_entry.title.save()
+        print("Beeeeooorp", the_entry.date_for)
+        the_entry.save()
+        saved = "PENCE!"
+        all_entries = Entry.objects.all().order_by("date_for")
+        messages.success(request, "Entry updated!")
+        return HttpResponseRedirect(reverse("diary:home"))
+#         render(request, "diary/list_entries.html", {"saved": saved, "object_listy": all_entries,
+#                                                     "users_list": USER_CHOICES2})
+
+
+#     else:
+#         saved = None
+    
+    #the_entry.save()
+    
+    print("BEENCE")
+    template = "diary/edit_entry.html"
+    shit = "shit!"
+    return render(request, template, {"title": title, "detail": detail,
+                                      "user": user, "date": date,
+                                      "entry": the_entry, "shit": shit,
+                                      "users_list": USER_CHOICES2,
+                                      "selected_user": the_entry.user})
+            
+        
 
 class UpdateEntryView(LoginRequiredMixin, UpdateView):
     model = Entry
-    fields = ("title",
-              "detail",
-              "user",
-              "date_for")
+# # #     fields = ("title",
+# # #               "detail",
+# # #               "user",
+# # #               "date_for")
+    form_class = UpdateViewForm
+    #form_class()
+    #form = form_class()
+    extra_context = {"form":form_class}
     #user_query = User.objects.values_list("first_name", "last_name")
     template_name = "diary/edit_entry.html"
+    
+# # #     class Meta:
+# # #         model = Entry
+# # #         fields = ("title",
+# # #               "detail",
+# # #               "user",
+# # #               "date_for")
+#         widgets = {
+#             "": forms.Choice}
     
     def form_valid(self, form):
         form.instance.last_modified = datetime.datetime.now().date()
@@ -182,6 +269,8 @@ class UpdateEntryView(LoginRequiredMixin, UpdateView):
         #print(form.instance.date_for < datetime.datetime.now().y())
         
         return super().form_valid(form)
+    
+
 
     
 #     def get_queryset(self):
@@ -252,6 +341,16 @@ def added_user(request):
     return render(request, template, {"object_listy": all_entries, "users_list": users_list, 
                                       "today": today, "saved": saved, "searchu": searcho})
     
+def search_all(request):
+    all_entries = Entry.objects.all().order_by("date_for")
+    user_query = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES2 = [i for i in user_query]
+    searcho = "SEARCHING!"
+    template = "diary/list_entries.html"
+    return render(request, template, {"object_listy": all_entries, "users_list": USER_CHOICES2,
+                                      "all_query": "ALL!", "today": today, "searchu": searcho,
+                                      "word_query": "", "user_query": None, "date_query": ""})
+
 # class HomePageView(TemplateView):
 #     template_name = "diary/home2.html"
         

@@ -1,3 +1,4 @@
+<header>Edit Entry</header>
 {% extends "base.html" %}
 
 <h1>YULK!</h1>
@@ -19,14 +20,37 @@ Parthia.
 
 {% else %}
 
-<form action="" method="POST" style="width: 300px;">{% csrf_token %}
- {{ form|crispy }}
- <div><br><br><br><br><br><br><button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp;|&nbsp;&nbsp;   
+<form action="" method="POST" name="ebbo" value = "e" style="width: 310px;">{% csrf_token %}
+	<!--{{ form.as_p }}-->
+	<span class="labelo">Order: </span><input class="formy" type="text" name="edit_title" value="{{ entry.title }}"><br>
+	<span class="labelo">Detail: </span><input class="formy" type="text" name="edit_detail" value="{{ entry.detail }}"><br>
+	<div class="gap"></div>Select User:<br>
+	{% for the_user in users_list %}
+	<label class="labelo2">{{ the_user.0 }}</label>
+	{% if the_user.0 == selected_user %}
+		<input type="radio" name="edit_user" value="{{ the_user.0 }}" checked><br>
+
+	{% else %}
+		<input type="radio" name="edit_user" value="{{ the_user.0 }}"><br>
+	{% endif %}
+	{% endfor %}
+
+	<div class="gap"></div><span class="labelo">Date: </span><input class="formy" type="date" name="edit_date" value="{{ entry.date_for|date:"Y-m-d" }}"><br><br>
+
+
+ <button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp;|&nbsp;&nbsp;   
  {% endif %}
 <button><a href="{% url "diary:home" %}">Cancel</a></button></div><br><br><br><br><br>
 </form>
- <div class="page_contents">Or <button><a href="{% url "diary:delete" entry.pk %}">Delete</a>
+ <div><br>
+ <!--<div class="page_contents">Or <button><a href="{% url "diary:delete" entry.pk %}">Delete</a>-->
  </button>
+
+{{ shit }}
+
+
+
+
  </div>
 
 
