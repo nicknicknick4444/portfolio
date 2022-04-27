@@ -113,4 +113,18 @@ class SetTimeForm(forms.Form):
 #     class Meta:
 #         termy = forms.CharField(max_length=1000, default="")
 
+
+class UpdateViewForm(forms.ModelForm):
+    query_list = User.objects.values_list("first_name", "last_name")
+    USER_CHOICES = [i for i in query_list]
+    user = forms.ChoiceField(choices = USER_CHOICES)
+
+    class Meta:
+        model = Entry
+        fields = ("title",
+              "detail",
+              "user",
+              "date_for")
     
+
+        
