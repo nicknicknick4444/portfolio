@@ -729,6 +729,32 @@ input {
 	#display: block;
 }
 
+.formy {
+	float: none;
+}
+
+.labelo {
+	float: left;
+	width: 10%;
+}
+
+.labelo2 {
+	#padding: 5px;
+	float: left;
+	#margin: 10px;
+	text-align: left;
+}
+
+input[type="radio"]{
+	#margin-top: -1px;
+	vertical-align: middle;
+	#height: 100%;
+}
+
+.gap {
+	height: 10px;
+}
+
 
 
 
