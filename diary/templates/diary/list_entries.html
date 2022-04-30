@@ -27,25 +27,24 @@
 <div class="page_contents">
 Today is {{ today }}
 
-{% if saved == "SAVED!" %}
+<!--{% if saved == "SAVED!" %}
  <p>
   User saved successfully!<br>
  </p>
-{% endif %}
+{% endif %}-->
 
 {% if searchu == "SEARCHING!" or searchu == "EMPTY!" and searchu != "CLEARED!" %}
  {% if word_query != "" %}
   <p>Searching for: {{ word_query }}</p>
  {% endif %}
- {% if user_query != None %}
+ {% if user_query != "" %}
   <p>Filtering by user: {{ user_query }}</p>
+
  {% endif %}
  {% if date_query != "" %}
   <p>Filtering by date: {{ date_query }}</p>
  {% endif %}
- {% if all_query != "" %}
-  <p>Searching all entries</p>
- {% endif %}
+
 <!--<p></p>-->
 
 {% endif %}
@@ -99,7 +98,7 @@ User Filter:<br>
 <div class="page_contents">
 
 
-{% for find in object_listy %}
+{% for find in object_list %}
 
 {% if find.is_old %}
 
@@ -167,6 +166,8 @@ User Filter:<br>
 
 {% if entry.is_old %}
 
+
+
 {% else %}
 
 <a href="{% url "diary:detail" entry.pk %}">
@@ -191,6 +192,25 @@ User Filter:<br>
 
 
 {% endif %}
+
+
+<div class="page_contents">
+ <div class="pagination">
+  <span class="step-links">
+   {% if object_list.has_previous %}
+    <a href="?page=1">&laquo;First</a>
+    <a href="?page={{ object_list.previous_page_number }}">Previous</a>
+   {% endif %}
+    <span class="current">
+     Page {{ object_list.number }}  of {{ object_list.paginator.num_pages }}.
+    </span>
+   {% if object_list.has_next %}
+    <a href="?page={{ object_list.next_page_number }}">Next</a>
+    <a href="?page={{ object_list.paginator.num_pages }}">Last &raquo;</a>
+   {% endif %}
+  </span>
+ </div>
+</div>
 
 
 </div>
