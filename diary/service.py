@@ -16,60 +16,96 @@ def cookie_help(reqc, name, func):
         var = reqc[name]
     return var
 
-def change_help(rm, reqc, name, var, orig, blnk):
+def search_change_help(rm, reqc, name, orig, var):
     if rm == "POST":
         if name in reqc:
             print("PRINTING", orig, reqc[name], type(orig), type(reqc[name]))
             if orig != reqc[name]:
-                var = orig
+                return orig
             else:
-                var = reqc[name]
-                
+                return reqc[name]
         elif name not in reqc:
             if orig == "":
-                var = ""
+                return ""
             elif orig == None:
-                var = ""
+                return ""
             else:
-                var = orig
-                
+                return orig
+        elif orig == reqc[name]:
+            print("PRADY!!!!!!!!!!")
+            return reqc[name]
         else:
-            var = orig
-
+            return orig
     elif name in reqc:
-        var = reqc[name]
+        return reqc[name]
 
     else:
-        var = var
-    return var
+        return var
+    #return var
 
-def user_change_help(reqc, name, orig, reqm, var, reqcname):
-        if name in reqc:
-            if reqcname == "" and type(orig) == None:
-                return "PLOT"
-                #print("ONE")
-            elif reqcname != orig and orig == None:
-                #query_u = request.POST.get("query_u")
-                #query_u = request.COOKIES["query_u"]
-                if reqm == "POST":
-                    return ""
-                    #print("TWO A")
-                else:
-                    return reqcname
-                    #print("TWO B")
-            elif reqcname != orig and type(orig) == str and len(orig) > 0:
-                return orig
-                #print("THREE")
-            elif reqm == "POST" and type(orig) != reqcname:
-                if type(orig) == None:
-                    return ""
-                    #print("FOUR")
-                else:
-                    return orig
-                    #print("FIVE")
-            else:
-                #query_u = request.COOKIES["query_u"]
-                return ""
-                #print("SIX")
+def user_change_help(reqc, name, orig, reqm, reqcname):
+    #if name in reqc:
+    if reqc[name] == "" and type(orig) == None:
+        print("ONE!!")
+        return "PLOT"
+        
+    elif reqc[name] != orig and orig == None:
+        #query_u = request.POST.get("query_u")
+        #query_u = request.COOKIES["query_u"]
+        if reqm == "POST":
+            print("TWO A!!")
+            return ""
+            
+        else:
+            print("TWO B!!")
+            return reqc[name]
+            
+    elif reqc[name] != orig and type(orig) == str and len(orig) > 0:
+        print("THREE!!")
+        return orig
+        
+    elif reqm == "POST!!" and type(orig) != reqc[name]:
+        if type(orig) == None:
+            print("FOUR!!")
+            return ""
+            #print("FOUR")
+        else:
+            print("FIVE A!!")
+            return orig
+            #print("FIVE")
+    elif orig == reqc[name]:
+        print("FIVE B!!")
+        return reqc[name]
+    else:
+        print("SIX!!")
+        #query_u = request.COOKIES["query_u"]
+        return ""
+        #print("SIX")
+# #     else:
+# #         print("SEVEN!!")
+# #         return orig
 
-
+def date_change_help(reqc, name, orig):
+    # Start of query_d help
+    if orig == "":
+        return ""
+    elif name in reqc and orig:
+        if convert_date(orig) != reqc[name]:
+            return convert_date(orig)
+            print("ONE", query_d)
+        else:
+            return reqc[name]
+            print("TWO")
+    elif name in reqc and not orig:
+        if reqc[name] == "":
+            return ""
+        else:
+            return convert_date(reqc[name])
+        print("THREE")
+    elif name not in reqc and orig != "":
+        return convert_date(orig)
+        print("FOUR")
+    else:
+        return ""
+        print("FIVE")
+    # End of query_d help

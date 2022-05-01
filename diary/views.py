@@ -12,7 +12,8 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from .models import Entry, SendTime
 from .forms import NewEntryForm, CreateUserForm, SetTimeForm, UpdateViewForm
-from .service import convert_date, cookie_help, change_help, user_change_help
+from .service import convert_date, cookie_help, search_change_help, user_change_help, \
+                    date_change_help
 
 
 # Create your views here.
@@ -114,12 +115,13 @@ def searching(request):
     
     if request.method == "POST" or "query_s" in request.COOKIES:
             
-        query_s = change_help(request.method, request.COOKIES, "query_s", query_s, request.POST.get("term_search"), "")
+        query_s = search_change_help(request.method, request.COOKIES, "query_s", request.POST.get("term_search"), query_s)
         #query_u = change_help(request.method, request.COOKIES, "query_u", query_u, request.POST.get("sort_user"), "")
         
         if "query_u" in request.COOKIES:
-            query_u = user_change_help(request.COOKIES, "query_u", request.POST.get("sort_user"), request.method, query_u, request.COOKIES["query_u"])
-        
+            query_u = user_change_help(request.COOKIES, "query_u", request.POST.get("sort_user"), request.method, request.COOKIES["query_u"])
+         
+        query_d = date_change_help(request.COOKIES, "query_d", request.POST.get("by_date")) 
 # # # # # # #         if "query_u" in request.COOKIES:
 # # # # # # #             if request.COOKIES["query_u"] == "" and type(request.POST.get("sort_user")) == None:
 # # # # # # #                 query_u = "PLOT"
@@ -153,46 +155,49 @@ def searching(request):
         
         
         
-        if "query_u" in request.COOKIES:
-            #if request.COOKIES["query_u"] == "None":
-            print("POLDARK!", query_u, type(query_u))
-                
-        else:
-            #query_u == "":
-            print("PLARKO!", query_u, type(query_u))
+#         if "query_u" in request.COOKIES:
+#             #if request.COOKIES["query_u"] == "None":
+#             print("POLDARK!", query_u, type(query_u))
+#                 
+#         else:
+#             #query_u == "":
+#             print("PLARKO!", query_u, type(query_u))
             
                 
         
-        if "query_u" in request.COOKIES:
-            print("query_u", request.COOKIES["query_u"])
+#         if "query_u" in request.COOKIES:
+#             print("query_u", request.COOKIES["query_u"])
         
-        print("GOOOOOOOOOOOOOVE", request.POST.get("sort_user"))
-        print("WARM WARM TOWN!", query_d)
-        if request.POST.get("by_date") == "":
-            query_d = ""
-        elif "query_d" in request.COOKIES and request.POST.get("by_date"):
-            if convert_date(request.POST.get("by_date")) != request.COOKIES["query_d"]:
-                query_d = convert_date(request.POST.get("by_date"))
-                print("ONE", query_d)
-            else:
-                query_d = request.COOKIES["query_d"]
-                print("TWO")
-        elif "query_d" in request.COOKIES and not request.POST.get("by_date"):
-            if request.COOKIES["query_d"] == "":
-                query_d = ""
-            else:
-                query_d = convert_date(request.COOKIES["query_d"])
-            print("THREE")
-        elif "query_d" not in request.COOKIES and request.POST.get("by_date") != "":
-            query_d = convert_date(request.POST.get("by_date"))
-            print("FOUR")
-        else:
-            query_d = ""
-            print("FIVE")
+#         print("GOOOOOOOOOOOOOVE", request.POST.get("sort_user"))
+#         print("WARM WARM TOWN!", query_d)
+
+
+# # # # #         # Start of query_d help
+# # # # #         if request.POST.get("by_date") == "":
+# # # # #             query_d = ""
+# # # # #         elif "query_d" in request.COOKIES and request.POST.get("by_date"):
+# # # # #             if convert_date(request.POST.get("by_date")) != request.COOKIES["query_d"]:
+# # # # #                 query_d = convert_date(request.POST.get("by_date"))
+# # # # #                 print("ONE", query_d)
+# # # # #             else:
+# # # # #                 query_d = request.COOKIES["query_d"]
+# # # # #                 print("TWO")
+# # # # #         elif "query_d" in request.COOKIES and not request.POST.get("by_date"):
+# # # # #             if request.COOKIES["query_d"] == "":
+# # # # #                 query_d = ""
+# # # # #             else:
+# # # # #                 query_d = convert_date(request.COOKIES["query_d"])
+# # # # #             print("THREE")
+# # # # #         elif "query_d" not in request.COOKIES and request.POST.get("by_date") != "":
+# # # # #             query_d = convert_date(request.POST.get("by_date"))
+# # # # #             print("FOUR")
+# # # # #         else:
+# # # # #             query_d = ""
+# # # # #             print("FIVE")
+# # # # #         # End of query_d help
         
         
         
-        #if query_type( == 
         
         
         
@@ -205,25 +210,31 @@ def searching(request):
                 
         print("RAN A LONG LONG", type(query_s))
                 
-        if query_s != "" or type(query_s) != None:
+        if query_s != "" or type(query_s) != None or query_s != None:
             que1=Entry.objects.filter(detail__icontains=query_s).order_by("date_for")
-            print("GLASS!")
+            #print("ONE!", que1)
         else:
             que1=Entry.objects.all().order_by("date_for")
+            #print("TWO!", que1)
             
-        if query_u and query_u != None:
+        if query_u and query_u != "":
             que2 = que1.filter(user__exact=query_u).order_by("date_for")
+            #print("THREE!", que2)
         else:
             que2 = que1
-            print("GLASS2", query_u, type(query_u))
+            #print("FOUR!", que2)
         if query_d != "":
             que3 = que2.filter(date_for__exact=query_d).order_by("user", "title")
-        elif query_s != "" or query_u != None:
+            #print("FIVE!", que3)
+        elif query_s != "" or query_u != "":
             que3 = que2
+            #print("SIX!", que3)
         elif query_s == "" and query_u == "" and query_d == "":
             que3 = Entry.objects.none()
+            #print("SEVEN!", que3)
         else:
             que3 = Entry.objects.none()
+            #print("EIGHT!", que3)
     
     
     if len(que3) == 0:
