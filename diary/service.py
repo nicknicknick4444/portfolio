@@ -1,5 +1,5 @@
 from datetime import datetime
-from .models import User
+from .models import Entry, User
 
 def convert_date(d):
     datey_conv = datetime.strptime(d, "%Y-%m-%d").date()
@@ -109,3 +109,32 @@ def date_change_help(reqc, name, orig):
         return ""
         print("FIVE")
     # End of query_d help
+
+
+def filter_func(query_s, query_u, query_d):
+    if query_s != "" or type(query_s) != None or query_s != None:
+        que1 = Entry.objects.filter(detail__icontains=query_s).order_by("date_for", "user", "title")
+        #print("ONE!", que1)
+    else:
+        que1 = Entry.objects.all().order_by("date_for", "user")
+        #print("TWO!", que1)
+        
+    if query_u and query_u != "":
+        que2 = que1.filter(user__exact=query_u).order_by("date_for", "user", "title")
+        #print("THREE!", que2)
+    else:
+        que2 = que1
+        #print("FOUR!", que2)
+    if query_d != "":
+        return que2.filter(date_for__exact=query_d).order_by("user", "title")
+        #print("FIVE!", que3)
+    elif query_s != "" or query_u != "":
+        return que2
+        #print("SIX!", que3)
+    elif query_s == "" and query_u == "" and query_d == "":
+        return Entry.objects.none()
+        #print("SEVEN!", que3)
+    else:
+        return Entry.objects.none()
+        #print("EIGHT!", que3)
+
