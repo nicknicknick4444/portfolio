@@ -45,7 +45,7 @@ def send_email(RECIPIENT_ADDRESS):
                 <head></head>
                 <body>
                     <p style="color: #000000;">
-                    <b><u>Diary notes for {{ listy.0.user }}</u></b><br><br>
+                    <b><u>Diary Notes for {{ listy.0.user }}</u></b><br><br>
                     {% for i in listy %}
                     {{ i.title }}<br>
                     {{ i.detail }}<br><br>
@@ -74,7 +74,7 @@ def send_email(RECIPIENT_ADDRESS):
     print("CHECK EMAIL!")
 
 def main():
-    send_email("nickhartessex@hotmail.com")
+    send_email("diarynotes444@gmail.com")
 
 if __name__ == "__main__":
     main()
