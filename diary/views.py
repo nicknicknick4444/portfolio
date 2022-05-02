@@ -14,7 +14,7 @@ from .models import Entry, SendTime
 from .forms import NewEntryForm, CreateUserForm, SetTimeForm, UpdateViewForm
 from .service import convert_date, cookie_help, search_change_help, user_change_help, \
                     date_change_help, filter_func
-
+from .email_send import main as email_main
 
 # Create your views here.
 
@@ -303,6 +303,9 @@ def search_all(request):
                                       "all_query": "ALL!", "today": today, "searchu": searcho,
                                       "word_query": "", "user_query": None, "date_query": ""})
 
-   
 
+def send_emails(request):
+    email_main("Nicky")
+    template = "diary/done.html"
+    return render(request, template, {"today": today})
 
