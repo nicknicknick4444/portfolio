@@ -305,7 +305,7 @@ def search_all(request):
 
 
 def send_emails(request):
-    email_main("Nicky")
+    email_main("Nick")
     template = "diary/done.html"
     return render(request, template, {"today": today})
 
