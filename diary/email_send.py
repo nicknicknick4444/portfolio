@@ -74,7 +74,7 @@ def send_email(RECIPIENT_ADDRESS):
     print("CHECK EMAIL!")
 
 def main():
-    send_email("richard.hart4@nhs.net")
+    send_email("nickhartessex@hotmail.com")
 
 if __name__ == "__main__":
     main()
