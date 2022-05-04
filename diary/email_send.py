@@ -33,7 +33,7 @@ def send_email(RECIPIENT_ADDRESS):
     for i in USERS:
         # TO SEND TO ALL USERS AGAIN REMOVE THIS IF LOOP WHEN FINISHED AND JUDD EVERYTHING UP TO BISMARK BACK 1 DENT
         print(i)
-        if i[0] == "Nick" or i[0] == "Prady":
+        if i[0] == "Nick" or i[0] == "Jon":
             curr_user = i[0]
             curr_day = today()
             str_day = date_for_str.now()
