@@ -13,19 +13,19 @@ from django.http import HttpResponseRedirect
 from .models import Entry, SendTime
 from .forms import NewEntryForm, CreateUserForm, SetTimeForm, UpdateViewForm
 from .service import convert_date, cookie_help, search_change_help, user_change_help, \
-                    date_change_help, filter_func
+                    date_change_help, filter_func, today
 from .email_send import main as email_main
 
 # Create your views here.
-
-today = datetime.datetime.now().date()
+# def today():
+#     return datetime.datetime.now().date()
 
 class EntryListView(ListView):
     model = Entry
     paginate_by = 3
     template_name = "diary/list_entries.html"
     saved = ""
-    extra_context = {"today": today, "saved": saved, }
+    extra_context = {"today": today(), "saved": saved, }
     
     def get_context_data(self, *args, **kwargs):
         user_query = User.objects.values_list("first_name", "last_name")
@@ -50,7 +50,7 @@ def EntryListView2(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    return render(request, template, {"today": today, "object_list": page_obj,
+    return render(request, template, {"today": today(), "object_list": page_obj,
                                       "users_list": USER_CHOICES2})
 
 def searching(request):
@@ -105,7 +105,7 @@ def searching(request):
         
     print("MOST!!", query_u, type(query_u))
     response =  render(request, "diary/list_entries.html", {"searchu": searcho, "object_list": page_obj,
-                                                        "today": today, "users_list": USER_CHOICES2,
+                                                        "today": today(), "users_list": USER_CHOICES2,
                                                        "word_query": query_s, "user_query": query_u,
                                                        "date_query": query_d, "saved": saved,
                                                        "page_obj": page_obj, })
@@ -129,7 +129,7 @@ def clear_query(request):
     page_obj = paginator.get_page(page_number)
     
     response = render(request, template, {"searchu": searcho, "object_list": page_obj,
-                                        "today": today, "users_list": USER_CHOICES2,
+                                        "today": today(), "users_list": USER_CHOICES2,
                                       "saved": saved,})    
     cookoes = ["query_s", "query_u", "query_d"]
     for i in cookoes:
@@ -191,7 +191,7 @@ def NewEntryView2(request):
         messages.success(request, "Entry saved!")
         return HttpResponseRedirect(reverse("diary:home"))
     else:
-        return render(request, "diary/new_entry.html", {"today": today, "users_list": USER_CHOICES2})
+        return render(request, "diary/new_entry.html", {"today": today(), "users_list": USER_CHOICES2})
 
 def UpdateEntryView2(request, pk):
     user_query = User.objects.values_list("first_name", "last_name")
@@ -291,7 +291,7 @@ def added_user(request):
     searcho = "USER_ADDED!"
     template = "diary/list_entries.html"
     return render(request, template, {"object_list": all_entries, "users_list": users_list, 
-                                      "today": today, "saved": saved, "searchu": searcho})
+                                      "today": today(), "saved": saved, "searchu": searcho})
     
 def search_all(request):
     all_entries = Entry.objects.all().order_by("date_for")
@@ -300,12 +300,12 @@ def search_all(request):
     searcho = "SEARCHING!"
     template = "diary/list_entries.html"
     return render(request, template, {"object_list": all_entries, "users_list": USER_CHOICES2,
-                                      "all_query": "ALL!", "today": today, "searchu": searcho,
+                                      "all_query": "ALL!", "today": today(), "searchu": searcho,
                                       "word_query": "", "user_query": None, "date_query": ""})
 
 
 def send_emails(request):
     email_main()
     template = "diary/done.html"
-    return render(request, template, {"today": today})
+    return render(request, template, {"today": today()})
 

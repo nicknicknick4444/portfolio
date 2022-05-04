@@ -1,10 +1,19 @@
+import datetime as datetime_module
 from datetime import datetime
 from .models import Entry, User
 
 def convert_date(d):
-    datey_conv = datetime.strptime(d, "%Y-%m-%d").date()
-    print("YOOOO!", datey_conv, type(datey_conv))
-    return datey_conv
+# #     datey_conv =
+    return datetime.strptime(d, "%Y-%m-%d").date()
+# #     print("YOOOO!", datey_conv, type(datey_conv))
+# #     return datey_conv
+
+def convert_date2(d):
+    #d = d
+    print("PORTY!", d, type(d))
+    converted = d.strftime("%d/%m/%Y")
+    print(converted)
+    return converted
 
 user_query = User.objects.values_list("first_name","last_name")
 USER_CHOICES = [i for i in user_query]
@@ -138,3 +147,5 @@ def filter_func(query_s, query_u, query_d):
         return Entry.objects.none()
         #print("EIGHT!", que3)
 
+def today():
+    return datetime_module.datetime.now().date()
