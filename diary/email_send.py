@@ -1,5 +1,5 @@
 import smtplib
-import schedule
+#import schedule
 import time
 import datetime as datetime_module
 from datetime import datetime as date_for_str
@@ -132,33 +132,33 @@ def send_email():
             #Part attachment
             message.attach(htmlPart)
 
-            #Send email and close connection
-            server.send_message(message)
-            # BISMARK!
-            
-    server.quit()
+# # #             #Send email and close connection
+# # #             server.send_message(message)
+# # #             # BISMARK!
+# # #             
+# # #     server.quit()
     
     print("CHECK EMAIL!")
     
     
-def for_dry_runs():
-    #convert_date2(date_for_str.now())
-    the_time = SendTime.objects.filter(id__exact=2)
-    schedule.every().day.at(str(the_time[0])).do(send_email)
-    
-    print(the_time[0])
-    #schedule.every(10).seconds.do(emailer)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+# # # def for_dry_runs():
+# # #     #convert_date2(date_for_str.now())
+# # #     the_time = SendTime.objects.filter(id__exact=2)
+# # #     #schedule.every().day.at(str(the_time[0])).do(send_email)
+# # #     
+# # #     print(the_time[0])
+# # #     #schedule.every(10).seconds.do(emailer)
+# # #     while True:
+# # #         schedule.run_pending()
+# # #         time.sleep(1)
     
     
     #return send_email("diarynotes444@gmail.com")
 
 def main():
     # Re-dd email address for testing
-    #send_email()
-    for_dry_runs()
+    send_email()
+    #for_dry_runs()
 
 if __name__ == "__main__":
     main()
