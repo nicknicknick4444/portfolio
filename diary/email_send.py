@@ -1,4 +1,5 @@
-import datetime, smtplib
+import smtplib
+import datetime as datetime_module
 from datetime import datetime as date_for_str
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -7,13 +8,23 @@ from jinja2 import Environment
 from .email_deets import MY_ADDRESS, MY_PASSWORD, \
      HOST_ADDRESS, HOST_PORT
 from .models import Entry, User
-from .service import today, convert_date2
+#from .service import convert_date2 as convert_date3
+#from .service import today as today2
 
 #listy = ["Uno", "Dos", "Tres"]
 
+def today2():
+    return datetime_module.datetime.now().date()
+
+def convert_date2(d):
+    print("PORTY!", d, type(d))
+    converted = d.strftime("%d/%m/%Y")
+    print(converted)
+    return converted
+
 def grab_posts(USER):
-    if Entry.objects.filter(user__exact=USER, date_for__exact=today()).exists():
-        posts = Entry.objects.filter(user__exact=USER, date_for__exact=today()).order_by("title", "detail")
+    if Entry.objects.filter(user__exact=USER, date_for__exact=today2()).exists():
+        posts = Entry.objects.filter(user__exact=USER, date_for__exact=today2()).order_by("title", "detail")
         listage = [i for i in posts]
     else:
         listage = [["BLANK"]]
@@ -33,12 +44,14 @@ def send_email(RECIPIENT_ADDRESS):
     for i in USERS:
         # TO SEND TO ALL USERS AGAIN REMOVE THIS IF LOOP WHEN FINISHED AND JUDD EVERYTHING UP TO BISMARK BACK 1 DENT
         print(i)
-        if i[0] == "Nick" or i[0] == "Jon":
+        if i[0] == "Nick" or i[0] == "Prady":
             curr_user = i[0]
-            curr_day = today()
-            str_day = date_for_str.now()
-            day_str = convert_date2(str_day)
-            print("BAGS!", day_str)
+            curr_day = today2()
+            str_day_raw = date_for_str.now()
+            
+            day_str = convert_date2(str_day_raw)
+            sd_abbrev = day_str[:5]
+            print("BAGS!", day_str, sd_abbrev)
             ####RECIPIENT_ADDRESS = i[1]
             
             #Creation of the MIMEMultipart object
@@ -73,19 +86,25 @@ def send_email(RECIPIENT_ADDRESS):
                     <body>
                         <p style="color: #000000;">
                         <b><u>Diary Notes for {{ curr_user }}:</u></b><br><br>
-                        {% for item in user_list %}
-                          {% if item.0 == "BLANK" %}
+                        
+                          {% if user_list.0.0 == "BLANK" %}
                             No diary notes today!<br>
                           {% else %}
-                           {{ item.0 }}{{ item.1 }}<br>
+                          Good morning,
+                            <p>Here are your diary notes for {{ sd_abbrev }}:<br><br></p>
+                           {% for item in user_list %}
+
+                           <span style="font-size: 15px;">{{ item.0 }}{{ item.1 }}</span><br>
                          
                          
-                         
+                           {% endfor %}
+                          <br>
                           {% endif %}
-                        {% endfor %}
-                        </p>
+                        
+                        
                         <p>All the best,</p>
                         <p>Nick</p>
+                     </p>
                     </body>
                 </html>
             """
@@ -97,29 +116,30 @@ def send_email(RECIPIENT_ADDRESS):
             htmlPart = MIMEText(
                 Environment().from_string(TEMPLATE).render(
                         listy = listy, user_list = user_list, \
-                        curr_user = curr_user, str_day = str_day
+                        curr_user = curr_user, day_str = day_str, \
+                        sd_abbrev = sd_abbrev
                     ),"html"
                 )
 
             #Part attachment
             message.attach(htmlPart)
 
-            #Send email and close connection
-            server.send_message(message)
-            # BISMARK!
-            
-    server.quit()
+# # # # # # #             #Send email and close connection
+# # # # # # #             server.send_message(message)
+# # # # # # #             # BISMARK!
+# # # # # # #             
+# # # # # # #     server.quit()
     
     print("CHECK EMAIL!")
     
     
-def timer():
+def for_dry_runs():
     #convert_date2(date_for_str.now())
     return send_email("diarynotes444@gmail.com")
 
 def main():
     #send_email("diarynotes444@gmail.com")
-    timer()
+    for_dry_runs()
 
 if __name__ == "__main__":
     main()

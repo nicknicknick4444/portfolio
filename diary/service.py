@@ -1,6 +1,11 @@
 import datetime as datetime_module
+from crontab import CronTab
 from datetime import datetime
+from .email_send import main as email_main
 from .models import Entry, User
+
+user_query = User.objects.values_list("first_name","last_name")
+USER_CHOICES = [i for i in user_query]
 
 def convert_date(d):
 # #     datey_conv =
@@ -9,14 +14,11 @@ def convert_date(d):
 # #     return datey_conv
 
 def convert_date2(d):
-    #d = d
     print("PORTY!", d, type(d))
     converted = d.strftime("%d/%m/%Y")
     print(converted)
     return converted
 
-user_query = User.objects.values_list("first_name","last_name")
-USER_CHOICES = [i for i in user_query]
 
 def cookie_help(reqc, name, func):
     if name not in reqc:
@@ -149,3 +151,26 @@ def filter_func(query_s, query_u, query_d):
 
 def today():
     return datetime_module.datetime.now().date()
+
+# # # # def cronny():
+# # # # # #     # Use root user
+# # # # # #     cron = CronTab(user="root")
+# # # #     
+# # # #     #Use the current user
+# # # #     my_cron = CronTab(user=True)
+# # # #     
+# # # #     # Creting an object from the clas sinto a file
+# # # #     file_cron = CronTab(tabfile="filename.tab")
+# # # #     
+# # # #     # Create new job
+# # # #     job = cron.new(command=email_main())
+# # # #     
+# # # #     # Setting restrictions of jobule
+# # # #     
+# # # #     # Job on 1st - 5th days of the week
+# # # #     job.day.on(1,2,3,4,5)
+    
+    #Clearing 
+    
+    
+
