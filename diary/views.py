@@ -116,7 +116,8 @@ def searching(request):
     return response
 
 def clear_query(request):
-    cleared_query = Entry.objects.all().order_by("date_for", "user", "title")
+    cleared_query_raw = Entry.objects.all().order_by("date_for", "user", "title")
+    cleared_query = [i for i in cleared_query_raw is i.is_old == False]
     saved = ""
     user_query = User.objects.values_list("first_name", "last_name")
     USER_CHOICES2 = [i for i in user_query]
