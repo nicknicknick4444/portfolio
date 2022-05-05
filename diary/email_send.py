@@ -1,4 +1,6 @@
 import smtplib
+import schedule
+import time
 import datetime as datetime_module
 from datetime import datetime as date_for_str
 from email.mime.multipart import MIMEMultipart
@@ -7,11 +9,15 @@ from jinja2 import Environment
 
 from .email_deets import MY_ADDRESS, MY_PASSWORD, \
      HOST_ADDRESS, HOST_PORT
-from .models import Entry, User
+from .models import Entry, User, SendTime
 #from .service import convert_date2 as convert_date3
 #from .service import today as today2
 
 #listy = ["Uno", "Dos", "Tres"]
+
+def emailer():
+    print("I'M A-WORKING!")
+
 
 def today2():
     return datetime_module.datetime.now().date()
@@ -31,7 +37,7 @@ def grab_posts(USER):
     return listage
 
 
-def send_email(RECIPIENT_ADDRESS):
+def send_email():
     
     server = smtplib.SMTP(host=HOST_ADDRESS, port=HOST_PORT)
     server.starttls()
@@ -52,7 +58,9 @@ def send_email(RECIPIENT_ADDRESS):
             day_str = convert_date2(str_day_raw)
             sd_abbrev = day_str[:5]
             print("BAGS!", day_str, sd_abbrev)
-            ####RECIPIENT_ADDRESS = i[1]
+            
+            ### Hide this and re-add as func arg for test sending
+            RECIPIENT_ADDRESS = i[1]
             
             #Creation of the MIMEMultipart object
             message = MIMEMultipart()
@@ -124,21 +132,32 @@ def send_email(RECIPIENT_ADDRESS):
             #Part attachment
             message.attach(htmlPart)
 
-# # # # # # #             #Send email and close connection
-# # # # # # #             server.send_message(message)
-# # # # # # #             # BISMARK!
-# # # # # # #             
-# # # # # # #     server.quit()
+            #Send email and close connection
+            server.send_message(message)
+            # BISMARK!
+            
+    server.quit()
     
     print("CHECK EMAIL!")
     
     
 def for_dry_runs():
     #convert_date2(date_for_str.now())
-    return send_email("diarynotes444@gmail.com")
+    the_time = SendTime.objects.filter(id__exact=2)
+    schedule.every().day.at(str(the_time[0])).do(send_email)
+    
+    print(the_time[0])
+    #schedule.every(10).seconds.do(emailer)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+    
+    
+    #return send_email("diarynotes444@gmail.com")
 
 def main():
-    #send_email("diarynotes444@gmail.com")
+    # Re-dd email address for testing
+    #send_email()
     for_dry_runs()
 
 if __name__ == "__main__":
