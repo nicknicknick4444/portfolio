@@ -2,10 +2,15 @@
 {% extends "base.html" %}
 {% load static %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+</head>
 
 
 {% block content %}
+
+<body>
+
+
+
 
 <div class="page_contents">
 
@@ -55,6 +60,10 @@ Today is {{ today }}
 
 {% endif %}
 
+
+
+{% if "vanisho" not in request.COOKIES %}
+
  <form action="{% url "diary:searchy" %}" method="POST" name="s" value="s">{% csrf_token %}
   <label class="labelo2">Search:</label><input type="text" name="term_search"></input>
   <!--<button type="submit">Search</button> Search: --><br>
@@ -87,6 +96,15 @@ User Filter:<br>
  <!--<button><a href="{% url "diary:search_all" %}">Search All</a></button>-->
 </form>
 
+
+
+<div><a href="{% url "diary:hideo" %}">HIDE FILTERS</a><br><br></div>
+
+{% elif "vanisho" in request.COOKIES %}
+
+<div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a><br><br></div>
+
+{% endif %}
 
 </div>
 
@@ -220,5 +238,7 @@ User Filter:<br>
 
 
 </div>
+
+</body>
 
 {% endblock content %}

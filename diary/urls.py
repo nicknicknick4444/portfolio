@@ -18,6 +18,7 @@ urlpatterns = [
     #path("added_user/", views.added_user, name="added_user"),
     path("all/", views.search_all, name="search_all"),
     path("email/", views.send_emails, name="emails"),
+    path("hideo/", views.hideo, name="hideo"),
     #path("", views.EntryListView.as_view(), name="home"),
     path("", views.EntryListView2, name="home"),
     #path("plinty/", views.HomePageView.as_view(), name="home2"),

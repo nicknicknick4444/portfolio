@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -135,6 +135,12 @@ def clear_query(request):
     cookoes = ["query_s", "query_u", "query_d"]
     for i in cookoes:
         response.delete_cookie(i)
+    
+    pinfo = request.META.get("PATH_INFO")
+    http_host = request.META.get("HTTP_HOST")
+    
+    print("BOURCEY!!!!", http_host + pinfo)
+    
     return response
 
 class DetailEntryView(DetailView):
@@ -304,9 +310,27 @@ def search_all(request):
                                       "all_query": "ALL!", "today": today(), "searchu": searcho,
                                       "word_query": "", "user_query": None, "date_query": ""})
 
-
 def send_emails(request):
     email_main()
     template = "diary/done.html"
     return render(request, template, {"today": today()})
 
+
+def hideo(request):
+    template = "diary/list_entries.html"
+    pinfo = request.META.get("PATH_INFO")
+    http_host = request.META.get("HTTP_HOST")
+# #     if not "vanisho" in request.COOKIES:
+# #         gubby = request.COOKIES.get("vanisho", "GONE!")
+# #     else:
+# #         gubby = request.COOKIES["vanisho"]
+    toggley = cookie_help(request.COOKIES, "vanisho", "GONE!")
+    HttpResponseRedirect.allowed_schemes.append("127.0.0.1")
+    print("YAZOOOOOOO!", request.META.get("HTTP_REFERER"))
+    response =  HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+    if "vanisho" in request.COOKIES:
+        response.delete_cookie("vanisho")
+    elif "vanisho" not in request.COOKIES:
+        response.set_cookie("vanisho", toggley)
+    #return request, template, {"today": today()}
+    return response
