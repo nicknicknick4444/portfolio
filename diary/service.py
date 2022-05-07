@@ -1,5 +1,4 @@
 import datetime as datetime_module
-#from crontab import CronTab
 from datetime import datetime
 from .email_send import main as email_main
 from .models import Entry, User
@@ -8,17 +7,14 @@ user_query = User.objects.values_list("first_name","last_name")
 USER_CHOICES = [i for i in user_query]
 
 def convert_date(d):
-# #     datey_conv =
     return datetime.strptime(d, "%Y-%m-%d").date()
-# #     print("YOOOO!", datey_conv, type(datey_conv))
-# #     return datey_conv
+
 
 def convert_date2(d):
     print("PORTY!", d, type(d))
     converted = d.strftime("%d/%m/%Y")
     print(converted)
     return converted
-
 
 def cookie_help(reqc, name, func):
     if name not in reqc:
@@ -97,7 +93,6 @@ def user_change_help(reqc, name, orig, reqm, reqcname):
 # #         return orig
 
 def date_change_help(reqc, name, orig):
-    # Start of query_d help
     if orig == "":
         return ""
     elif name in reqc and orig:
@@ -119,8 +114,6 @@ def date_change_help(reqc, name, orig):
     else:
         return ""
         print("FIVE")
-    # End of query_d help
-
 
 def filter_func(query_s, query_u, query_d):
     if query_s != "" or type(query_s) != None or query_s != None:
@@ -152,25 +145,11 @@ def filter_func(query_s, query_u, query_d):
 def today():
     return datetime_module.datetime.now().date()
 
-# # # # def cronny():
-# # # # # #     # Use root user
-# # # # # #     cron = CronTab(user="root")
-# # # #     
-# # # #     #Use the current user
-# # # #     my_cron = CronTab(user=True)
-# # # #     
-# # # #     # Creting an object from the clas sinto a file
-# # # #     file_cron = CronTab(tabfile="filename.tab")
-# # # #     
-# # # #     # Create new job
-# # # #     job = cron.new(command=email_main())
-# # # #     
-# # # #     # Setting restrictions of jobule
-# # # #     
-# # # #     # Job on 1st - 5th days of the week
-# # # #     job.day.on(1,2,3,4,5)
+def cookie_eat(reqc, resp):
+    mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", "sesho", "cou", "startytime", \
+                "finishy_time", "excepor", "resety", "squores", "goesy", "query_s", \
+                "query_u", "query_d"]
+    for i in mainlist:
+        if i in reqc:
+            resp.delete_cookie(i)
     
-    #Clearing 
-    
-    
-

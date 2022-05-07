@@ -1,5 +1,5 @@
 #from .logico.spelling_logic import search_twittor
-from .logico.tweepy_practice import getty
+from .logico.tweepy_practice2 import getty
 
 # def search_twitter(query, tweet_fields, bearer_token):
 #     return search_twittor
@@ -19,7 +19,8 @@ dicty2u = [{'created_at': '2022-02-27T21:36:29.000Z', 'id': '1498049422680231936
          {'created_at': '2022-02-27T19:39:04.000Z', 'id': '1498019872692965378', 'text': 'RT @its__kaaty: send halppp, thye are too cute @sotk_nft https://t.co/DZgIUZYPr3', 'author_id': '1347334908310679552'}]
 
 def cleanup(reqc, reso):
-    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", "goesy"]
+    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", \
+                "squores", "goesy", "query_s", "query_u", "query_d"]
     for i in mainlist:
         if i in reqc.COOKIES:
             reso.delete_cookie(i)

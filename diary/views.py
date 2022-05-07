@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from .models import Entry, SendTime
 from .forms import NewEntryForm, CreateUserForm, SetTimeForm, UpdateViewForm
 from .service import convert_date, cookie_help, search_change_help, user_change_help, \
-                    date_change_help, filter_func, today
+                    date_change_help, filter_func, today, cookie_eat
 from .email_send import main as email_main
 
 # Create your views here.
@@ -52,10 +52,11 @@ def EntryListView2(request):
     
     response = render(request, template, {"today": today(), "object_list": page_obj,
                                       "users_list": USER_CHOICES2})
-    cookie_list = ["query_s", "query_u", "query_d"]
-    for i in cookie_list:
-        if i in request.COOKIES:
-            response.delete_cookie(i)
+# #     cookie_list = ["query_s", "query_u", "query_d", "sent_signal"]
+# #     for i in cookie_list:
+# #         if i in request.COOKIES:
+# #             response.delete_cookie(i)
+    cookie_eat(request.COOKIES, response)
     return response
 
 def searching(request):
@@ -137,7 +138,7 @@ def clear_query(request):
     response = render(request, template, {"searchu": searcho, "object_list": page_obj,
                                         "today": today(), "users_list": USER_CHOICES2,
                                       "saved": saved,})    
-    cookoes = ["query_s", "query_u", "query_d"]
+    cookoes = ["query_s", "query_u", "query_d", ""]
     for i in cookoes:
         response.delete_cookie(i)
     

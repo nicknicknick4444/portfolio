@@ -72,8 +72,9 @@ def make_lists():
     return collgood, collbad
 
 def cleanup_cookies(reqc, resp):
-    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", "goesy",
-                "namey", "boxo", "bisp", "chosen", "risp", "filtery"]
+    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", \
+                "goesy", "namey", "boxo", "bisp", "chosen", "risp", "filtery", "query_s", \
+                "query_u", "query_d"]
     for i in mainlist:
         if i in reqc.COOKIES:
             resp.delete_cookie(i)
