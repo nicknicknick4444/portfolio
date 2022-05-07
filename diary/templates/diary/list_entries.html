@@ -15,8 +15,11 @@
 <div class="page_contents">
 
 <!-- FOR EMAIL TESTING - WILL DELETE LATER -->
-<button><a href="{% url "diary:emails" %}">Send</a></button>
-
+{% if "sent_signal" in request.COOKIES %}
+ <button disabled="disabled">Sent</button>
+{% else %}
+ <button><a href="{% url "diary:emails" %}">Send</a></button>
+{% endif %}
 
 
 <a href="{% url "diary:new" %}">+New Entry</a>
@@ -37,6 +40,7 @@
 <div class="gap"></div>
 <div class="page_contents">
 Today is {{ today }}
+<div class="gap"></div>
 
 <!--{% if saved == "SAVED!" %}
  <p>
@@ -46,14 +50,14 @@ Today is {{ today }}
 
 {% if searchu == "SEARCHING!" or searchu == "EMPTY!" and searchu != "CLEARED!" %}
  {% if word_query != "" %}
-  <p>Searching for: {{ word_query }}</p>
+  <div>Searching for: {{ word_query }}</div>
  {% endif %}
  {% if user_query != "" %}
-  <p>Filtering by user: {{ user_query }}</p>
+  <div>Filtering by user: {{ user_query }}</div>
 
  {% endif %}
  {% if date_query != "" %}
-  <p>Filtering by date: {{ date_query }}</p>
+  <div>Filtering by date: {{ date_query }}</div>
  {% endif %}
 
 <!--<p></p>-->
@@ -104,7 +108,7 @@ User Filter:<br>
  {% if "query_d" in request.COOKIES %}
 <div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a><br><br></div>
  {% else %}
-<br><br>
+
 <div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
 <br>
  {% endif %}
@@ -242,6 +246,7 @@ User Filter:<br>
 </div>
 
 
+<i style="font-size: 14px;">All diary notes emailed daily at 8am</i>
 </div>
 
 </body>

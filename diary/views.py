@@ -50,8 +50,13 @@ def EntryListView2(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    return render(request, template, {"today": today(), "object_list": page_obj,
+    response = render(request, template, {"today": today(), "object_list": page_obj,
                                       "users_list": USER_CHOICES2})
+    cookie_list = ["query_s", "query_u", "query_d"]
+    for i in cookie_list:
+        if i in request.COOKIES:
+            response.delete_cookie(i)
+    return response
 
 def searching(request):
     user_query = User.objects.values_list("first_name", "last_name")
@@ -313,13 +318,16 @@ def search_all(request):
 def send_emails(request):
     email_main()
     template = "diary/done.html"
-    return render(request, template, {"today": today()})
+    sent = cookie_help(request.COOKIES, "sent_signal", "SENT!")
+    response = render(request, template, {"today": today()})
+    response.set_cookie("sent_signal", sent)
+    return response
 
 
 def hideo(request):
     template = "diary/list_entries.html"
-    pinfo = request.META.get("PATH_INFO")
-    http_host = request.META.get("HTTP_HOST")
+# #     pinfo = request.META.get("PATH_INFO")
+# #     http_host = request.META.get("HTTP_HOST")
 # #     if not "vanisho" in request.COOKIES:
 # #         gubby = request.COOKIES.get("vanisho", "GONE!")
 # #     else:
