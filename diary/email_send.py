@@ -7,8 +7,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from jinja2 import Environment
 
-from email_deets import MY_ADDRESS, MY_PASSWORD, HOST_ADDRESS, HOST_PORT
-from models import Entry, User, SendTime
+from .email_deets import MY_ADDRESS, MY_PASSWORD, HOST_ADDRESS, HOST_PORT
+from .models import Entry, User, SendTime
 #from .service import convert_date2 as convert_date3
 #from .service import today as today2
 
@@ -131,11 +131,11 @@ def send_email():
         #Part attachment
         message.attach(htmlPart)
 
-        #Send email and close connection
-        server.send_message(message)
-        # BISMARK!
-            
-    server.quit()
+# # #         #Send email and close connection
+# # #         server.send_message(message)
+# # #         # BISMARK!
+# # #             
+# # #     server.quit()
     
     print("CHECK EMAIL!")
     
