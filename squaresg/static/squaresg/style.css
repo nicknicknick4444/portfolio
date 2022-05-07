@@ -502,6 +502,10 @@ span .closer:hover {
 	margin-bottom: 1px;
 }
 
+.inputy {
+	margin-top: -1px;
+}
+
 #searchy {
 	margin-top: 6px;
 }
@@ -717,9 +721,14 @@ ul.errorlist.nonfield {
 	line-height: 21px;
 }
 
-input {
+/*input {
 	float: right;
 	width: 200px;
+}*/
+
+.input_d {
+	float: right;
+	width: 50px;
 }
 
 .page_contents {
