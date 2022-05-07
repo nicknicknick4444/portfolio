@@ -80,7 +80,7 @@ User Filter:<br>
      
     {% else %}
 {% endcomment %}
-     <input type="radio" name="sort_user" value="{{ the_user.0 }}">
+     <input type="radio" class="input_d" name="sort_user" value="{{ the_user.0 }}">
   
   <!--</label>--><br>
 
@@ -101,8 +101,13 @@ User Filter:<br>
 <div><a href="{% url "diary:hideo" %}">HIDE FILTERS</a><br><br></div>
 
 {% elif "vanisho" in request.COOKIES %}
-
+ {% if "query_d" in request.COOKIES %}
 <div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a><br><br></div>
+ {% else %}
+<br><br>
+<div><a href="{% url "diary:hideo" %}">SHOW FILTER</a></div>
+<br>
+ {% endif %}
 
 {% endif %}
 
@@ -183,7 +188,7 @@ User Filter:<br>
  </div>
  {% endfor %}
 {% endif %}
-<br>
+<!--<br>-->
 
 <div class="listo" style="display: block; margin: auto; width: 90%; text-align: center;">
 {% for entry in object_list %}
