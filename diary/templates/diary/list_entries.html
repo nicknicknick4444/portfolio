@@ -14,6 +14,14 @@
 
 <div class="page_contents">
 
+
+
+
+
+
+
+{% if user.is_authenticated %}
+
 <!-- FOR EMAIL TESTING - WILL DELETE LATER -->
 {% if "sent_signal" in request.COOKIES %}
  <button disabled="disabled">Sent</button>
@@ -21,13 +29,9 @@
  <button><a href="{% url "diary:emails" %}">Send</a></button>
 {% endif %}
 
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "diary:new" %}">+New Entry</a>
 
-<a href="{% url "diary:new" %}">+New Entry</a>
-
-
-{% if user.is_authenticated %}
-
- &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "diary:set_time" %}">Set Send Time</a>
+ <!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "diary:set_time" %}">Set Send Time</a>-->
 
  &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url "logout" %}">Log Out</a>
 
