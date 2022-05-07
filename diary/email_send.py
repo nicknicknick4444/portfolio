@@ -131,11 +131,11 @@ def send_email():
         #Part attachment
         message.attach(htmlPart)
 
-# # #         #Send email and close connection
-# # #         server.send_message(message)
-# # #         # BISMARK!
-# # #             
-# # #     server.quit()
+        #Send email and close connection
+        server.send_message(message)
+        # BISMARK!
+            
+    server.quit()
     
     print("CHECK EMAIL!")
     
