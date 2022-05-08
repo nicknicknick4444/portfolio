@@ -8,23 +8,45 @@
 
 {% block content %}
 
-<div class="page_contents">
-  <form action="" method="POST" style="width: 300px; margin: auto; display: block;">{% csrf_token %}
-  <i style="font-size: 10px;">All fields are mandatory</i><br><br>
+<div class="page_contents" >
+
+<b><a style="float: right;" href="{% url "logout" %}">Log Out&nbsp;&nbsp;&nbsp;</a></b>
+
+
+
+  <form action="" method="POST" style="margin: auto; display: block;">{% csrf_token %}
+<div class="form_style">
+<div style="">
+  <div style="padding-right: 25px;"><i style="font-size: 10px;">All fields are mandatory</i></div><br>
   <label class="labelo2">Order:</label><input type="text" id="title" name="new_title" required><br>
   <label class="labelo2">Detail:</label><input type="text" id="detail" name="new_detail" required><br>
-  <p>Select who this is for:</p>
+<div class="gap"></div>
+  <div style="float: left;">Who this is for?</div><br>
+ <div class="user_contain" style="width: 287px; height: 35px;">
   {% for the_user in users_list %}
-    <label class="labelo2">{{ the_user.0 }}</label><input type="radio" id="user" name="new_user" value="{{ the_user.0 }}" required><br>
+ <div class="user_col" style="width: 87px; height: 15px; float: left;">
+    <label class="labelo3">{{ the_user.0 }}</label><input type="radio" class="input_u" id="user" name="new_user" value="{{ the_user.0 }}" required>
+ </div>
   {% endfor %}
+ </div>
   <div class="gap"></div>
   <label class="labelo2">When For:</label><input type="date" id="date_for" name="new_date" required><br>
   <!--{{ form.as_p }}-->
-  <br><button class="btn btn-success ml-2" type="submit">Save</button>
+  <br>
+
+ <div class="page_contents" style="padding-right: 32px;">
+  <button class="btn btn-success ml-2" type="submit">Save</button>
    &nbsp;&nbsp;|&nbsp;&nbsp;
   <button><a href="{% url "diary:home" %}">Cancel</a></button>
- </form>
+ </div>
 </div>
+
+</div>
+</div>
+ </form>
+
+
+
 
 
 

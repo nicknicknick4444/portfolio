@@ -788,6 +788,15 @@ input[type="radio"]{
 	margin-left: 11px;
 }
 
+.deleting_detail {
+	border: 2px solid #ffc166; 
+	border-radius: 3px; 	
+	margin-left: 20%; 
+	margin-right: 20%; 
+	padding-top: 5px; 
+	padding-bottom: 5px;
+}
+
 .form_style {
 	border: 2px solid #ffe900;
 	border-radius: 3px;
@@ -823,6 +832,10 @@ input[type="radio"]{
 }
 
 .entry a:link {
+	color: #000000;
+}
+
+.entry a:visited {
 	color: #000000;
 }
 
@@ -996,7 +1009,7 @@ fieldset {
 }
 
 .leftside {
-	padding-left: 30px;
+	padding-left: 29px;
 	width: 29%;
 	float: left;
 	text-align: left;

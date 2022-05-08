@@ -8,54 +8,63 @@
 {% block content %}
 <div class="page_contents">
 
-{% if entry.is_old %}
+<b><a style="float: right;" href="{% url "logout" %}">Log Out&nbsp;&nbsp;&nbsp;</a></b>
 
-Parthia.
+{% if entry.is_old %}
 
 <strong>{{ entry.date_for }}<br>{{ entry.title }}</strong>
 <p>{{ entry.user }}</p>
 <p>{{ entry.detail }}</p>
 <p style="color:#ee0000;" id="labely"><i>Can't edit diary notes from the past.</i></p>
+<button><a href="{% url "diary:home" %}">Cancel</a></button>
 <br>
 
 {% else %}
 
-<form action="" method="POST" name="ebbo" value = "e" style="width: 310px;">{% csrf_token %}
+
+<form action="" method="POST" name="ebbo" value = "e">{% csrf_token %}
+<div class="form_style">
+
 	<!--{{ form.as_p }}-->
 	<span class="labelo">Order: </span><input class="formy" type="text" name="edit_title" value="{{ entry.title }}"><br>
 	<span class="labelo">Detail: </span><input class="formy" type="text" name="edit_detail" value="{{ entry.detail }}"><br>
-	<div class="gap"></div>Select User:<br>
-	{% for the_user in users_list %}
-	<label class="labelo2">{{ the_user.0 }}</label>
-	{% if the_user.0 == selected_user %}
-		<input type="radio" name="edit_user" value="{{ the_user.0 }}" checked><br>
+	<div class="gap"></div>
+	<div style="float: left;">User Filter:</div><br>
+	<div class="user_contain" style="width: 282px; height: 40px;">
+	 {% for the_user in users_list %}
+         <div class="user_col" style="width: 87px; height: 15px; float: left;">
+	  <label class="labelo3">{{ the_user.0 }}</label>
+	  {% if the_user.0 == selected_user %}
+	   <input type="radio" name="edit_user" value="{{ the_user.0 }}" checked><br>
 
-	{% else %}
-		<input type="radio" name="edit_user" value="{{ the_user.0 }}"><br>
-	{% endif %}
-	{% endfor %}
+	  {% else %}
+	   <input type="radio" class="input_u" name="edit_user" value="{{ the_user.0 }}"><br>
+	  {% endif %}
+	 </div>
+	 {% endfor %}</div>
 
-	<div class="gap"></div><span class="labelo">Date: </span><input class="formy" type="date" name="edit_date" value="{{ entry.date_for|date:"Y-m-d" }}"><br><br>
+	<div class="gap"></div>
 
+<span class="labelo2">Pick Date: </span>
+<input class="formy" type="date" name="edit_date" value="{{ entry.date_for|date:"Y-m-d" }}"><br><br>
 
- <button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp;|&nbsp;&nbsp;   
+<div class="page_contents" style="padding-right: 33px;">
+<button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp; |&nbsp;&nbsp;   
+<button><a href="{% url "diary:home" %}">Cancel</a></button>
+</div>
  {% endif %}
-<button><a href="{% url "diary:home" %}">Cancel</a></button></div><br><br><br><br><br>
+
+
+</div>
 </form>
- <div><br>
- <!--<div class="page_contents">Or <button><a href="{% url "diary:delete" entry.pk %}">Delete</a>-->
- </button>
-
-{{ shit }}
-
-
-
-
- </div>
 
 
 
 
 </div>
+
+
+
+
 
 {% endblock content %}

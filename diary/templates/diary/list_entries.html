@@ -73,8 +73,8 @@ Today is {{ today }}
 {% if "vanisho" not in request.COOKIES %}
 
  <form action="{% url "diary:searchy" %}" method="POST" name="s" value="s">{% csrf_token %}
- <div class="form_style">
-  <label class="labelo2">Search:</label><input type="text" name="term_search"></input>
+ <div class="form_style" style="padding-right: 3px;">
+  <label class="labelo2">Search:</label><input style="width: 170px;" type="text" name="term_search"></input>
   <!--<button type="submit">Search</button> Search: --><br>
 <div class="gap"></div>
 <div style="text-align: left;">User Filter:</div>
@@ -109,7 +109,8 @@ Today is {{ today }}
  <input name="by_date" type="date" id="date_pick">
 
 <br><br>
- <button type="submit">Search & Filter</button>
+<div style="padding-right: 30px;">
+ <button type="submit"">Search & Filter</button></div>
  <!--<button><a href="{% url "diary:search_all" %}">Search All</a></button>-->
 </div>
 </form>
@@ -153,7 +154,7 @@ Today is {{ today }}
 <a href="{% url "diary:detail" find.pk %}">
 <strong>{{ find.date_for }}<br>{{ find.title }}</strong><br>
 {{ find.detail }}<br>
-{{ find.user }}</a><br>
+For: {{ find.user }}</a><br><div class="gap"></div>
  <a href="{% url "diary:detail" find.pk %}">View Entry</a>
 {% if user.is_authenticated %}
   |  
@@ -170,7 +171,7 @@ Today is {{ today }}
 <a href="{% url "diary:detail" find.pk %}">
 <strong><i>{{ find.date_for }}</i><br>{{ find.title }}</strong><br>
 {{ find.detail }}<br>
-{{ find.user }}</a><br>
+For: {{ find.user }}</a><br><div class="gap"></div>
 <a href="{% url "diary:detail" find.pk %}">View Entry</a><br>
 {% if user.is_authenticated %}
  <a href="{% url "diary:edit2" find.pk %}">Edit Entry</a>  |  
@@ -224,7 +225,7 @@ Today is {{ today }}
 <strong><i>{{ entry.date_for }}</i><br>
 {{ entry.title }}</strong><br>
 {{ entry.detail }}<br>
-{{ entry.user }}</a><br>
+For: {{ entry.user }}</a><br><div class="gap"></div>
 <a href="{% url "diary:detail" entry.pk %}">View Entry</a><br> 
 {% if user.is_authenticated %}
  <a href="{% url "diary:edit2" entry.pk %}">Edit Entry</a>  |  

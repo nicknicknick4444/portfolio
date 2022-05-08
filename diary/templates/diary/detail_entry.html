@@ -3,14 +3,17 @@
 
 {% block content %}
 
+<div class="page_contents">
+
 {% if user.is_authenticated %}
- <input type="hidden" name="next" value="{{ request.path }}">
- <a href="{% url "logout" %}">Log Out</a></input>
+ <!--<input type="hidden" name="next" value="{{ request.path }}">
+ <a href="{% url "logout" %}">Log Out</a></input>-->
+
+<b><a style="float: right;" href="{% url "logout" %}">Log Out&nbsp;&nbsp;&nbsp;</a></b>
 
 {% endif %}
 
-<div class="page_contents">
-
+<div class="deleting_detail"
  <h2>{{ entry.title }}</h2>
  <p>Emailing Date: {{ entry.date_for }}</p>
  <p>For: {{ entry.user }}</p>
@@ -18,7 +21,9 @@
  <p style="font-size: 10px;">(Date Added: {{ entry.created }}) by {{ entry.by }}</p> 
  <p style="font-size: 10px;">(Last Modified: {{ entry.last_modified }}) by {{ entry.mod_by }}</p>
 
-<button><a href="{% url "diary:home" %}">Back to main list</a></button><br><br><br><br><br><br>
+<button><a href="{% url "diary:home" %}">Back to main list</a></button>
+</div>
+
 
 <!--{% if user.is_authenticated %}
  Or <button><a href="{% url "diary:delete" entry.pk %}">Delete</a></button>
