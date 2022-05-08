@@ -319,9 +319,12 @@ def search_all(request):
 
 def send_emails(request):
     email_main()
-    template = "diary/done.html"
+    template = "diary/list_entries.html"
+    messages.success(request, "Emails sent!")
     sent = cookie_help(request.COOKIES, "sent_signal", "SENT!")
-    response = render(request, template, {"today": today()})
+    HttpResponseRedirect.allowed_schemes.append("127.0.0.1")
+    response = HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+    #response = render(request, template, {"today": today()})
     response.set_cookie("sent_signal", sent)
     return response
 
