@@ -153,7 +153,7 @@ Today is {{ today }}
 <div class="entry">
 <a href="{% url "diary:detail" find.pk %}">
 <strong>{{ find.date_for }}<br>{{ find.title }}</strong><br>
-{{ find.detail }}<br>
+{{ find.detail|truncatechars:25 }}<br>
 For: {{ find.user }}</a><br><div class="gap"></div>
  <a href="{% url "diary:detail" find.pk %}">View Entry</a>
 {% if user.is_authenticated %}
@@ -170,7 +170,7 @@ For: {{ find.user }}</a><br><div class="gap"></div>
 <div class="entry">
 <a href="{% url "diary:detail" find.pk %}">
 <strong><i>{{ find.date_for }}</i><br>{{ find.title }}</strong><br>
-{{ find.detail }}<br>
+{{ find.detail|truncatechars:25 }}<br>
 For: {{ find.user }}</a><br><div class="gap"></div>
 <a href="{% url "diary:detail" find.pk %}">View Entry</a><br>
 {% if user.is_authenticated %}
@@ -224,7 +224,7 @@ For: {{ find.user }}</a><br><div class="gap"></div>
 <a href="{% url "diary:detail" entry.pk %}">
 <strong><i>{{ entry.date_for }}</i><br>
 {{ entry.title }}</strong><br>
-{{ entry.detail }}<br>
+{{ entry.detail|truncatechars:25 }}<br>
 For: {{ entry.user }}</a><br><div class="gap"></div>
 <a href="{% url "diary:detail" entry.pk %}">View Entry</a><br> 
 {% if user.is_authenticated %}
