@@ -73,48 +73,58 @@ Today is {{ today }}
 {% if "vanisho" not in request.COOKIES %}
 
  <form action="{% url "diary:searchy" %}" method="POST" name="s" value="s">{% csrf_token %}
+ <div class="form_style">
   <label class="labelo2">Search:</label><input type="text" name="term_search"></input>
   <!--<button type="submit">Search</button> Search: --><br>
 <div class="gap"></div>
-User Filter:<br>
+<div style="text-align: left;">User Filter:</div>
+<div class="user_contain" style="width: 282px; height: 40px;">
 {% for the_user in users_list %}
 
-  <label class="labelo2">{{ the_user.0 }}</label>
-
+ <div class="user_col" style="width: 87px; height: 15px; float: left;">
+  
+ 
+ <label class="labelo3">{{ the_user.0 }}</label>
+  
 {% comment %}
     {% if user_query == the_user.0 %}
-     <input type="radio" name="sort_user", value="{{ query_name }}" checked>
+     <input type="radio" class="input_u" name="sort_user", value="{{ query_name }}" checked>
     
      
     {% else %}
-{% endcomment %}
-     <input type="radio" class="input_d" name="sort_user" value="{{ the_user.0 }}">
-  
+
+     <input type="radio" class="input_u" name="sort_user" value="{{ the_user.0 }}">
+{% endcomment %} 
+ <input type="radio" class="input_u" name="sort_user" value="{{ the_user.0 }}">
+
   <!--</label>--><br>
+ </div>
 
 {% endfor %}
+</div>
 
 <div class="gap"></div>
 
 <label class="labelo2">Pick Date:</label>
- <input name="by_date" type="date">
+ <input name="by_date" type="date" id="date_pick">
 
 <br><br>
  <button type="submit">Search & Filter</button>
  <!--<button><a href="{% url "diary:search_all" %}">Search All</a></button>-->
+</div>
 </form>
 
 
 
-<div><a href="{% url "diary:hideo" %}">HIDE FILTERS</a><br><br></div>
+<div class="toggleo"><a href="{% url "diary:hideo" %}">HIDE FILTERS</a><br></div>
 
 {% elif "vanisho" in request.COOKIES %}
  {% if "query_d" in request.COOKIES %}
-<div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a><br><br></div>
+<div class="toggleo"><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
  {% else %}
 
-<div><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
-<br>
+<div class="toggleo"><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
+
  {% endif %}
 
 {% endif %}
@@ -125,7 +135,7 @@ User Filter:<br>
 <div class="page_contents">
 
 <button><a href="{% url "diary:clear_query" %}">Clear</a></button><br><br>
-{{ searchu }}<br>
+<!--{{ searchu }}<br>-->
 </div>
 	{% endif %}
 
@@ -139,6 +149,7 @@ User Filter:<br>
 
 {% if find.is_old %}
 
+<div class="entry">
 <a href="{% url "diary:detail" find.pk %}">
 <strong>{{ find.date_for }}<br>{{ find.title }}</strong><br>
 {{ find.detail }}<br>
@@ -147,14 +158,15 @@ User Filter:<br>
 {% if user.is_authenticated %}
   |  
  <a href="{% url "diary:delete" find.pk %}">Delete Entry</a>
-
+</div>
 
 {% endif %}
 
-<br><br>
+<br><!--<br>-->
 
 {% else %}
 
+<div class="entry">
 <a href="{% url "diary:detail" find.pk %}">
 <strong><i>{{ find.date_for }}</i><br>{{ find.title }}</strong><br>
 {{ find.detail }}<br>
@@ -163,13 +175,13 @@ User Filter:<br>
 {% if user.is_authenticated %}
  <a href="{% url "diary:edit2" find.pk %}">Edit Entry</a>  |  
  <a href="{% url "diary:delete" find.pk %}">Delete Entry</a>
-
+</div>
  
 {% endif %}
 
 
 
-<br><br>
+<br><!--<br>-->
 
 {% endif %}
 
@@ -180,7 +192,7 @@ User Filter:<br>
 {% elif searchu == "EMPTY!" %}
 
 <div class="page_contents">0 diary entries found.<br><br>
-<button><a href="{% url "diary:clear_query" %}">Clear</a></button>
+<button><a href="{% url "diary:clear_query" %}">Clear</a></button><br><br>
 </div>
 
 
@@ -198,7 +210,7 @@ User Filter:<br>
 {% endif %}
 <!--<br>-->
 
-<div class="listo" style="display: block; margin: auto; width: 90%; text-align: center;">
+<div class="listo">
 {% for entry in object_list %}
 
 {% if entry.is_old %}
@@ -207,6 +219,7 @@ User Filter:<br>
 
 {% else %}
 
+<div class="entry">
 <a href="{% url "diary:detail" entry.pk %}">
 <strong><i>{{ entry.date_for }}</i><br>
 {{ entry.title }}</strong><br>
@@ -216,7 +229,8 @@ User Filter:<br>
 {% if user.is_authenticated %}
  <a href="{% url "diary:edit2" entry.pk %}">Edit Entry</a>  |  
  <a href="{% url "diary:delete" entry.pk %}">Delete Entry</a>
-<br><br>
+</div>
+<br><!--<br>-->
 {% else %}
 <br>
 {% endif %}
@@ -250,7 +264,7 @@ User Filter:<br>
 </div>
 
 
-<i class="page_contents" style="font-size: 14px;">All diary notes emailed daily at 8am</i>
+<div class="page_contents"><i style="font-size: 14px;">All diary notes emailed daily at 8am</i></div>
 </div>
 
 </body>
