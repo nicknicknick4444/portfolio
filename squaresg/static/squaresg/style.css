@@ -731,9 +731,9 @@ ul.errorlist.nonfield {
 
 .input_u {
 	float: right;
-	width: 14px;
+	width: 12px;
 	margin-right: 20px;
-	margin-bottom: 2px;
+	padding-bottom: 20px;
 	#height: 5px;
 }
 
