@@ -138,7 +138,7 @@ def clear_query(request):
     response = render(request, template, {"searchu": searcho, "object_list": page_obj,
                                         "today": today(), "users_list": USER_CHOICES2,
                                       "saved": saved,})    
-    cookoes = ["query_s", "query_u", "query_d", ""]
+    cookoes = ["query_s", "query_u", "query_d"]
     for i in cookoes:
         response.delete_cookie(i)
     

@@ -504,6 +504,7 @@ span .closer:hover {
 
 .inputy {
 	margin-top: -1px;
+	width: 10px;
 }
 
 #searchy {
@@ -704,8 +705,10 @@ body {
 
 /* DIARY */
 
+
+
 .dateinput {
-	width:200px;
+	#width:200px;
 }
 
 ul.errorlist.nonfield {
@@ -726,16 +729,18 @@ ul.errorlist.nonfield {
 	width: 200px;
 }*/
 
-.input_d {
+.input_u {
 	float: right;
-	width: 50px;
+	width: 40px;
+	#height: 5px;
 }
 
 .page_contents {
 	text-align: center;
 	margin: auto;
-	width: 300px;
+	#width: 300px;
 	#display: block;
+	font-family: helvetica;
 }
 
 .formy {
@@ -750,8 +755,21 @@ ul.errorlist.nonfield {
 .labelo2 {
 	#padding: 5px;
 	float: left;
+	#width: 30px;
 	#margin: 10px;
-	text-align: left;
+	#text-align: left;
+	#font-size: 12px;
+}
+
+.labelo3 {
+	float: left;
+	font-size: 14px;
+}
+
+.user_contain {
+	padding-top: 10px;
+	#border: 1px solid #000000;
+	margin: auto;
 }
 
 input[type="radio"]{
@@ -763,6 +781,84 @@ input[type="radio"]{
 .gap {
 	height: 10px;
 }
+
+#date_pick {
+	width: 159px;	
+	float: left;
+	margin-left: 11px;
+}
+
+.form_style {
+	border: 2px solid #ffe900;
+	border-radius: 3px;
+	padding-left: 35px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 290px;
+	margin: auto;
+}
+
+.listo {
+	display: block; 
+	margin: auto; 
+	width: 90%; 
+	text-align: center;
+	}
+
+.entry {
+	border: 2px solid #ffc166;
+	border-radius: 3px;
+	margin-left: 20%;
+	margin-right: 20%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-family: helvetica;
+}
+
+.toggleo {
+	font-family: helvetica;
+	color: #000000;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.entry a:link {
+	color: #000000;
+}
+
+.entry a:hover {
+	color: #f86400;
+}
+
+.toggleo a:link {
+	color: #000000;
+}
+
+.toggleo a:visited {
+	color: #000000;
+}
+
+.toggleo a:hover {
+	color: #f86400;
+}
+
+.page_contents a:link {
+	color: #000000;
+}
+
+.page_contents a:visited {
+	color: #00000;
+}
+
+.page_contents a:hover {
+	color: #f86400;
+}
+
+
+
+
+
+
 
 
 
