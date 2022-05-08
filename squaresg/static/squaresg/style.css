@@ -731,7 +731,7 @@ ul.errorlist.nonfield {
 
 .input_u {
 	float: right;
-	width: 10px;
+	width: 15px;
 	margin-right: 20px;
 	#height: 5px;
 }
@@ -764,7 +764,7 @@ ul.errorlist.nonfield {
 
 .labelo3 {
 	float: left;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .user_contain {
@@ -820,8 +820,9 @@ input[type="radio"]{
 	border-radius: 3px;
 	margin-left: 20%;
 	margin-right: 20%;
-	padding-top: 4px;
-	padding-bottom: 4px;
+	/*padding-top: 4px;
+	padding-bottom: 4px;*/
+	padding: 4px;
 	font-family: helvetica;
 }
 
