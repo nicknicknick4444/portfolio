@@ -195,12 +195,13 @@ def NewEntryView2(request):
     new_detail = request.POST.get("new_detail")
     new_user = request.POST.get("new_user")
     new_date = request.POST.get("new_date")
-    
+    curr_user = request.user.first_name
+    print("WHY??", curr_user, type(curr_user))
     if request.method == "POST":
-        Entry.objects.create(title=new_title, detail=new_detail, 
-                                    user=new_user, date_for=convert_date(new_date),
-                             created=today, last_modified=today, mod_by=request.user.first_name,
-                             by=request.user.first_name)
+        Entry.objects.create(title=new_title, detail=new_detail, \
+                                    user=new_user, date_for=convert_date(new_date), \
+                             created=today(), last_modified=today(), \
+                             mod_by=curr_user, by=curr_user)
         messages.success(request, "Entry saved!")
         return HttpResponseRedirect(reverse("diary:home"))
     else:
@@ -222,7 +223,7 @@ def UpdateEntryView2(request, pk):
         the_entry.user = user
         the_entry.mod_by = request.user.first_name
         the_entry.date_for = convert_date(date)
-        the_entry.last_modified = convert_date(date)
+        the_entry.last_modified = today()
         the_entry.save()
         
         all_entries = Entry.objects.all().order_by("date_for")
