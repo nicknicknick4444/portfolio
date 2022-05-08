@@ -135,7 +135,7 @@ Today is {{ today }}
 	{% if searchu == "SEARCHING!" and searchu != "CLEARED!" %}
 <div class="page_contents">
 
-<button><a href="{% url "diary:clear_query" %}">Clear</a></button><br><br>
+<button style="margin-bottom: 10px;"><a href="{% url "diary:clear_query" %}">Clear</a></button><br>
 <!--{{ searchu }}<br>-->
 </div>
 	{% endif %}

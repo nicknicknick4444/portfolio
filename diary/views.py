@@ -46,7 +46,7 @@ def EntryListView2(request):
     USER_CHOICES2 = [i for i in user_query]
     template = "diary/list_entries.html"
     
-    paginator = Paginator(object_list, 2)
+    paginator = Paginator(object_list, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
@@ -103,7 +103,7 @@ def searching(request):
     que3 = [i for i in que3]
     
     #Pagination
-    paginator = Paginator(que3, 2)
+    paginator = Paginator(que3, 3)
     print(paginator)
     page_number = request.GET.get("page")
     print(page_number)
