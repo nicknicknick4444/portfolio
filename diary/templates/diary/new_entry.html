@@ -13,9 +13,12 @@
 <b><a style="float: right;" href="{% url "logout" %}">Log Out&nbsp;&nbsp;&nbsp;</a></b><br>
 
 
+ <div style="margin: auto; display: block; text-align: center;">
+  {{ signal }}
+ </div>
 
 
-  <form action="" method="POST" style="margin: auto; display: block;">{% csrf_token %}
+  <form action="" method="POST" name="new_form" style="margin: auto; display: block;">{% csrf_token %}
 <div class="form_style">
 <div style="">
   <div style="padding-right: 25px;"><i style="font-size: 10px;">All fields are mandatory</i></div><br>

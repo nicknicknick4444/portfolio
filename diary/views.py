@@ -196,16 +196,27 @@ def NewEntryView2(request):
     new_user = request.POST.get("new_user")
     new_date = request.POST.get("new_date")
     curr_user = request.user.first_name
-    print("WHY??", curr_user, type(curr_user))
+    print("WHY??", new_date, type(new_date))
+# #     new_date2 = convert_date(new_date)
+# #     print("CONV", new_date2, type(new_date2))
+# #     print("YAK", new_date2 > datetime.datetime.now().date())
+    
+    template = "diary/new_entry.html"
+    context = {"users_list": USER_CHOICES2}
     if request.method == "POST":
-        Entry.objects.create(title=new_title, detail=new_detail, \
-                                    user=new_user, date_for=convert_date(new_date), \
-                             created=today(), last_modified=today(), \
-                             mod_by=curr_user, by=curr_user)
-        messages.success(request, "Entry saved!")
-        return HttpResponseRedirect(reverse("diary:home"))
+        if convert_date(new_date) >= datetime.datetime.now().date():
+            Entry.objects.create(title=new_title, detail=new_detail, \
+                                        user=new_user, date_for=convert_date(new_date), \
+                                 created=today(), last_modified=today(), \
+                                 mod_by=curr_user, by=curr_user)
+            messages.success(request, "Entry saved!")
+            return HttpResponseRedirect(reverse("diary:home"))
+        else:
+            context = {"users_list": USER_CHOICES2, "signal": "Date can't be in the past!"}
+            return render(request, template, context)
     else:
-        return render(request, "diary/new_entry.html", {"today": today(), "users_list": USER_CHOICES2})
+        
+        return render(request, template, context)
 
 def UpdateEntryView2(request, pk):
     user_query = User.objects.values_list("first_name", "last_name")
@@ -217,26 +228,42 @@ def UpdateEntryView2(request, pk):
     print("spooks! WOO!", the_entry.user)
     date = request.POST.get("edit_date")
     print("SATE", the_entry.date_for)
-    if request.method == "POST":
-        the_entry.title = title
-        the_entry.detail = detail
-        the_entry.user = user
-        the_entry.mod_by = request.user.first_name
-        the_entry.date_for = convert_date(date)
-        the_entry.last_modified = today()
-        the_entry.save()
-        
-        all_entries = Entry.objects.all().order_by("date_for")
-        messages.success(request, "Entry updated!")
-        return HttpResponseRedirect(reverse("diary:home"))
+    #signal = ""
     
     template = "diary/edit_entry.html"
-    
-    return render(request, template, {"title": title, "detail": detail,
+    context = {"title": title, "detail": detail,
                                       "user": user, "date": date,
                                       "entry": the_entry, 
                                       "users_list": USER_CHOICES2,
-                                      "selected_user": the_entry.user})
+                                      "selected_user": the_entry.user}
+# # #     response =  render(request, template, {"title": title, "detail": detail,
+# # #                                       "user": user, "date": date,
+# # #                                       "entry": the_entry, 
+# # #                                       "users_list": USER_CHOICES2,
+# # #                                       "selected_user": the_entry.user,
+# # #                                       "signal": signal})
+    if request.method == "POST":
+        if convert_date(date) >= datetime.datetime.now().date():
+            the_entry.title = title
+            the_entry.detail = detail
+            the_entry.user = user
+            the_entry.mod_by = request.user.first_name
+            the_entry.date_for = convert_date(date)
+            the_entry.last_modified = today()
+            the_entry.save()
+            
+            all_entries = Entry.objects.all().order_by("date_for")
+            messages.success(request, "Entry updated!")
+            return HttpResponseRedirect(reverse("diary:home"))
+        else:
+            
+            context = {"title": title, "detail": detail, "user": user, "date": date,
+                       "entry": the_entry, "users_list": USER_CHOICES2,
+                       "selected_user": the_entry.user, "signal": "Date can't be in the past!"}
+            return render(request, template, context)
+    else:
+        return render(request, template, context)
+
 
 class UpdateEntryView(LoginRequiredMixin, UpdateView):
     model = Entry
