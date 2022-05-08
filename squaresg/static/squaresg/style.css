@@ -793,8 +793,8 @@ input[type="radio"]{
 .deleting_detail {
 	border: 2px solid #ffc166; 
 	border-radius: 3px; 	
-	margin-left: 20%; 
-	margin-right: 20%; 
+	margin-left: 15%; 
+	margin-right: 15%; 
 	padding-top: 5px; 
 	padding-bottom: 5px;
 }
