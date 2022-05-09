@@ -13,11 +13,11 @@
 
 {% endif %}
 
-<div class="deleting_detail">
- <h2>{{ entry.title }}</h2>
+<div class="deleting_detail" style="padding-top: 0;">
+ <div style="font-size: 30px;">{{ entry.title }}</div>
  <p>Emailing Date: {{ entry.date_for }}</p>
  <p>For: {{ entry.user }}</p>
- <p>Message: {{ entry.detail }}</p>
+ <p>Detail: {{ entry.detail }}</p>
  <p style="font-size: 10px;">(Date Added: {{ entry.created }}) by {{ entry.by }}</p> 
  <p style="font-size: 10px;">(Last Modified: {{ entry.last_modified }}) by {{ entry.mod_by }}</p>
 

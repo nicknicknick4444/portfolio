@@ -29,7 +29,10 @@
 
 	<!--{{ form.as_p }}-->
 	<span class="labelo">Order: </span><input class="formy" type="text" name="edit_title" value="{{ entry.title }}"><br>
-	<span class="labelo">Detail: </span><input class="formy" name="edit_detail" value="{{ entry.detail }}"><br>
+	<!--<span class="labelo">Detail: </span><input class="formy" name="edito_detail" value="{{ entry.detail }}"><br>-->
+	<span class="labelo">Detail: </span><textarea class="formy" name="edit_detail">{{ entry.detail }}</textarea><br> 
+	
+	
 	<div class="gap"></div>
 	<div style="float: left;">User Filter:</div><br>
 	<div class="user_contain" style="width: 287px; height: 35px;">
