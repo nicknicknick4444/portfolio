@@ -35,12 +35,12 @@
 	<div class="user_contain" style="width: 287px; height: 35px;">
 	 {% for the_user in users_list %}
          <div class="user_col" style="width: 87px; height: 15px; float: left;">
-	  <label class="labelo3">{{ the_user.0 }}</label>
+	  <label class="labelo3">
 	  {% if the_user.0 == selected_user %}
-	   <input type="radio" class="input_u" name="edit_user" value="{{ the_user.0 }}" checked><br>
-
+	   <input type="radio" class="input_u" name="edit_user" value="{{ the_user.0 }}" checked>{{ the_user.0 }}</label><br>
+		
 	  {% else %}
-	   <input type="radio" class="input_u" name="edit_user" value="{{ the_user.0 }}"><br>
+	   <input type="radio" class="input_u" name="edit_user" value="{{ the_user.0 }}">{{ the_user.0 }}</label><br>
 	  {% endif %}
 	 </div>
 	 {% endfor %}</div>

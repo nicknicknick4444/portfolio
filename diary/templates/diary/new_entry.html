@@ -29,7 +29,9 @@
  <div class="user_contain" style="width: 287px; height: 35px;">
   {% for the_user in users_list %}
  <div class="user_col" style="width: 87px; height: 15px; float: left;">
-    <label class="labelo3">{{ the_user.0 }}</label><input type="radio" class="input_u" id="user" name="new_user" value="{{ the_user.0 }}" required>
+    <label class="labelo3"><input type="radio" class="input_u" id="user" name="new_user" value="{{ the_user.0 }}" required>
+     {{ the_user.0 }}
+    </label>
  </div>
   {% endfor %}
  </div>
