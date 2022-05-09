@@ -122,7 +122,7 @@ Today is {{ today }}
 
 {% elif "vanisho" in request.COOKIES %}
  {% if "query_d" in request.COOKIES %}
-<div class="toggleo"><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
+<div class="toggleo" style="padding-top: 9px;"><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
  {% else %}
 
 <div class="toggleo"><a href="{% url "diary:hideo" %}">SHOW FILTERS</a></div>
