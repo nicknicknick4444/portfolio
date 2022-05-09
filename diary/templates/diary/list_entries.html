@@ -160,15 +160,17 @@ For: {{ find.user }}</a><br><div class="gap"></div>
 {% if user.is_authenticated %}
   |  
  <a href="{% url "diary:delete" find.pk %}">Delete Entry</a>
-</div>
+<!--</div>-->
+
 
 {% endif %}
+</div>
 
 <br><!--<br>-->
 
 {% else %}
 
-<div class="entry">
+  <div class="entry">
 <a href="{% url "diary:detail" find.pk %}">
 <strong><i>{{ find.date_for }}</i><br>{{ find.title }}</strong><br>
 {{ find.detail|truncatechars:25 }}<br>
@@ -177,9 +179,10 @@ For: {{ find.user }}</a><br><div class="gap"></div>
 {% if user.is_authenticated %}
  <a href="{% url "diary:edit2" find.pk %}">Edit Entry</a>  |  
  <a href="{% url "diary:delete" find.pk %}">Delete Entry</a>
-</div>
- 
+
+
 {% endif %}
+
 </div>
 
 
@@ -234,6 +237,7 @@ For: {{ entry.user }}</a><br><div class="gap"></div>
 </div>
 <br><!--<br>-->
 {% else %}
+</div>
 <br>
 {% endif %}
 
