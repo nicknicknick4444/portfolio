@@ -730,9 +730,9 @@ ul.errorlist.nonfield {
 }*/
 
 .input_u {
-	float: right;
-	width: 12px;
-	margin-right: 20px;
+	#float: right;
+	#width: 4px;
+	#margin-right: 20px;
 	padding-bottom: 20px;
 	#height: 5px;
 }
@@ -774,7 +774,11 @@ ul.errorlist.nonfield {
 	margin: auto;
 }
 
-input[type="radio"]{
+.user_col {
+	margin-bottom: 5px;
+}
+
+input[type="radio"] + .label03:after{
 	#margin-top: -1px;
 	vertical-align: middle;
 	#height: 100%;

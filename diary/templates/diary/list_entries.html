@@ -84,7 +84,7 @@ Today is {{ today }}
  <div class="user_col" style="width: 87px; height: 15px; float: left;">
   
  
- <label class="labelo3">{{ the_user.0 }}</label>
+<!-- lABEL was HERE -->
   
 {% comment %}
     {% if user_query == the_user.0 %}
@@ -94,8 +94,10 @@ Today is {{ today }}
     {% else %}
 
      <input type="radio" class="input_u" name="sort_user" value="{{ the_user.0 }}">
-{% endcomment %} 
- <input type="radio" class="input_u" name="sort_user" value="{{ the_user.0 }}">
+{% endcomment %}
+
+ <label for="{{ the_user.0 }}" class="labelo3"><input type="radio" class="input_u" name="sort_user" value="{{ the_user.0 }}">
+ {{ the_user.0 }}</label>
 
   <!--</label>--><br>
  </div>
@@ -109,7 +111,7 @@ Today is {{ today }}
  <input name="by_date" type="date" id="date_pick">
 
 <br><br>
-<div style="padding-right: 30px;">
+<div style="padding-right: 31px;">
  <button type="submit"">Search & Filter</button></div>
  <!--<button><a href="{% url "diary:search_all" %}">Search All</a></button>-->
 </div>
