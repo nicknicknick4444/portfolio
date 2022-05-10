@@ -17,26 +17,6 @@ from .service import convert_date, cookie_help, search_change_help, user_change_
 from .email_send import main as email_main
 
 # Create your views here.
-# def today():
-#     return datetime.datetime.now().date()
-
-class EntryListView(ListView):
-    model = Entry
-    paginate_by = 3
-    template_name = "diary/list_entries.html"
-    saved = ""
-    extra_context = {"today": today(), "saved": saved, }
-    
-    def get_context_data(self, *args, **kwargs):
-        user_query = User.objects.values_list("first_name", "last_name")
-        USER_CHOICES2 = [i for i in user_query]
-        context = super().get_context_data(*args, **kwargs)
-        context["users_list"] = USER_CHOICES2
-        return context
-    
-    def get_queryset(self):
-        object_list = Entry.objects.all().order_by("date_for")
-        return [i for i in object_list if i.is_old == False]
 
 def EntryListView2(request):
     object_list_raw = Entry.objects.all().order_by("date_for", "user", "title")
@@ -52,10 +32,7 @@ def EntryListView2(request):
     
     response = render(request, template, {"today": today(), "object_list": page_obj,
                                       "users_list": USER_CHOICES2})
-# #     cookie_list = ["query_s", "query_u", "query_d", "sent_signal"]
-# #     for i in cookie_list:
-# #         if i in request.COOKIES:
-# #             response.delete_cookie(i)
+
     cookie_eat(request.COOKIES, response)
     return response
 
@@ -68,7 +45,6 @@ def searching(request):
     if query_u == None:
         query_u = ""
 
-    
     raw_query_d = request.POST.get("by_date")
     
     if "query_d" not in request.COOKIES:
@@ -143,40 +119,12 @@ def clear_query(request):
         response.delete_cookie(i)
     
     pinfo = request.META.get("PATH_INFO")
-    http_host = request.META.get("HTTP_HOST")
-    
-    print("BOURCEY!!!!", http_host + pinfo)
-    
+    http_host = request.META.get("HTTP_HOST")    
     return response
 
 class DetailEntryView(DetailView):
     model = Entry
     template_name="diary/detail_entry.html"
-
-class NewEntryView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Entry
-    template_name = "diary/new_entry.html"
-    fields = (
-        "title",
-        "detail",
-        "user",
-        "date_for"
-        )
-    success_url = "/diary/"
-    success_message = "Diary entry saved successfully!"
-    
-    def __str__(self):
-        return self.user.first_name
-
-    def form_valid(self, form):
-        form.instance.created = datetime.datetime.now().date()
-        form.instance.last_modified = datetime.datetime.now().date()
-        form.instance.by = self.request.user.first_name
-        form.instance.mod_by = self.request.user.first_name
-        print(form.instance.created)
-        
-        print(form.instance.date_for)
-        return super().form_valid(form)
 
 class DeleteEntryView(LoginRequiredMixin, DeleteView):
     model = Entry
@@ -196,10 +144,6 @@ def NewEntryView2(request):
     new_user = request.POST.get("new_user")
     new_date = request.POST.get("new_date")
     curr_user = request.user.first_name
-    print("WHY??", new_date, type(new_date))
-# #     new_date2 = convert_date(new_date)
-# #     print("CONV", new_date2, type(new_date2))
-# #     print("YAK", new_date2 > datetime.datetime.now().date())
     
     template = "diary/new_entry.html"
     context = {"users_list": USER_CHOICES2}
@@ -265,74 +209,74 @@ def UpdateEntryView2(request, pk):
         return render(request, template, context)
 
 
-class UpdateEntryView(LoginRequiredMixin, UpdateView):
-    model = Entry
-    form_class = UpdateViewForm
-    extra_context = {"form":form_class}
-    template_name = "diary/edit_entry.html"
-        
-    def form_valid(self, form):
-        form.instance.last_modified = datetime.datetime.now().date()
-        form.instance.mod_by = self.request.user.first_name
-        return super().form_valid(form)
+# # # # class UpdateEntryView(LoginRequiredMixin, UpdateView):
+# # # #     model = Entry
+# # # #     form_class = UpdateViewForm
+# # # #     extra_context = {"form":form_class}
+# # # #     template_name = "diary/edit_entry.html"
+# # # #         
+# # # #     def form_valid(self, form):
+# # # #         form.instance.last_modified = datetime.datetime.now().date()
+# # # #         form.instance.mod_by = self.request.user.first_name
+# # # #         return super().form_valid(form)
 
-def add_user(request):
-    form = CreateUserForm(request.POST)
-    if request.method == "POST":
-        if form.is_valid():
-            print("BAUS!!")
-            new_user = User.objects.create_user(form.instance.username,
-                                           form.instance.email,
-                                           form.instance.password,)
-            new_user.first_name = form.instance.first_name
-            new_user.last_name = form.instance.last_name
-            new_user.save()
-            saved = "SAVED!"
-            return HttpResponseRedirect(reverse("diary:added_user"))
-        else:
-            saved = "UNSAVED!"
-    else:
-        saved = "UNSAVED!"
-    template = "diary/add_user.html"
-    return render(request, template, {"saved": saved, "form": form})
-    
-def set_time(request):
-    form = SetTimeForm(request.POST)
-   # the_time = get_object_or_404(SendTime, pk=1)
-    if request.method == "POST":
-        if form.is_valid():
-            hour = request.POST.get("hour")
-            minute = request.POST.get("minute")
-            time = "".join([hour, ":", minute])
-            if len(SendTime.objects.all()) > 0:
-                #the_time = get_object_or_404(SendTime, pk=1)
-                the_time = get_object_or_404(SendTime, pk=2)
-                the_time.send_time = time
-                the_time.save()
-            else:
-                SendTime.objects.create(send_time=time)
-            print(time)
-            time_saved = "Time saved!"
-    else:
-        time_saved = ""
-    if len(SendTime.objects.all()) > 0:
-        curr_time = SendTime.objects.get(id=2)
-    else:
-        curr_time = "NOPE"
-            
-    template = "diary/set_time.html"
-    return render(request, template, {"form": form, "time_saved": time_saved, "curr_time": curr_time})
-    
-def added_user(request):
-    saved = "SAVED!"
-    user_query = User.objects.values_list("first_name", "last_name")
-    USER_CHOICES2 = [i for i in user_query]
-    users_list = [i for i in USER_CHOICES2]
-    all_entries = Entry.objects.all().order_by("date_for")
-    searcho = "USER_ADDED!"
-    template = "diary/list_entries.html"
-    return render(request, template, {"object_list": all_entries, "users_list": users_list, 
-                                      "today": today(), "saved": saved, "searchu": searcho})
+# # # def add_user(request):
+# # #     form = CreateUserForm(request.POST)
+# # #     if request.method == "POST":
+# # #         if form.is_valid():
+# # #             print("BAUS!!")
+# # #             new_user = User.objects.create_user(form.instance.username,
+# # #                                            form.instance.email,
+# # #                                            form.instance.password,)
+# # #             new_user.first_name = form.instance.first_name
+# # #             new_user.last_name = form.instance.last_name
+# # #             new_user.save()
+# # #             saved = "SAVED!"
+# # #             return HttpResponseRedirect(reverse("diary:added_user"))
+# # #         else:
+# # #             saved = "UNSAVED!"
+# # #     else:
+# # #         saved = "UNSAVED!"
+# # #     template = "diary/add_user.html"
+# # #     return render(request, template, {"saved": saved, "form": form})
+# # #     
+# # # def set_time(request):
+# # #     form = SetTimeForm(request.POST)
+# # #    # the_time = get_object_or_404(SendTime, pk=1)
+# # #     if request.method == "POST":
+# # #         if form.is_valid():
+# # #             hour = request.POST.get("hour")
+# # #             minute = request.POST.get("minute")
+# # #             time = "".join([hour, ":", minute])
+# # #             if len(SendTime.objects.all()) > 0:
+# # #                 #the_time = get_object_or_404(SendTime, pk=1)
+# # #                 the_time = get_object_or_404(SendTime, pk=2)
+# # #                 the_time.send_time = time
+# # #                 the_time.save()
+# # #             else:
+# # #                 SendTime.objects.create(send_time=time)
+# # #             print(time)
+# # #             time_saved = "Time saved!"
+# # #     else:
+# # #         time_saved = ""
+# # #     if len(SendTime.objects.all()) > 0:
+# # #         curr_time = SendTime.objects.get(id=2)
+# # #     else:
+# # #         curr_time = "NOPE"
+# # #             
+# # #     template = "diary/set_time.html"
+# # #     return render(request, template, {"form": form, "time_saved": time_saved, "curr_time": curr_time})
+# # #     
+# # # def added_user(request):
+# # #     saved = "SAVED!"
+# # #     user_query = User.objects.values_list("first_name", "last_name")
+# # #     USER_CHOICES2 = [i for i in user_query]
+# # #     users_list = [i for i in USER_CHOICES2]
+# # #     all_entries = Entry.objects.all().order_by("date_for")
+# # #     searcho = "USER_ADDED!"
+# # #     template = "diary/list_entries.html"
+# # #     return render(request, template, {"object_list": all_entries, "users_list": users_list, 
+# # #                                       "today": today(), "saved": saved, "searchu": searcho})
     
 def search_all(request):
     all_entries = Entry.objects.all().order_by("date_for")
@@ -351,19 +295,11 @@ def send_emails(request):
     sent = cookie_help(request.COOKIES, "sent_signal", "SENT!")
     HttpResponseRedirect.allowed_schemes.append("127.0.0.1")
     response = HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-    #response = render(request, template, {"today": today()})
     response.set_cookie("sent_signal", sent)
     return response
 
-
 def hideo(request):
     template = "diary/list_entries.html"
-# #     pinfo = request.META.get("PATH_INFO")
-# #     http_host = request.META.get("HTTP_HOST")
-# #     if not "vanisho" in request.COOKIES:
-# #         gubby = request.COOKIES.get("vanisho", "GONE!")
-# #     else:
-# #         gubby = request.COOKIES["vanisho"]
     toggley = cookie_help(request.COOKIES, "vanisho", "GONE!")
     HttpResponseRedirect.allowed_schemes.append("127.0.0.1")
     print("YAZOOOOOOO!", request.META.get("HTTP_REFERER"))

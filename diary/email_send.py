@@ -35,7 +35,6 @@ def grab_posts(USER):
         listage = [["BLANK"]]
     return listage
 
-
 def send_email():
     
     server = smtplib.SMTP(host=HOST_ADDRESS, port=HOST_PORT)
@@ -44,19 +43,14 @@ def send_email():
     
     user_que = User.objects.values_list("first_name", "email")
     USERS = [i for i in user_que]
-    print(USERS)
     
     for i in USERS:
-        # TO SEND TO ALL USERS AGAIN REMOVE THIS IF LOOP WHEN FINISHED AND JUDD EVERYTHING UP TO BISMARK BACK 1 DENT
-        print(i)
-        #####if i[0] == "Nick" or i[0] == "Prady":
         curr_user = i[0]
         curr_day = today2()
         str_day_raw = date_for_str.now()
         
         day_str = convert_date2(str_day_raw)
         sd_abbrev = day_str[:5]
-        print("BAGS!", day_str, sd_abbrev)
         
         ### Hide this and re-add as func arg for test sending
         RECIPIENT_ADDRESS = i[1]
@@ -67,11 +61,10 @@ def send_email():
         #Setup of MIMEMultiprt Object header
         message["From"] = MY_ADDRESS
         message["To"] = RECIPIENT_ADDRESS
-        #message["To"] = i[1]
         message["Subject"] = f"Diary Notes for {curr_user} ({day_str})"
         
         listy = grab_posts(i[0])
-        print(listy[0], type(listy[0]))
+        lengtho = len(listy)
         user_list = []
         if listy[0] != ["BLANK"]:
             for index, order in enumerate(listy):
@@ -79,10 +72,7 @@ def send_email():
                     user_list.append(["&nbsp;", "&nbsp;"])
                     user_list.append([order.title + "&nbsp;-&nbsp;", order.detail])
                 else:
-                    #for i in ordo:
                     user_list.append([order.title + "&nbsp;-&nbsp;", order.detail])
-                    #print(ordo.title, index, print(type(ordo)))
-            print(user_list)
         else:
             user_list.append(["BLANK", "BLANK"])
         
@@ -96,9 +86,17 @@ def send_email():
                     
                       {% if user_list.0.0 == "BLANK" %}
                         No diary notes today!<br>
+                          
                       {% else %}
                       Good morning,
+                      
+                      {% if user_list.0.0 != "BLANK" and lengtho == 1 %}
+                        <p>Here is your diary note for {{ sd_abbrev }}:<br><br></p>
+                    
+                      {% else %}
                         <p>Here are your diary notes for {{ sd_abbrev }}:<br><br></p>
+                      {% endif %}
+                      
                        {% for item in user_list %}
 
                        <span style="font-size: 15px;">{{ item.0 }}{{ item.1 }}</span><br>
@@ -117,14 +115,14 @@ def send_email():
         """
 
         
-
+        
         #Creation of a MIMEText Part
         #htmlPart = MIMEText(html, "html")
         htmlPart = MIMEText(
             Environment().from_string(TEMPLATE).render(
                     listy = listy, user_list = user_list, \
                     curr_user = curr_user, day_str = day_str, \
-                    sd_abbrev = sd_abbrev
+                    sd_abbrev = sd_abbrev, lengtho = lengtho
                 ),"html"
             )
 
@@ -133,27 +131,12 @@ def send_email():
 
         #Send email and close connection
         server.send_message(message)
-        # BISMARK!
+        # END!
             
     server.quit()
     
     print("CHECK EMAIL!")
     
-    
-# # # def for_dry_runs():
-# # #     #convert_date2(date_for_str.now())
-# # #     the_time = SendTime.objects.filter(id__exact=2)
-# # #     #schedule.every().day.at(str(the_time[0])).do(send_email)
-# # #     
-# # #     print(the_time[0])
-# # #     #schedule.every(10).seconds.do(emailer)
-# # #     while True:
-# # #         schedule.run_pending()
-# # #         time.sleep(1)
-    
-    
-    #return send_email("diarynotes444@gmail.com")
-
 def main():
     # Re-dd email address for testing
     send_email()
