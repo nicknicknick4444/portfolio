@@ -103,7 +103,7 @@ def clear_query(request):
     searcho = "CLEARED!"
     template = "diary/list_entries.html"
     
-    paginator = Paginator(cleared_query, 2)
+    paginator = Paginator(cleared_query, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
