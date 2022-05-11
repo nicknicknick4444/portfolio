@@ -13,5 +13,6 @@ urlpatterns = [
     path("all/", views.search_all, name="search_all"),
     path("email/", views.send_emails, name="emails"),
     path("hideo/", views.hideo, name="hideo"),
+    path("backo/", views.back_to_before, name="back_before"),
     path("", views.EntryListView2, name="home"),
     ]

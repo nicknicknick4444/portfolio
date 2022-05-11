@@ -17,7 +17,7 @@
 <p>{{ entry.user }}</p>
 <p>{{ entry.detail }}</p>
 <p style="color:#ee0000;" id="labely"><i>Can't edit diary notes from the past.</i></p>
-<button><a href="{% url "diary:home" %}">Cancel</a></button>
+<button><a href="{% url "diary:back_before" %}">Cancel</a></button>
 <br>
 
 {% else %}
@@ -56,7 +56,7 @@
 
 <div class="page_contents" style="padding-right: 34px;">
 <button class="btn btn-success ml-2" type="submit">Update</button>&nbsp;&nbsp; |&nbsp;&nbsp;   
-<button><a href="{% url "diary:home" %}">Cancel</a></button>
+<button><a href="{% url "diary:back_before" %}">Cancel</a></button>
 </div>
  {% endif %}
 

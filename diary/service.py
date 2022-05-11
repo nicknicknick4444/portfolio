@@ -62,7 +62,6 @@ def user_change_help(reqc, name, orig, reqm, reqcname):
             return ""
         else:
             return orig
-            #print("FIVE")
     elif orig == reqc[name]:
         return reqc[name]
     else:

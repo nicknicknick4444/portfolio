@@ -19,72 +19,41 @@ User._meta.get_field("first_name").verbose_name = "Nickname"
 User._meta.get_field("last_name").verbose_name = "Initial"
 User._meta.get_field("first_name").blank = False
 User._meta.get_field("last_name").blank = False
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=CASCADE)
-
-#MY = [("a","Yes"),("b","No"),("c","maybe"), ("d","Fat chance")]
+User._meta.get_field("email").blank = False
 
 def get_user_choices():
     user_query = User.objects.values_list("first_name","last_name")
     USER_CHOICES = [i for i in user_query]
-    print("grinth", USER_CHOICES)
     return USER_CHOICES
-#print(USER_CHOICES)
 
 class Entry(models.Model):
     user_query = User.objects.values_list("first_name", "last_name")
     USER_CHOICES = [i for i in user_query]
-    print("QUECK", USER_CHOICES)
+    
     title = models.CharField(max_length=250)
     detail = models.CharField(max_length=1000)
-    #user = models.CharField(max_length=100)
+    
     by = models.CharField(max_length=100, default="")
     mod_by = models.CharField(max_length=100, default="")
     user = models.CharField(max_length=20, choices = get_user_choices(), blank=False, default="")
-    #user = models.ModelChoiceField(widget=forms.Select, queryset=USER_CHOICES)
-    #user = models.OneToOneField(User, to_field="first_name", on_delete=models.CASCADE)
-    ###user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #user = models.ModelMultipleChoiceField(queryset=Users.objects.all())
-    #user = models.ForeignKey(User, related_name="first_names", on_delete=models.CASCADE)
-    #initial = user.first_name
-    ##user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+
     created = models.DateField()
     last_modified = models.DateField()
     date_for = models.DateField()
-    
-#     class Meta:
-#         db_table = "User"
-    
-#     def __str__(self):
-#         return self.user.username
-        #user.get_short_name()
-    
+        
     def clean(self, *args, **kwargs):
         super(Entry, self).clean(*args, **kwargs)
         if self.date_for < datetime.datetime.now().date():
             raise ValidationError("Date can't be in the past!")
-        #print(self.date_for < datetime.datetime.now().date() - 1)
     @property
     def is_old(self):
         return self.date_for < datetime.datetime.now().date()
     
-#     def __str__(self):
-#         return self.title
-    
     def get_absolute_url(self):
         return reverse("diary:home")
-
-# class Initial(models.Model):
-#     models.CharField(max_length=5, unique=True)
     
 class SendTime(models.Model):
-    #send_time = models.DateTimeField(auto_now_add=True)
     send_time = models.CharField(max_length=100, default="00:00")
     
     def __str__(self):
         return self.send_time
-    
-#     def get_absolute_url(self):
-#         return reverse(
-#             )
