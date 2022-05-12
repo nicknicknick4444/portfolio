@@ -146,6 +146,14 @@ Today is {{ today }}
 
 <div class="page_contents">
 
+{% if messages %}
+ {% for message in messages %}
+   <div style="margin: auto; display: block; text-align: center;">
+    <strong>
+     {{ message }}
+    </strong>
+ {% endfor %}
+{% endif %}
 
 {% for find in object_list %}
 
@@ -206,8 +214,8 @@ For: {{ find.user }}</a><br><div class="gap"></div>
 
 {% if messages %}
  {% for message in messages %}
- <strong>
  <div style="margin: auto; display: block; text-align: center;">
+ <strong>
   {{ message }}
  </strong>
  </div>
