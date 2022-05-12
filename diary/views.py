@@ -214,16 +214,14 @@ def UpdateEntryView2(request, pk):
             
             all_entries = Entry.objects.all().order_by("date_for")
             messages.success(request, "Entry updated!")
-            response = HttpResponseRedirect(reverse("diary:home"))
-            response.set_cookie("URLY", refero)
+            response = HttpResponseRedirect(reverse("diary:back_before"))
             return response
         else:
-            
             context = {"title": title, "detail": detail, "user": user, "date": date,
                        "entry": the_entry, "users_list": USER_CHOICES2,
                        "selected_user": the_entry.user, "signal": "Date can't be in the past!"}
             response = render(request, template, context)
-            response.set_cookie("URLY", refero)
+            #response.set_cookie("URLY", refero)
             return response
     else:
         response = render(request, template, context)
