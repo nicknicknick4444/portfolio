@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+
+
+<!--<h1>Helloo!</h1>-->
+
+{% block content %}
+
+
+<body>
+
+{% block javascript %}
+<script type="text/javascript">
+function getScore() {
+ document.getElementById("scoreBoard").style.display = "block";
+}
+</script>
+
+<script type="text/javascript">
+function hideScore() {
+ document.getElementById("scoreBoard").style.display = "none";
+}
+</script>
+
+<script>
+function getSave() {
+ document.getElementById("saveScore").style.display = "block";
+ document.getElementById("gameOptions").style.display = "none";
+}
+</script>
+
+<script>
+function hideSave() {
+ document.getElementById("saveScore").style.display = "none";
+}
+</script>
+
+{% endblock %}
+
+<div class="missingPiece">
+{% block title %}9 Squares Game{% endblock title %}<br>
+<a href="{% url "squaresg:index" %}">Home</a> | 
+
+<a href="{% url "squaresg:resetto2" %}">Reset
+
+</div>
+
+
+
+
+
+
+
+<h2>Oh no! Please <a href="{% url "squaresg:resetto2" %}">reset</a></h2>
+
+
+
+
+
+
+
+{% endblock content %}
