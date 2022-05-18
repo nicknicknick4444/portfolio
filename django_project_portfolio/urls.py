@@ -31,5 +31,5 @@ urlpatterns = [
 #     path('admin/', admin.site.urls),
 ]
 
-# handler404 = "squaresg.views.error_404"
+# handler404 = "squaresg.views.handler404"
 # handler500 = "squaresg.views.error_500"

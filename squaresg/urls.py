@@ -27,7 +27,7 @@ urlpatterns = [
 #     path("500/", custom_server_error),
     ]
 
-handler404 = "squaresg.views.handler404"
-handler500 = "squaresg.views.handler500"
+#handler404 = "squaresg.views.handler404"
+#handler500 = "squaresg.views.handler500"
 # handler403 = "squaresg.views.error_403"
 # handler400 = "squaresg.views.error_400"

@@ -2,7 +2,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
-from django.template import loader
+from django.template import loader, RequestContext
 from django.template.response import TemplateResponse
 from django.views import generic
 from django.utils import timezone
@@ -211,14 +211,17 @@ def Scoresy(request, *args, **kwargs):
     return render(request, "squaresg/squares.html", {"form":form})
 
 
-def handler404(request, exception):
-    #data = {}
-    return render(request, "404.html", status=404)
+# # def error404(request, exception):
+# #     #data = {}
+# #     return render(request, "404.html", status=404)
 
-def handler500(request):
-    #data = {}
-    return render(request, "500.html", status=500)
 
+# # def handler500(request):
+# #     #data = {}
+# #     response = render("500.html", {}, context_instance = RequestContext(request))
+# #     #return render(request, "500.html", status=500)
+# #     response.status_code = 500
+# #     return response
 # 
 # def custom_page_not_found(request):
 #     return django.views.defaults.page_not_found(request, None)
