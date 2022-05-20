@@ -1,3 +1,4 @@
+<header>400 Error</header>
 {% extends "base.html" %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
@@ -43,20 +44,10 @@ function hideSave() {
 {% endblock %}
 
 <div class="missingPiece">
-{% block title %}9 Squares Game{% endblock title %}<br>
-<a href="{% url "squaresg:index" %}">Home</a> | 
 
-<a href="{% url "squaresg:resetto2" %}">Reset
+<div style="font-size: 40px;">Oh no!<br><a href="{% url "squaresg:index" %}">Click here to top 400 bisp reset</a></div>
 
 </div>
-
-
-
-
-
-
-
-<h2>Oh no! Please <a href="{% url "squaresg:index" %}">reset</a></h2>
 
 
 
