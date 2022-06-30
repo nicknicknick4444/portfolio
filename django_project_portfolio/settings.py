@@ -27,8 +27,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = env.bool("DEBUG", default=False)
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'spelling.apps.SpellingConfig',
     'plp.apps.PlpConfig',
     'diary.apps.DiaryConfig',
+    'calco.apps.CalcoConfig',
     'accounts.apps.AccountsConfig',
     #3rd Party
     'crispy_forms',
