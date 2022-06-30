@@ -1,0 +1,43 @@
+<header>Calculator 2</header>
+{% extends "base.html" %}
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+{% block content %}
+
+<div>
+<a href="{% url "calco:first" %}?templ8={{ "1" | urlencode }}">Calc 1</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+Calc 2&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="{% url "calco:first" %}?templ8={{ "3" | urlencode }}">Calc 3</a>
+</div>
+
+<h1>Burstee!</h1>
+
+<div class="screen2" style="font-size: 35px;">
+{% if screen == "" %}
+	{{ "0" }}
+{% elif screen == "0" %}
+	{{ "ERROR" }}
+{% elif screen == "*" %}
+	{{ "x" }}
+{% elif screen == "/" %}
+	{{ "÷" }}
+{% else %}
+	{{ screen }}
+{% endif %}
+</div>
+
+{% for button in buttons %}
+ <a href="{% url "calco:one" %}?num_id={{ button | urlencode }}" style="font-size: 25px;">{{ button }}</a>
+  {% if button in ends %}
+   <br>
+  {% endif %}
+ {% endfor %}
+
+{% endblock content %}
+
+</body>

@@ -23,6 +23,7 @@ urlpatterns = [
     path("diary/", include("diary.urls")),
     path("picnic/", include("plp.urls")),
     path("spelling/", include("spelling.urls")),
+    path("calcy/", include("calco.urls")),
     #path("squares/", include("squaresg.urls")),
     path("", include("squaresg.urls")),
     
