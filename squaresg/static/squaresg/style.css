@@ -878,28 +878,29 @@ input[type="radio"] + .label03:after{
 
 .calculator1 {
 	margin: auto; 
-	width: 394px;
+	width: 314px;
 	overflow: auto; 
 }
 
-.screen-itself {
-	width: 372px; 
+.screen-itself1 {
+	width: 290px; 
 	text-align: right; 
 	background-color: #ffffff;
 	margin: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	border: 1px #000000 solid;
 }
 
 .screen1 {
 	font-size: 40px;
 	width: 40px;
-	margin: auto;
+	margin-right: 3px;
 }
 
 .big-button {
 	background-color: #FF5C28; 
-	width: 372px; 
+	width: 292px; 
 	//height: 24px;
 	font-size: 20px; 
 	margin: auto; 
@@ -908,19 +909,19 @@ input[type="radio"] + .label03:after{
 }
 
 #equals-button {
-	width: 278px;
+	width: 218px;
 	background-color: #FF5C28;
 	margin-bottom: 10px;
 }
 
 .button-box {
-	width: 376px;
+	width: 296px;
 	margin: auto;
 }
 
 .buttony {
 	background-color: #0A73D4;
-	width: 90px;
+	width: 70px;
 	height: 24px;
 	margin-left: 2px;
 	margin-right: 2px;
