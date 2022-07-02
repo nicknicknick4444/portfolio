@@ -10,14 +10,14 @@
 {% block content %}
 <body>
 
-<form action="colour">{% csrf_token %}
+<!--<form action="colour">{% csrf_token %}
 <select name="coloury">
 {% for colour in colours_list %}
 	<option value="{{ colour.1 }}">{{ colour.0 }}</option>
 {% endfor %}
 </select>
 <input type="submit" value="Select">
-</form>
+</form>-->
 
 <div class="calc_swap">
 Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -67,6 +67,15 @@ Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
  		</div>
 
 </div>
+
+<div class="formypick"><form action="colour">{% csrf_token %}
+<select name="coloury">
+{% for colour in colours_list %}
+	<option value="{{ colour.1 }}">{{ colour.0 }}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Select">
+</form></div>
 
 
 

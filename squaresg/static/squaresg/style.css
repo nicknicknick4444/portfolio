@@ -933,6 +933,16 @@ input[type="radio"] + .label03:after{
 	text-align: center;
 }
 
+.calc_swap {
+	margin: auto;
+	text-align: center;
+}
+
+.formypick {
+	margin: auto;
+	text-align: center;
+}
+
 /* .calc {
 	background-color: #eeee00; 
 	width: 600px; 
