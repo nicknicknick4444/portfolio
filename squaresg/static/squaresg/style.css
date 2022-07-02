@@ -880,6 +880,7 @@ input[type="radio"] + .label03:after{
 	margin: auto; 
 	width: 314px;
 	overflow: auto; 
+	border: 1px solid #85929E;
 }
 
 .screen-itself1 {
@@ -895,7 +896,7 @@ input[type="radio"] + .label03:after{
 .screen1 {
 	font-size: 40px;
 	width: 40px;
-	margin-right: 3px;
+	padding-right: 3px;
 }
 
 .big-button {
