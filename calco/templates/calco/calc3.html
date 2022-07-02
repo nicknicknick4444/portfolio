@@ -32,7 +32,7 @@ Calc 3
 
 </div>
 {% for button in buttons %}
- <a href="{% url "calco:one" %}?num_id={{ button | urlencode }}" style="font-size: 35px;">{{ button }}</a>
+ <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" style="font-size: 35px;">{{ button }}</a>
  {% if button in ends %}
   <br>
  {% endif %}

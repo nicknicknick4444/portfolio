@@ -8,7 +8,7 @@
 
 
 {% block content %}
-<body style="background-color: {{ picked_colour }};">
+<body>
 
 <form action="colour">{% csrf_token %}
 <select name="coloury">
@@ -19,17 +19,20 @@
 <input type="submit" value="Select">
 </form>
 
-<div>
+<div class="calc_swap">
 Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="{% url "calco:first" %}?templ8={{ "2" | urlencode }}">Calc 2</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a href="{% url "calco:first" %}?templ8={{ "3" | urlencode }}">Calc 3</a></div>
+<a href="{% url "calco:first" %}?templ8={{ "3" | urlencode }}">Calc 3</a>
+</div>
 
-<div class="calculator" style="width: 200px;">
-	<div class=""screen-itself; style="width: 100px; text-align: right;">
-<span class="screen1" style="font-size: 40px; width: 40px;">
+<div class="calculator1" style="background-color: {{ picked_colour }};">
+
+	<div class="screen-itself">
+
+<span class="screen1">
 {% if screen == "" %}
 	{{ "0" }}
-{% elif screen == "0" %}
+{% elif screen == "ERROR" %}
 	{{ "ERROR" }}
 {% elif screen == "*" %}
 	{{ "x" }}
@@ -41,19 +44,31 @@ Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
 	</span>
 </div>
 
- <div class="button-box" style="width: 120px;">
+ 		<div class="button-box">
 {% for button in buttons %}
 
-  {% if button == "CLEAR" or button == "=" %}
-   <a href="{% url "calco:one" %}?num_id={{ button | urlencode }}"><div class="big-button" style="width: 120px; font-size: 20px; float: left;">{{ button }}</div></a>
+  {% if button == "CLEAR" %}
+   <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
+		<div class="big-button">
+			{{ button }}</div></a>
+
+ {% elif button == "=" %}
+  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
+		<div class="buttony" id="equals-button">
+			{{ button }}</div>
+	</a>
 
   {% else %}
 
- <a href="{% url "calco:one" %}?num_id={{ button | urlencode }}"><div class="buttony" style="width: 30px; font-size: 20px; float: left;">{{ button }}</div></a>
+ <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
+<div class="buttony">{{ button }}</div></a>
   {% endif %}
 {% endfor %}
- </div>
+ 		</div>
+
 </div>
+
+
 
 </body>
 {% endblock content %}

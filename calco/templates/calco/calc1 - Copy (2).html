@@ -28,7 +28,7 @@
   {% if screen == "ERROR" and button != "CLEAR" %}
     <a href="" style="font-size: 20px;">{{ button }}</a>
   {% else %}
-    <a href="{% url "calco:one" %}?num_id={{ button | urlencode }}" style="font-size: 20px;">{{ button }}</a>
+    <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" style="font-size: 20px;">{{ button }}</a>
   {% endif %}
 	{% if button in ends %}
 		<br>
