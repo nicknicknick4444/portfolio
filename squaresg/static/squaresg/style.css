@@ -876,6 +876,8 @@ input[type="radio"] + .label03:after{
 
 /* CALCULATORS */
 
+/* Template 1 */
+
 .calculator1 {
 	margin: auto; 
 	width: 314px;
@@ -895,7 +897,7 @@ input[type="radio"] + .label03:after{
 
 .screen1 {
 	font-size: 40px;
-	width: 40px;
+	//width: 40px;
 	padding-right: 3px;
 	font-family: 'VT323', monospace;
 }
@@ -909,7 +911,7 @@ input[type="radio"] + .label03:after{
 	text-align: center;
 	margin-bottom: 3px;
 	padding-top: 5px;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 	font-family: 'Trispace', sans-serif;
 }
 
@@ -973,8 +975,90 @@ input[type="radio"] + .label03:after{
 }
 
 
+/* Template 2 */
 
+.screen-itself2 {
+	width: 290px;
+	text-align: right;
+	background-color: #ffffff;
+	margin: auto;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	border: 1px #ffffff solid;
+	background-color: #000000;
+}
 
+.screen2 {
+	font-size: 45px;
+	color: #0cfa18;
+	padding-right: 3px;
+	font-family: helvetica;
+}
+
+.button-box2 {
+	width: 296px;
+	margin: auto;
+	
+}
+
+.calculator2 {
+	//border: 1px solid #000000;
+	background-color: #000000;
+	overflow: auto;
+	margin: auto;
+	width: 314px;
+}
+
+.big-button2 {
+	background-color: #000000;
+	border: 1px solid #ffffff;
+	border-radius: 3px;
+	width: 292px;
+	font-size: 20px;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 2px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	font-family: helvetica;
+}
+
+.buttony2 {
+	background-color: #000000;
+	border: 1px solid #ffffff;
+	border-radius: 3px;
+	width: 68px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	font-size: 20px;
+	font-family: helvetica;
+	float: left;
+	text-align: center;
+}
+
+#equals-button2 {
+	width: 216px;
+	background-color: #000000;
+	border: 1px solid #ffffff;
+	border-radius: 3px; 
+	margin-bottom: 10px;
+}
+
+#the_buttons2:visited {
+	color: #ffffff;
+}
+
+#the_buttons2 {
+	color: #ffffff;
+}
+
+#the_buttons2:hover {
+	color: #0cfa18;
+}
 
 
 
@@ -1011,7 +1095,7 @@ input[type="radio"] + .label03:after{
 	font-size: 30px;
 }
 
-.spu{
+.spu {
 	#position: absolute;
 	#top: 50%;
 	#-ms-transform: translateY(-50%);
