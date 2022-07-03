@@ -3,11 +3,24 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .calc_time import main as calculation
 from .models import Colour
-from .service import swappy, cooko, calc_prep, num_disp, key_process, first, colour_pick
+from .service import swappy, cooko, calc_prep, num_disp
 
 
 # Create your views here.
 
+def key_process(request):
+    response = HttpResponseRedirect(reverse("calco:calc1"))
+    num = request.GET.get("num_id")
+    if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
+        print(num)
+        cooky = cooko(request, num)
+        response.set_cookie("sum_list", cooky)
+        return response
+    elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
+        response.set_cookie("sum_list", "ERROR")
+        return response
+    else:
+        return response
 
 def calc1(request):
 #     if not "design" in request.COOKIES:
@@ -121,4 +134,38 @@ def calc1(request):
     response.set_cookie("sum_list", cooky)
     print("BIA", total)
     return response
+    
+def first(request):
+    if "design" in request.COOKIES:
+        templ8 = request.COOKIES["design"]
+    templ8 = request.GET.get("templ8", "1")    
+    if "picked_colour" in request.COOKIES:
+        picked = request.COOKIES["picked_colour"]
+    else:
+        picked = "#D6DBDF"
+    print("GRUZE", templ8)
+    response = HttpResponseRedirect(reverse("calco:calc1"))
+    response.set_cookie("design", templ8)
+    response.set_cookie("picked_colour", picked)
+    return response
 
+def colour_pick(request):
+    pick = request.GET.get("coloury")
+    if "picked_colour" in request.COOKIES:
+        if pick == "":
+            colour = request.COOKIES["picked_colour"]
+            print("STAYS", colour)
+        elif pick != "":
+            colour = pick
+            print("PICKED!", colour)
+        else:
+            colour = "#D6DBDF"
+            print("JANT!", colour)
+    else:
+        if pick:
+            colour = pick
+        else:
+            colour = "#D6DBDF"
+    response = HttpResponseRedirect(reverse("calco:calc1"))
+    response.set_cookie("picked_colour", colour)
+    return response
