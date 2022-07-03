@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .calc_time import main as calculation
 from .models import Colour
 from .service import swappy, cooko, calc_prep, num_disp
 
@@ -11,14 +10,24 @@ from .service import swappy, cooko, calc_prep, num_disp
 def key_process(request):
     response = HttpResponseRedirect(reverse("calco:calc1"))
     num = request.GET.get("num_id")
-    if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
-        print(num)
-        cooky = cooko(request, num)
-        response.set_cookie("sum_list", cooky)
-        return response
-    elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
-        response.set_cookie("sum_list", "ERROR")
-        return response
+    if request.COOKIES["design"] == "1" or request.COOKIES["design"] == "":
+        if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
+            print(num)
+            cooky = cooko(request, num)
+            response.set_cookie("sum_list", cooky)
+            return response
+        elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
+            response.set_cookie("sum_list", "ERROR")
+            return response
+    elif request.COOKIES["design"] == "2":
+        if len(request.COOKIES["sum_list"]) <= 10 or num == "CLEAR":
+            print(num)
+            cooky = cooko(request, num)
+            response.set_cookie("sum_list", cooky)
+            return response
+        elif len(request.COOKIES["sum_list"]) > 10 and num != "CLEAR":
+            response.set_cookie("sum_list", "ERROR")
+            return response
     else:
         return response
 
