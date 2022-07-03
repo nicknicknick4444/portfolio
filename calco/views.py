@@ -212,12 +212,18 @@ def calc1(request):
     return response
 
 def key_process(request):
-    num = request.GET.get("num_id")
-    print(num)
-    cooky = cooko(request, num)
     response = HttpResponseRedirect(reverse("calco:calc1"))
-    response.set_cookie("sum_list", cooky)
-    return response
+    num = request.GET.get("num_id")
+    if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
+        print(num)
+        cooky = cooko(request, num)
+        response.set_cookie("sum_list", cooky)
+        return response
+    elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
+        response.set_cookie("sum_list", "ERROR")
+        return response
+    else:
+        return response
 
 def first(request):
     if "design" in request.COOKIES:
@@ -241,16 +247,22 @@ def banty(request):
     return HttpResponseRedirect(reverse("calco:calc1"))
 
 def colour_pick(request):
-#     if request.method == "POST":
-#         if form.is_valid():
-    colour = request.GET.get("coloury")
-    if colour:
-        colour = colour
-        print("JANT", colour)
-#     else:
-#         colour = "#ffffff"
-#     colour = request.POST.get("coloury", "JOFF")
-#     print("pranty!", colour)
+    pick = request.GET.get("coloury")
+    if "picked_colour" in request.COOKIES:
+        if pick == "":
+            colour = request.COOKIES["picked_colour"]
+            print("STAYS", colour)
+        elif pick != "":
+            colour = pick
+            print("PICKED!", colour)
+        else:
+            colour = "#D6DBDF"
+            print("JANT!", colour)
+    else:
+        if pick:
+            colour = pick
+        else:
+            colour = "#D6DBDF"
     response = HttpResponseRedirect(reverse("calco:calc1"))
     response.set_cookie("picked_colour", colour)
     return response

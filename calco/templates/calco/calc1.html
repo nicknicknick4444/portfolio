@@ -6,23 +6,13 @@
 </head>
 
 
-
 {% block content %}
 <body>
 
-<!--<form action="colour">{% csrf_token %}
-<select name="coloury">
-{% for colour in colours_list %}
-	<option value="{{ colour.1 }}">{{ colour.0 }}</option>
-{% endfor %}
-</select>
-<input type="submit" value="Select">
-</form>-->
-
 <div class="calc_swap">
 Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
-<a href="{% url "calco:first" %}?templ8={{ "2" | urlencode }}">Calc 2</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a href="{% url "calco:first" %}?templ8={{ "3" | urlencode }}">Calc 3</a>
+<a href="{% url "calco:first" %}?templ8={{ "2" | urlencode }}" id="swap_links">Calc 2</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="{% url "calco:first" %}?templ8={{ "3" | urlencode }}" id="swap_links">Calc 3</a>
 </div>
 
 <div class="calculator1" style="background-color: {{ picked_colour }};">
@@ -48,20 +38,20 @@ Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
 {% for button in buttons %}
 
   {% if button == "CLEAR" %}
-   <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
+   <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons">
 		<div class="big-button">
 			{{ button }}</div></a>
 
  {% elif button == "=" %}
-  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
+  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons">
 		<div class="buttony" id="equals-button">
 			{{ button }}</div>
 	</a>
 
   {% else %}
 
- <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}">
-<div class="buttony">{{ button }}</div></a>
+ <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons">
+<div class="buttony" {% if button == "(" or button == ")" %} style="padding-top: 3px; padding-bottom: 5px;" {% else %}{% endif %}>{{ button }}</div></a>
   {% endif %}
 {% endfor %}
  		</div>
@@ -70,6 +60,7 @@ Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
 
 <div class="formypick"><form action="colour">{% csrf_token %}
 <select name="coloury">
+	<option value="{{ colour.1 }}">--Select Colour--</option>
 {% for colour in colours_list %}
 	<option value="{{ colour.1 }}">{{ colour.0 }}</option>
 {% endfor %}
