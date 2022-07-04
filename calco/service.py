@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .calc_time import main as calculation
 from .models import Colour
 
 def swappy(i):
@@ -86,3 +85,8 @@ def num_disp(sum_list):
     else:
         return ""
 
+def cookie_default(name, rc, default):
+    if name in rc:
+        return rc[name]
+    else:
+        return default

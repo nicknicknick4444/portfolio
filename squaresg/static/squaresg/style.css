@@ -880,6 +880,7 @@ input[type="radio"] + .label03:after{
 
 .calculator1 {
 	margin: auto; 
+	margin-top: 5px;
 	width: 314px;
 	overflow: auto; 
 	border: 1px solid #85929E;
@@ -991,8 +992,8 @@ input[type="radio"] + .label03:after{
 .screen2 {
 	font-size: 45px;
 	color: #0cfa18;
-	padding-right: 3px;
-	font-family: helvetica;
+	padding-right: 1px;
+	font-family: VT323;
 }
 
 .button-box2 {
@@ -1006,6 +1007,7 @@ input[type="radio"] + .label03:after{
 	background-color: #000000;
 	overflow: auto;
 	margin: auto;
+	margin-top: 5px;
 	width: 314px;
 }
 
@@ -1013,7 +1015,7 @@ input[type="radio"] + .label03:after{
 	background-color: #000000;
 	border: 1px solid #ffffff;
 	border-radius: 3px;
-	width: 292px;
+	width: 290px;
 	font-size: 20px;
 	margin: auto;
 	text-align: center;
@@ -1060,6 +1062,17 @@ input[type="radio"] + .label03:after{
 	color: #0cfa18;
 }
 
+.big-button2:hover {
+	border: 1px solid #0cfa18;
+}
+
+.buttony2:hover  {
+	border: 1px solid #0cfa18;
+}
+
+#equals-button2:hover {
+	border: 1px solid #0cfa18;
+}
 
 
 
