@@ -899,7 +899,7 @@ input[type="radio"] + .label03:after{
 .screen1 {
 	font-size: 40px;
 	//width: 40px;
-	padding-right: 3px;
+	padding-right: 1px;
 	font-family: 'VT323', monospace;
 }
 
@@ -1074,6 +1074,88 @@ input[type="radio"] + .label03:after{
 	border: 1px solid #0cfa18;
 }
 
+/* Template 3 */
+
+.calculator3 {
+	width: 314px;
+	background-image: linear-gradient(#07D550, #004AF7);
+	margin: auto;
+	overflow: auto;
+}
+
+.screen-itself3 {
+	border: 1px solid #000000;
+	width: 290px;
+	text-align: right;
+	margin:auto;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	background-color: #e0e0e0;
+}
+
+.button-box3 {
+	width: 296px;
+	margin: auto;
+}
+
+.big-button3 {
+	border: 1px solid #ffffff;
+	width: 290px;
+	font-size: 20px;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 10px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-family: helvetica;
+}
+
+#equals-button3 {
+	width: 216px;
+	margin-bottom: 10px;
+}
+
+.buttony3-under {
+	background-color: #7803A0;
+	color: none;
+	opacity: 0.2;
+}
+
+.buttony3 {
+	border: 1px solid #ffffff;
+	width: 68px;
+	margin-top: 2px;
+	margin-bottom: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-size: 20px;
+	font-family: helvetica;
+	float: left;
+	text-align: center;
+}
+
+.buttony3:hover {
+	background-color: #ffffff;
+	color: #23B2FF;
+	opacity: 0.9;
+}
+
+#the_buttons3:visited {
+	color: #ffffff;
+}
+
+#the_buttons3 {
+	color: #ffffff;
+	
+}
+
+.big-button3:hover {
+	background-color: #ffffff;
+	color: #23B2FF;
+	opacity: 0.9;
+}
 
 
 

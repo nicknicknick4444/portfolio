@@ -5,19 +5,18 @@
 
 </head>
 
+{% block content %}
 <body>
 
-{% block content %}
-
-<div>
+<div class="calc_swap">
 <a href="{% url "calco:first" %}?templ8={{ "1" | urlencode }}">Calc 1</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="{% url "calco:first" %}?templ8={{  "2" | urlencode}}">Calc 2</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 Calc 3
 </div>
 
-<h1>Local Hero Soundtrack Album</h1>
-
-<div class="screen3" style="font-size: 40px;">
+<div class="calculator3">
+	<div class="screen-itself3">
+		<div class="screen3" style="font-size: 40px;">
 {% if screen == "" %}
 	{{ "0" }}
 {% elif screen == "0" %}
@@ -30,13 +29,35 @@ Calc 3
 	{{ screen }}
 {% endif %}
 
-</div>
+		</div>
+	</div>
+
+ <div class="button-box3">
 {% for button in buttons %}
- <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" style="font-size: 35px;">{{ button }}</a>
- {% if button in ends %}
-  <br>
+
+ {% if button == "CLEAR" %}
+	<a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons3">
+	<div class="big-button3">
+	{{ button }}</div></a>
+ {% elif button == "=" %}
+  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons3">
+   <div class="buttony3" id="equals-button3">
+    {{ button }}
+   </div></div></a>
+
+{% else %}
+ <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons3">
+  <div class="buttony3" {% if button == "(" or button == ")" %} style="padding-top: 3px; padding-bottom: 5px;" {% else %}{% endif %}>   
+    {{ button }}
+  </div></a>
+
  {% endif %}
+
 {% endfor %}
+ </div>
+</div>
+</body>
+
 {% endblock content %}
 
-</body>
+

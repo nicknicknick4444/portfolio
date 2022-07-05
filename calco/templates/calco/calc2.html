@@ -49,7 +49,8 @@ Calc 2&nbsp;&nbsp;|&nbsp;&nbsp;
 	{{ button }}</div></a>
 {% else %}
  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons2">
-	<div class = "buttony2" {% if button == "(" or button == ")" %} style="padding-top: 11px; padding-bottom: 13px;" {% else %}{% endif %}>{{ button }}
+	<div class = "buttony2" {% if button == "(" or button == ")" %} style="padding-top: 11px; padding-bottom: 13px;" {% else %}{% endif %}>
+       {{ button }}
 	</div></a>
 
 

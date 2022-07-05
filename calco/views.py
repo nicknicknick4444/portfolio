@@ -28,6 +28,15 @@ def key_process(request):
         elif len(request.COOKIES["sum_list"]) > 15 and num != "CLEAR":
             response.set_cookie("sum_list", "NO SPACE")
             return response
+    elif request.COOKIES["design"] == "3":
+        if len(request.COOKIES["sum_list"]) <= 5 or num == "CLEAR":
+            print(num)
+            cooky = cooko(request, num)
+            response.set_cookie("sum_list", cooky)
+            return response
+        elif len(request.COOKIES["sum_list"]) > 5 and num != "CLEAR":
+            response.set_cookie("sum_list", "NO SPACE")
+            return response
     else:
         return response
     
