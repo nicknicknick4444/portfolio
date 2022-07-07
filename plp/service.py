@@ -74,7 +74,7 @@ def make_lists():
 def cleanup_cookies(reqc, resp):
     mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", \
                 "goesy", "namey", "boxo", "bisp", "chosen", "risp", "filtery", "query_s", \
-                "query_u", "query_d"]
+                "query_u", "query_d", "design", "picked_colour", "sum_list"]
     for i in mainlist:
         if i in reqc.COOKIES:
             resp.delete_cookie(i)

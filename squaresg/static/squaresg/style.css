@@ -899,7 +899,7 @@ input[type="radio"] + .label03:after{
 .screen1 {
 	font-size: 40px;
 	//width: 40px;
-	padding-right: 1px;
+	padding-right: 0.25%;
 	font-family: 'VT323', monospace;
 }
 
@@ -990,9 +990,9 @@ input[type="radio"] + .label03:after{
 }
 
 .screen2 {
-	font-size: 45px;
+	font-size: 40px;
 	color: #0cfa18;
-	padding-right: 1px;
+	padding-right: 0.3%;
 	font-family: VT323;
 }
 
@@ -1080,6 +1080,7 @@ input[type="radio"] + .label03:after{
 	width: 314px;
 	background-image: linear-gradient(#07D550, #004AF7);
 	margin: auto;
+	margin-top: 5px;
 	overflow: auto;
 }
 
@@ -1091,6 +1092,11 @@ input[type="radio"] + .label03:after{
 	margin-top: 12px;
 	margin-bottom: 12px;
 	background-color: #e0e0e0;
+}
+
+.screen3 {
+	font-family: VT323;
+	padding-right: 0.2%;
 }
 
 .button-box3 {
@@ -1105,14 +1111,15 @@ input[type="radio"] + .label03:after{
 	margin: auto;
 	text-align: center;
 	margin-bottom: 10px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	font-family: helvetica;
+	padding-top: 3.5px;
+	padding-bottom: 4.5px;
+	font-family: 'IBM Plex Sans', sans-serif;
 }
 
 #equals-button3 {
 	width: 216px;
 	margin-bottom: 10px;
+	font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .buttony3-under {
@@ -1128,10 +1135,10 @@ input[type="radio"] + .label03:after{
 	margin-bottom: 10px;
 	margin-left: 2px;
 	margin-right: 2px;
-	padding-top: 4px;
-	padding-bottom: 4px;
+	padding-top: 3px;
+	padding-bottom: 5px;
 	font-size: 20px;
-	font-family: helvetica;
+	font-family: 'IBM Plex Sans', sans-serif;
 	float: left;
 	text-align: center;
 }

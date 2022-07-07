@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Colour
-from .service import swappy, cooko, calc_prep, num_disp, cookie_default
+from .service import swappy, cooko, calc_prep, num_disp, cookie_default, cookie_eater
 
 
 # Create your views here.
@@ -10,35 +10,39 @@ from .service import swappy, cooko, calc_prep, num_disp, cookie_default
 def key_process(request):
     response = HttpResponseRedirect(reverse("calco:calc1"))
     num = request.GET.get("num_id")
-    if request.COOKIES["design"] == "1" or request.COOKIES["design"] == "" or "design" not in request.COOKIES:
+    if request.COOKIES["sum_list"] == "MEMORY ERROR" and num != "CLEAR":
+        return response
+    else:
+        #if request.COOKIES["design"] == "" or "design" not in request.COOKIES:
         if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
             print(num)
             cooky = cooko(request, num)
             response.set_cookie("sum_list", cooky)
+            
             return response
         elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
-            response.set_cookie("sum_list", "NO SPACE")
+            response.set_cookie("sum_list", "MEMORY ERROR")
             return response
-    elif request.COOKIES["design"] == "2":
-        if len(request.COOKIES["sum_list"]) <= 15 or num == "CLEAR":
-            print(num)
-            cooky = cooko(request, num)
-            response.set_cookie("sum_list", cooky)
+#         elif request.COOKIES["design"] == "2":
+#             if len(request.COOKIES["sum_list"]) <= 15 or num == "CLEAR":
+#                 print(num)
+#                 cooky = cooko(request, num)
+#                 response.set_cookie("sum_list", cooky)
+#                 return response
+#             elif len(request.COOKIES["sum_list"]) > 15 and num != "CLEAR":
+#                 response.set_cookie("sum_list", "MEMORY ERROR")
+#                 return response
+#         elif request.COOKIES["design"] == "3":
+#             if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
+#                 print(num)
+#                 cooky = cooko(request, num)
+#                 response.set_cookie("sum_list", cooky)
+#                 return response
+#             elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
+#                 response.set_cookie("sum_list", "MEMORY ERROR")
+#                 return response
+        else:
             return response
-        elif len(request.COOKIES["sum_list"]) > 15 and num != "CLEAR":
-            response.set_cookie("sum_list", "NO SPACE")
-            return response
-    elif request.COOKIES["design"] == "3":
-        if len(request.COOKIES["sum_list"]) <= 5 or num == "CLEAR":
-            print(num)
-            cooky = cooko(request, num)
-            response.set_cookie("sum_list", cooky)
-            return response
-        elif len(request.COOKIES["sum_list"]) > 5 and num != "CLEAR":
-            response.set_cookie("sum_list", "NO SPACE")
-            return response
-    else:
-        return response
     
 def calc1(request):    
     templ8 = cookie_default("design", request.COOKIES, "1")
@@ -51,11 +55,11 @@ def calc1(request):
     buttons = ["CLEAR", "1", "2", "3", "+", "4", "5", "6", "-", "7", "8", "9", "x", "0", \
                "(", ")", "÷", ".", "="]
 #     ends = ["+","-","x","÷", "CLEAR"]
-    ends = ["CLEAR", "÷"]
+    #ends = ["CLEAR", "÷"]
     signs = ["+", "-", "*", "/", "(", ")"]
     colours = Colour.objects.values_list("colour_name", "colour_hex")
     colours_list = [i for i in colours]
-
+    
     if "sum_list" in request.COOKIES:
         final_list = request.COOKIES["sum_list"]
 
@@ -67,11 +71,12 @@ def calc1(request):
             final_list = ""
             total = ""
             cooky = total
-            response = render(request, template, {"buttons": buttons, "ends": ends, "screen": total, \
+            response = render(request, template, {"buttons": buttons, "screen": total, \
                                                  "colours_list": colours_list, "picked_colour": picked_colour})
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            cookie_eater(request.COOKIES, response)
             return response
         elif len(final_list) > 0 and final_list[-1] == "=":
             print("YAAAAAAARGH!!!!")
@@ -96,12 +101,12 @@ def calc1(request):
         
         
             cooky = total
-            response = render(request, template, {"buttons": buttons, \
-                                                  "ends": ends, "screen": total, \
+            response = render(request, template, {"buttons": buttons, "screen": total, \
                                                   "colours_list": colours_list, "picked_colour": picked_colour})
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            cookie_eater(request.COOKIES, response)
             return response
         elif len(final_list) > 1 and final_list[-1] == "C":
             final_list = ""
@@ -119,13 +124,13 @@ def calc1(request):
             print("DIRE STRAITS", total)
             
             cooky = total
-            response = render(request, template, {"buttons": buttons, \
-                                                  "ends": ends, "screen": total, \
+            response = render(request, template, {"buttons": buttons, "screen": total, \
                                                   "colours_list": colours_list, "picked_colour": picked_colour})
             
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            cookie_eater(request.COOKIES, response)
             return response
         
         elif len(final_list) > 0:
@@ -145,13 +150,13 @@ def calc1(request):
     else:
         total = ""
     
-    response = render(request, template, {"buttons": buttons, "ends": ends, \
-                                          "screen": total, "colours_list": colours_list, \
-                                          "picked_colour": picked_colour})
+    response = render(request, template, {"buttons": buttons, "screen": total, \
+                                          "colours_list": colours_list, "picked_colour": picked_colour})
     cooky = cooko(request, "")
     response.set_cookie("sum_list", cooky)
     response.set_cookie("design", templ8)
     response.set_cookie("picked_colour", picked_colour)
+    cookie_eater(request.COOKIES, response)
     print("BIA", total)
     return response
     

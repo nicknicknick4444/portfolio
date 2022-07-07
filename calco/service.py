@@ -90,3 +90,10 @@ def cookie_default(name, rc, default):
         return rc[name]
     else:
         return default
+
+def cookie_eater(reqc, resp):
+    cookie_list = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", "sesho", "cou", "startytime", \
+              "finishy_time", "excepor", "resety", "squores", "goesy", "query_s", "query_u", "query_d"]
+    for i in cookie_list:
+        if i in reqc:
+            resp.delete_cookie(i)
