@@ -1,0 +1,10 @@
+.venvy2/
+__pycache__/
+db.sqlite3
+.env
+PEAS.txt
+Twitter_Deets.txt
+Venv_Setup.txt
+logico/tweepy_practice2.py
+logico/tweepy_practiceGITHUB.py
+logico/tweepy_practice.py
