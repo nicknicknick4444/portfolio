@@ -90,6 +90,16 @@ def calc1(request):
 
             if total[-2:] == ".0":
                 total = str(total[:-2])
+            elif "." in total and total[-2:] != ".0" and len(total) > 14:
+                five = total[:5]
+                if "." in five:
+                    print("PIES OF PEACE")
+                    print(type(total))
+                    total = float(total)
+                    total = "{:.5f}".format(total)
+                else:
+                    total = total
+                    #total = str(total)
 #             if total[-1] == "0":
 #                 total = ""
 #         elif len(final_list) >= 3 and final_list[-2:] == "+0":
