@@ -96,7 +96,7 @@ def calc1(request):
                     print("PIES OF PEACE")
                     print(type(total))
                     total = float(total)
-                    total = "{:.5f}".format(total)
+                    total = "{:.7f}".format(total)
                 else:
                     total = total
                     #total = str(total)
