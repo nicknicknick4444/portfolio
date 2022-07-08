@@ -23,24 +23,6 @@ def key_process(request):
         elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
             response.set_cookie("sum_list", "MEMORY ERROR")
             return response
-#         elif request.COOKIES["design"] == "2":
-#             if len(request.COOKIES["sum_list"]) <= 15 or num == "CLEAR":
-#                 print(num)
-#                 cooky = cooko(request, num)
-#                 response.set_cookie("sum_list", cooky)
-#                 return response
-#             elif len(request.COOKIES["sum_list"]) > 15 and num != "CLEAR":
-#                 response.set_cookie("sum_list", "MEMORY ERROR")
-#                 return response
-#         elif request.COOKIES["design"] == "3":
-#             if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
-#                 print(num)
-#                 cooky = cooko(request, num)
-#                 response.set_cookie("sum_list", cooky)
-#                 return response
-#             elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
-#                 response.set_cookie("sum_list", "MEMORY ERROR")
-#                 return response
         else:
             return response
     
@@ -50,21 +32,14 @@ def calc1(request):
     
     print("R&j / r&d", templ8)
     template = "calco/calc{}.html".format(templ8)
-#     buttons = ["CLEAR", "1", "2", "3", "+", "4", "5", "6", "-", "7", "8",\
-#                "9", "x", "0", ".", "÷","(", ")", "="]
     buttons = ["CLEAR", "1", "2", "3", "+", "4", "5", "6", "-", "7", "8", "9", "x", "0", \
                "(", ")", "÷", ".", "="]
-#     ends = ["+","-","x","÷", "CLEAR"]
-    #ends = ["CLEAR", "÷"]
     signs = ["+", "-", "*", "/", "(", ")"]
     colours = Colour.objects.values_list("colour_name", "colour_hex")
     colours_list = [i for i in colours]
     
     if "sum_list" in request.COOKIES:
         final_list = request.COOKIES["sum_list"]
-
-        #total = "0"
-        #final_list = sum_list
         
         if len(final_list) > 0 and final_list[-1] == "C":
             print("TUBES", final_list[-1])
@@ -99,16 +74,6 @@ def calc1(request):
                     total = "{:.7f}".format(total)
                 else:
                     total = total
-                    #total = str(total)
-#             if total[-1] == "0":
-#                 total = ""
-#         elif len(final_list) >= 3 and final_list[-2:] == "+0":
-#             print("POGGY!")
-#             final_list = ast.literal_eval(final_list[:-2])
-#         elif len(final_list) >= 3 and final_list[-2:] == "-0":
-#             final_list = ast.lieral_evalfinal_list[:-2]
-#             print("KWOGGY")
-        
         
             cooky = total
             response = render(request, template, {"buttons": buttons, "screen": total, \
@@ -124,9 +89,6 @@ def calc1(request):
         elif len(final_list) == 1 and final_list[0] == "C":
             final_list = ""
             total = ""
-#         elif "C" in final_list:
-#             final_list = ""
-#             total = ""
         elif len(final_list) == 6 and final_list[:-1] == "ERROR":
             final_list = final_list[-1]
             total = final_list

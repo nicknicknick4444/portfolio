@@ -48,9 +48,9 @@ function hideSave() {
 
 
 
+{% with A=request.COOKIES %}
+{% if "squores" in A and "cou" in A and "goesy" in A and "excepor" in A and "starty_time" in A and "finishy_time" in A and "sesho" in A and "resety" in A %}
 
-
-{% if "sesho" in request.COOKIES %}
 
 
 <div class="missingPiece">
@@ -208,7 +208,7 @@ function hideSave() {
  </div>-->
 
 {% endif %}
-
+{% endwith %}
 
 
 
