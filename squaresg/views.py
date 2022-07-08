@@ -81,11 +81,12 @@ def SquaresView2(request):
     template = "squaresg/squares.html"
     form = ScoreForm
     scores = Scores.objects.all().order_by("score","all_seconds","attempts").values()[:10]
-    if "squores" in request.COOKIES and "excepor" in request.COOKIES and "cou" in request.COOKIES:
+    if "squores" in request.COOKIES and "excepor" in request.COOKIES and "cou" in request.COOKIES and "goesy" in request.COOKIES:
         numboure = ast.literal_eval(request.COOKIES["squores"])
         excepe = int(request.COOKIES["excepor"])
         cou = request.COOKIES["cou"]
-        context = {"cou":cou, "exceppo":excepe, "form":form, "scores":scores, "nine_squares_list": numboure}
+        turny = request.COOKIES["goesy"]
+        context = {"cou":cou, "exceppo":excepe, "form":form, "scores":scores, "nine_squares_list": numboure, "goes": turny}
     else:
         context = {"scores":scores}
     return render(request, template, context)
