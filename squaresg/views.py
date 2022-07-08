@@ -104,18 +104,18 @@ def RandomSquaresView(request):
         if e not in request.COOKIES:
             print("Won't bend!")
             return HttpResponseRedirect(reverse("squaresg:squares"))
-    if "cou" not in request.COOKIES:
-        return HttpResponseRedirect(reverse("squaresg:squares"))
+# # # #     if "cou" not in request.COOKIES:
+# # # #         return HttpResponseRedirect(reverse("squaresg:squares"))
     
-    if "squores" in request.COOKIES:
-        numbourey = ast.literal_eval(request.COOKIES["squores"])
-    else:
-        return HttpResponseRedirect(reverse("squaresg:squares"))
+# # # #     if "squores" in request.COOKIES:
+    numbourey = ast.literal_eval(request.COOKIES["squores"])
+# # # #     else:
+# # # #         return HttpResponseRedirect(reverse("squaresg:squares"))
     
-    if "excepor" not in request.COOKIES:
-        excepe = ""
-    else:
-        excepe = int(request.COOKIES["excepor"])
+# # # #     if "excepor" not in request.COOKIES:
+# # # #         excepe = ""
+# # # #     else:
+    excepe = int(request.COOKIES["excepor"])
     turny = int(request.COOKIES["goesy"])
     if "cou" in request.COOKIES and request.COOKIES["cou"] == "WIN":
         turny = turny
