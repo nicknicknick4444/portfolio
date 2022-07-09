@@ -102,7 +102,6 @@ def RandomSquaresView(request):
                "finishy_time", "sesho", "resety"]
     for e in essence:
         if e not in request.COOKIES:
-            print("Won't bend!")
             return HttpResponseRedirect(reverse("squaresg:squares"))
 # # # #     if "cou" not in request.COOKIES:
 # # # #         return HttpResponseRedirect(reverse("squaresg:squares"))
