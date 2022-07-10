@@ -887,7 +887,9 @@ input[type="radio"] + .label03:after{
 }
 
 .screen-itself1 {
-	width: 290px; 
+	width: 290px;
+	height: 42px;
+	line-height: 42px;
 	text-align: right; 
 	background-color: #ffffff;
 	margin: auto;
@@ -897,9 +899,9 @@ input[type="radio"] + .label03:after{
 }
 
 .screen1 {
-	font-size: 40px;
+	//font-size: 40px;
 	//width: 40px;
-	padding-right: 0.25%;
+	padding-right: 0.2%;
 	font-family: 'VT323', monospace;
 }
 
@@ -980,6 +982,8 @@ input[type="radio"] + .label03:after{
 
 .screen-itself2 {
 	width: 290px;
+	height: 42px;
+	line-height: 42px;
 	text-align: right;
 	background-color: #ffffff;
 	margin: auto;
@@ -990,9 +994,9 @@ input[type="radio"] + .label03:after{
 }
 
 .screen2 {
-	font-size: 40px;
+	//font-size: 40px;
 	color: #0cfa18;
-	padding-right: 0.3%;
+	padding-right: 0.2%;
 	font-family: VT323;
 }
 
@@ -1087,6 +1091,8 @@ input[type="radio"] + .label03:after{
 .screen-itself3 {
 	border: 1px solid #000000;
 	width: 290px;
+	height: 42px;
+	line-height: 42px;
 	text-align: right;
 	margin:auto;
 	margin-top: 12px;

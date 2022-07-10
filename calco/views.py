@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Colour
-from .service import swappy, cooko, calc_prep, num_disp, cookie_default, cookie_eater
+from .service import swappy, cooko, calc_prep, num_disp, cookie_default, \
+     cookie_eater, font_sizer
 
 
 # Create your views here.
@@ -14,18 +15,18 @@ def key_process(request):
         return response
     else:
         #if request.COOKIES["design"] == "" or "design" not in request.COOKIES:
-        if len(request.COOKIES["sum_list"]) <= 17 or num == "CLEAR":
+        if len(request.COOKIES["sum_list"]) <= 29 or num == "CLEAR":
             print(num)
             cooky = cooko(request, num)
             response.set_cookie("sum_list", cooky)
             
             return response
-        elif len(request.COOKIES["sum_list"]) > 17 and num != "CLEAR":
+        elif len(request.COOKIES["sum_list"]) > 29 and num != "CLEAR":
             response.set_cookie("sum_list", "MEMORY ERROR")
             return response
         else:
             return response
-    
+
 def calc1(request):    
     templ8 = cookie_default("design", request.COOKIES, "1")
     picked_colour = cookie_default("picked_colour", request.COOKIES, "#D6DBDF")
@@ -46,13 +47,19 @@ def calc1(request):
             final_list = ""
             total = ""
             cooky = total
+            
+            # NEW CODE
+            sizey = font_sizer(total)
+            
             response = render(request, template, {"buttons": buttons, "screen": total, \
-                                                 "colours_list": colours_list, "picked_colour": picked_colour})
+                                                 "colours_list": colours_list, "picked_colour": picked_colour, \
+                                                  "sizey": sizey})
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
             cookie_eater(request.COOKIES, response)
             return response
+        
         elif len(final_list) > 0 and final_list[-1] == "=":
             print("YAAAAAAARGH!!!!")
             try:
@@ -65,7 +72,7 @@ def calc1(request):
 
             if total[-2:] == ".0":
                 total = str(total[:-2])
-            elif "." in total and total[-2:] != ".0" and len(total) > 14:
+            elif "." in total and total[-2:] != ".0" and len(total) > 20:
                 five = total[:5]
                 if "." in five:
                     print("PIES OF PEACE")
@@ -76,13 +83,19 @@ def calc1(request):
                     total = total
         
             cooky = total
+            
+            # NEW CODE
+            sizey = font_sizer(total)
+            
             response = render(request, template, {"buttons": buttons, "screen": total, \
-                                                  "colours_list": colours_list, "picked_colour": picked_colour})
+                                                  "colours_list": colours_list, "picked_colour": picked_colour, \
+                                                  "sizey": sizey})
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
             cookie_eater(request.COOKIES, response)
             return response
+        
         elif len(final_list) > 1 and final_list[-1] == "C":
             final_list = ""
             total = ""
@@ -90,14 +103,19 @@ def calc1(request):
             final_list = ""
             total = ""
         elif len(final_list) == 6 and final_list[:-1] == "ERROR":
-            final_list = final_list[-1]
-            total = final_list
+            total = final_list[-1]
+            #total = final_list
             
             print("DIRE STRAITS", total)
             
             cooky = total
+            
+            # NEW CODE
+            sizey = font_sizer(total)
+            
             response = render(request, template, {"buttons": buttons, "screen": total, \
-                                                  "colours_list": colours_list, "picked_colour": picked_colour})
+                                                  "colours_list": colours_list, "picked_colour": picked_colour, \
+                                                  "sizey": sizey})
             
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
@@ -121,9 +139,12 @@ def calc1(request):
             total = final_list
     else:
         total = ""
+    # NEW CODE
+    sizey = font_sizer(total)
     
     response = render(request, template, {"buttons": buttons, "screen": total, \
-                                          "colours_list": colours_list, "picked_colour": picked_colour})
+                                          "colours_list": colours_list, "picked_colour": picked_colour, \
+                                          "sizey": sizey})
     cooky = cooko(request, "")
     response.set_cookie("sum_list", cooky)
     response.set_cookie("design", templ8)

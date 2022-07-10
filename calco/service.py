@@ -97,3 +97,9 @@ def cookie_eater(reqc, resp):
     for i in cookie_list:
         if i in reqc:
             resp.delete_cookie(i)
+
+def font_sizer(total):
+    if len(total) < 19:
+        return "40px"
+    else:
+        return "24px"
