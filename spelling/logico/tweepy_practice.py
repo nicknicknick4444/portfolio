@@ -8,6 +8,7 @@ from ..models import Admonish, TweetLists
 
 
 client = tweepy.Client(
+<<<<<<< HEAD
 #consumer_key = "PNeD02vW6jiOxiUR2dTtpt7ml",
 consumer_key = consumer_key2(),
 #consumer_secret = "pVQx2PLw860o4MgF6VrZvFeF7gwIkGQaj4HHqGe1c5Oct2feU0",
@@ -16,6 +17,12 @@ consumer_secret = consumer_secret2(),
 access_token = access_token2(),
 #access_token_secret = "nLEOtpGIvamMxML0xe68OwnrxxIA9MsGxLS39UrVKBB2p",
 access_token_secret = access_token_secret2(),
+=======
+consumer_key = SECRET,
+consumer_secret = SECRET,
+access_token = SECRET,
+access_token_secret = SECRET,
+>>>>>>> 4a7f61de6a45b4ad25384a44dfc3811568d41322
 )
 
 auth = tweepy.OAuth1UserHandler(
@@ -119,6 +126,7 @@ def get_answers():
     global words
     ids = [random.randint(1,2) for i in range(1,len(words)+1)]
     your_words = dict(zip(words, ids))
+    print("PRADDLE", your_words)
     return your_words
 
 def lookup_answer(the_id, wordu):
