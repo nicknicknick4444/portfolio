@@ -1,0 +1,24 @@
+<header>My Projects</header>
+{% extends "base.html" %}
+{% load static %}
+<!--<link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+{% block content %}
+
+
+<div class="my_links" style="text-align: center; font-size: 30px;"><a href="{% url "squaresg:resetto2" %}">9 Squares</a>
+<br><br>
+<a href="{% url "spelling:index" %}">Spelling Police</a>
+<br><br>
+<a href="{% url "plp:index" %}">Picnic Location Planner</a>
+<br><br>
+<a href="{% url "diary:home" %}">Diary Emailer</a>
+<br><br>
+<a href="{% url "calco:calc1" %}">Calculators</a>
+</div>
+
+
+{% endblock content %}

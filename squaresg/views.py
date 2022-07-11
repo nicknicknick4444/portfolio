@@ -227,6 +227,11 @@ def Scoresy(request, *args, **kwargs):
         form = ScoreForm()
     return render(request, "squaresg/squares.html", {"form":form})
 
+def ProjectsView(request):
+    template="squaresg/projects.html"
+    #links = [str(squaresg:resetto2), str(spelling:index), str(plp:index), str(diary:home), str(calco:calc1)]
+    context = {}
+    return render(request, template, context)
 
 # # def error404(request, exception):
 # #     #data = {}

@@ -1,4 +1,4 @@
-<header>My Portfolio</header>
+<header>My Django Djourney</header>
 {% extends "base.html" %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "squaresg/style.css" %}" >
@@ -8,16 +8,32 @@
 
 {% block content %}
 
-<h1>Holding Page</h1>
-<p>This will be my portfolio site.</p>
 
-
-<a href="{% url "squaresg:resetto2" %}">9 Squares</a>
+<p style="font-size: 15px;">I have been learning to program on and off for several years, but made a serious go of learning python in January 2021. 
+Since then I have practised every day, working my way through six books (three on the topic of python, and three Django.)
 <br><br>
-<!--<a href="{% url "spelling:index" %}">Spelling Police</a>
-<br><br>-->
+To this end, I have created some Django projects that demonstrate what I have learnt.<br><br>
+Upon finishing the Django books I felt something was missing from the tutorials: business logic. Beyong list views, logins and blog apps, I wanted to <i>make</i> things from my own imagination.
+<br><br>Starting with DJango's own Polls app tutorial, I began experimenting, which soon led me onto a whole new road of learning. Before I knew it, I was out on my own, leaving the tutorials behind and following my imagination.<br><br>
+I picked up a lot of vital skills while working in the resulting projects, such a function views, the use of cookies for persistence, pagination and the consumption of web APIs.<br><br>
+The discovery of function views was a particular turning point, since they satisfied my desire to move beyond ready-made class views. And once I found I could send a word or a number to the template, 
+then I thought about about how could send a calculated value, or the output of an API, or the returned values of several helper functions...
+<br><br>
+My curiosity and self-learning has led me to create some projects. Some are fun and some are light-hearted; some are serious and downright useful. 
+All of them represent great leaps forward not only in my knowledge of Django, but of the python programming language in general. 
+<br><br>Please have a look at my projets - see if you can sort the numbers game into the correct order; find the best <i>and</i> worst places in the UK for a picnic do some sums on a customised calculator; 
+or even lecture a total stranger on Twitter for their sloppy spelling!<br><br>!
+ I hope you enjoy them as much as I enjoyed making them. I have a strong desire to become a profesional Django developer, and these projects aim to demonstrate that passion.
+<br><br>Be sure to have a look at all my code for these projects on <a href="https://github.com/nicknicknick4444/portfolio">Github</a>.
+<!--<div class="my_links" style="text-align: center; font-size: 30px;"><a href="{% url "squaresg:resetto2" %}">9 Squares</a>
+<br><br>
+<a href="{% url "spelling:index" %}">Spelling Police</a>
+<br><br>
 <a href="{% url "plp:index" %}">Picnic Location Planner</a>
 <br><br>
 <a href="{% url "diary:home" %}">Diary Emailer</a>
+<br><br>
+<a href="{% url "calco:calc1" %}">Calculators</a>
+</div>-->
 
 {% endblock content %}

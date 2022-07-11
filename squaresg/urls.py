@@ -25,6 +25,7 @@ urlpatterns = [
     path("saveIt/", views.Scoresy, name="scoresyform"),
 #     path("404/", custom_page_not_found),
 #     path("500/", custom_server_error),
+    path("projects/", views.ProjectsView, name="projects"),
     ]
 
 #handler404 = "squaresg.views.handler404"
