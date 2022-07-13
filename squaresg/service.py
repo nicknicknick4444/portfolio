@@ -28,7 +28,8 @@ def datechange(the_date, functoken):
 
 def cleanup2(reqc, reso):
     mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", \
-                "query_s", "query_u", "query_d", "design", "picked_colour", "sum_list"]
+                "query_s", "query_u", "query_d", "design", "picked_colour", \
+                "sum_list", "colours_list"]
     for i in mainlist:
         if i in reqc.COOKIES:
             reso.delete_cookie(i)

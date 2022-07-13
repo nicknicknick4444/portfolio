@@ -1,4 +1,5 @@
-from .service import api_call, make_id, cookie_help1, cookie_help2, time_check, make_lists, cleanup_cookies
+from .service import api_call, make_id, cookie_help1, cookie_help2, time_check, \
+     make_lists, cleanup_cookies
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -24,6 +25,8 @@ def subbo(request):
 
     response.set_cookie("searched", searching)
     response.set_cookie("time_stamp", nowy)
+    print("JANT!")
+    cleanup_cookies(request, response)
 
     return response
     
@@ -63,7 +66,7 @@ def picn(request):
                             "b4left": int(collbad[3][3][0]), "b4top": int(collbad[3][3][1]),
                             "b5left": int(collbad[4][3][0]), "b5top": int(collbad[4][3][1])}
                           )
-        cleanup_cookies(request, response)
+        
         if not "my_sesh" in request.COOKIES:
             response.set_cookie("my_sesh", make_id())
         response.set_cookie("goody", collgood)

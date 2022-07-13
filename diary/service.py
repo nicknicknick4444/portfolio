@@ -110,7 +110,7 @@ def today():
 def cookie_eat(reqc, resp):
     mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", "sesho", "cou", "startytime", \
                 "finishy_time", "excepor", "resety", "squores", "goesy", "query_s", \
-                "query_u", "query_d", "design", "picked_colour", "sum_list"]
+                "query_u", "query_d", "design", "picked_colour", "sum_list", "colours_list"]
     for i in mainlist:
         if i in reqc:
             resp.delete_cookie(i)

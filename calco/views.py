@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Colour
 from .service import swappy, cooko, calc_prep, num_disp, cookie_default, \
-     cookie_eater, font_sizer
+     cookie_eater, font_sizer, cookie_colour
 
 
 # Create your views here.
@@ -37,7 +37,10 @@ def calc1(request):
                "(", ")", "÷", ".", "="]
     signs = ["+", "-", "*", "/", "(", ")"]
     colours = Colour.objects.values_list("colour_name", "colour_hex")
-    colours_list = [i for i in colours]
+    if "colours_list" not in request.COOKIES:
+        colours_list = [i for i in colours]
+    else:
+        colours_list = cookie_colour(request.COOKIES, "colours_list")
     
     if "sum_list" in request.COOKIES:
         final_list = request.COOKIES["sum_list"]
@@ -57,6 +60,7 @@ def calc1(request):
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            response.set_cookie("colours_list", colours_list)
             cookie_eater(request.COOKIES, response)
             return response
         
@@ -93,6 +97,7 @@ def calc1(request):
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            response.set_cookie("colours_list", colours_list)
             cookie_eater(request.COOKIES, response)
             return response
         
@@ -120,6 +125,7 @@ def calc1(request):
             response.set_cookie("sum_list", cooky)
             response.set_cookie("design", templ8)
             response.set_cookie("picked_colour", picked_colour)
+            response.set_cookie("colours_list", colours_list)
             cookie_eater(request.COOKIES, response)
             return response
         
@@ -149,6 +155,7 @@ def calc1(request):
     response.set_cookie("sum_list", cooky)
     response.set_cookie("design", templ8)
     response.set_cookie("picked_colour", picked_colour)
+    response.set_cookie("colours_list", colours_list)
     cookie_eater(request.COOKIES, response)
     print("BIA", total)
     return response
