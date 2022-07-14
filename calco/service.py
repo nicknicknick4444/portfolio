@@ -104,20 +104,11 @@ def font_sizer(total):
     else:
         return "24px"
 
-
-
-
-
-
 def cookie_colour(reqc, cl):
     c2 = reqc[cl]
     c2 = (c2.replace("[", "").replace("]", "").replace("(", "").replace(")", "")).replace("\'","").split("\054 ")
     
-    for i in c2:
-        print(i)
-
     colours_list = []
-    print(len(c2))
     for index, i in enumerate(c2):
         inner_pairs = []
         if index %2 == 0:
@@ -125,6 +116,5 @@ def cookie_colour(reqc, cl):
             inner_pairs.append(i)
             inner_pairs.append(c2[index+1])
             colours_list.append(inner_pairs)
-    print(colours_list, "RAT A TAT TAT tat tat TAT TAT TAT2!!!!")
     return colours_list
 
