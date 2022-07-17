@@ -47,6 +47,35 @@ def resetty(request):
     
     return response
 
+def resetty3(request):
+    response = HttpResponseRedirect(reverse("squaresg:squares"))
+    if "squores" in request.COOKIES:
+        numboure = request.COOKIES["squores"]
+        excepe = request.COOKIES["excepor"]
+        cou = request.COOKIES["cou"]
+# #         starty_time = request.COOKIES["starty_time"]
+# #         finishy_time = request.COOKIES["finishy_time"]
+# #         goesy = request.COOKIES["goesy"]
+# #         requesty = request.COOKIES["resety"]
+    else:
+        numboure, excepe = make_list_for_view()
+        cou = initial_cou(numboure)
+    starty_time = cookie_help(request, "starty_time", "BEGIN!")
+    finishy_time = cookie_help(request, "finishy_time", 0)
+    goesy = cookie_help(request, "goesy", 0)
+    resety = cookie_help(request, "resety", 0)
+    
+    cleanup2(request, response)
+    response.set_cookie("squores", numboure)
+    response.set_cookie("excepor", excepe)
+    response.set_cookie("goesy", goesy)
+    response.set_cookie("resety", resety)
+    response.set_cookie("starty_time", starty_time)
+    response.set_cookie("finishy_time", finishy_time)
+    response.set_cookie("cou", cou)
+    return response
+    
+
 def resetty2(request):
     response = HttpResponseRedirect(reverse("squaresg:squares"))
     request.session.set_test_cookie()
@@ -56,15 +85,15 @@ def resetty2(request):
     numboure, excepe = make_list_for_view()
     cou = initial_cou(numboure)
     squores = cookie_help(request, "squores", numboure)
-    excepc = cookie_help(request, "excepor", excepe)
-    print("excepc", excepc)
+# # #     excepc = cookie_help(request, "excepor", excepe)
+# # #     print("excepc", excepc)
     print("eccepe", excepe)
     goesy = cookie_help(request, "goesy", 0)
     resety = cookie_help(request, "resety", 0)
     finishy_time = cookie_help(request, "finishy_time", 0)
     starty_time = cookie_help(request, "starty_time", "BEGIN!")
-    cou2 = cookie_help(request, "cou", cou)
-    print("cou", cou)
+# #     cou2 = cookie_help(request, "cou", cou)
+# #     print("cou", cou)
     
     cleanup2(request, response)
     response.set_cookie("squores", numboure)

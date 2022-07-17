@@ -4,11 +4,11 @@ import django
 
 app_name = "squaresg"
 
-def custom_page_not_found(request):
-    return django.views.defaults.page_not_found(request, None)
-
-def custom_server_error(request):
-    return django.views.defaults.server_error(request)
+# # # # # def custom_page_not_found(request):
+# # # # #     return django.views.defaults.page_not_found(request, None)
+# # # # # 
+# # # # # def custom_server_error(request):
+# # # # #     return django.views.defaults.server_error(request)
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
@@ -19,6 +19,7 @@ urlpatterns = [
     path("squaresn/", views.RandomSquaresView, name="squares_rand"),
     path("squaresr/", views.resetty, name="resetto"),
     path("squaresr2/", views.resetty2, name="resetto2"),
+    path("squaresr3/", views.resetty3, name="resetto3"),
     #path("<int:question_id>/vote/", views.vote, name="vote"),
 #    path("int:question_id/addey/", views.addeyfunc, name="addy"),
     #path("<int:question_id>/addey/", views.AddyChoice, name="addy"),
