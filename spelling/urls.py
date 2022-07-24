@@ -12,4 +12,5 @@ urlpatterns = [
     path("filtdown/", views.filterdown, name="filtdown"),
     path("filtup/", views.filterup, name="filtup"),
     path("voted/", views.closey, name="voted_already"),
+    path("about/", views.about, name="about"),
     ]
