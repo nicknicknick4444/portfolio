@@ -350,6 +350,8 @@ body {
 	color: #e300a3;
 }
 
+
+
 .deets {
 	margin-top:10px;
 	margin-bottom: 10px;
@@ -503,12 +505,18 @@ span .closer:hover {
 }
 
 .inputy {
-	margin-top: -1px;
+	/*margin-top: -1px;
+	width: 10px;*/
+
+	margin-bottom: 6px;
+	vertical-align: middle;
 	width: 10px;
+
 }
 
 #searchy {
 	margin-top: 6px;
+	margin-left: 8px;
 }
 
 .pages {
@@ -1324,6 +1332,12 @@ fieldset {
 	#background-color: #d9d1ff;
 	/*margin-bottom: 2px;*/
 }
+
+/* .inputy {
+	margin-bottom: 7px;
+	vertical-align: middle;
+	width: 10px;
+} */
 
 /* PICNIC for mobile */
 
