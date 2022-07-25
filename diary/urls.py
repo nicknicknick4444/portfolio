@@ -15,4 +15,5 @@ urlpatterns = [
     path("hideo/", views.hideo, name="hideo"),
     path("backo/", views.back_to_before, name="back_before"),
     path("", views.EntryListView2, name="home"),
+    path("about/", views.about_diary, name="about_diary"),
     ]

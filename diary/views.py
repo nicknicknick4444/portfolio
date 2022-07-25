@@ -113,9 +113,7 @@ def clear_query(request):
     cookoes = ["query_s", "query_u", "query_d"]
     for i in cookoes:
         response.delete_cookie(i)
-    
-    #pinfo = request.META.get("PATH_INFO")
-    #http_host = request.META.get("HTTP_HOST")    
+       
     return response
 
 class DetailEntryView(DetailView):
@@ -173,12 +171,9 @@ def NewEntryView2(request):
         else:
             context = {"users_list": USER_CHOICES2, "signal": "Date can't be in the past!"}
             
-            #response = render(request, template, context)
             response.set_cookie("URLY", refero)
             return response
     else:
-        
-        #return render(request, template, context)
         response.set_cookie("URLY", refero)
         return response
 
@@ -221,7 +216,6 @@ def UpdateEntryView2(request, pk):
                        "entry": the_entry, "users_list": USER_CHOICES2,
                        "selected_user": the_entry.user, "signal": "Date can't be in the past!"}
             response = render(request, template, context)
-            #response.set_cookie("URLY", refero)
             return response
     else:
         response = render(request, template, context)
@@ -265,3 +259,6 @@ def back_to_before(request):
     response.delete_cookie("URLY")
     return response
 
+def about_diary(request):
+    response = render(request, "diary/about_diary.html", context={})
+    return response

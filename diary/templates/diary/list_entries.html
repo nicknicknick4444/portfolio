@@ -19,10 +19,10 @@
 
 
 
-
+<div class="hello"><a href="{% url "diary:about_diary" %}"><u>How this app works</u></a></div>
 {% if user.is_authenticated %}
 
-<!-- FOR EMAIL TESTING - WILL DELETE LATER -->
+<!-- FOR EMAIL TESTING -->
 {% if "sent_signal" in request.COOKIES %}
  <button disabled="disabled">Sent</button>
 {% else %}
