@@ -8,13 +8,9 @@ from ..models import Admonish, TweetLists
 
 
 client = tweepy.Client(
-#consumer_key = "PNeD02vW6jiOxiUR2dTtpt7ml",
 consumer_key = consumer_key2(),
-#consumer_secret = "pVQx2PLw860o4MgF6VrZvFeF7gwIkGQaj4HHqGe1c5Oct2feU0",
 consumer_secret = consumer_secret2(),
-#access_token = "1498738920242225155-kVRPMEvuiRPCQZOY5hT4DnERrPZojs",
 access_token = access_token2(),
-#access_token_secret = "nLEOtpGIvamMxML0xe68OwnrxxIA9MsGxLS39UrVKBB2p",
 access_token_secret = access_token_secret2(),
 )
 
@@ -89,7 +85,6 @@ def getty(search_term):
     those_tweets2 = [i for i in those_tweets if i["tweet_text"][:4] != "RT @"]
     those_tweets2 = those_tweets2[:30]
     
-    print("If you see this, the tweets are being (re)generated!!!!!!!!!!!")
     return those_tweets2
 
 def make_lists(seshn):
@@ -128,6 +123,5 @@ def lookup_answer(the_id, wordu):
 def readie(raw):
     raw = raw.replace("\054", ",").replace("\"","")
     raw = ast.literal_eval(raw)
-    print("DICT?",raw)
     return raw
 

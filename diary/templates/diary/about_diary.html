@@ -20,35 +20,40 @@
 <div class="hello"><a href="{% url "diary:home" %}"><u>Back to project</u></a></div><br>
 
 <div class="hello">
-This is a digital diary that, quite simply, emails the saved entries to the user's email address.<br><br>
+This is a digital diary that, quite simply, emails any saved entries to the user's email address every day at 8am. Admittedly, adding, editing and deleting diary entries can only be achieved while logged-in, 
+and so this guide is the best way to view this project.<br><br>
 I created cookie-based system for searching and filtering, since persistence of state is vital in a task like this. <br><br>
 On the face of it, this should have been a job for class views. Instead, these are also some function views with hidden depths, in order to tackle small problems.<br><br> 
 For example, deleting a user wouldn't automatically make a name vanish from the list of users, because the class view makes a 
 single database query upon pageload. Instead, I had to build this functionality myself, purely because I wasn't happy with the default behaviour!<br><br>
 The actual emailing is python code triggered by a Heroku cron job addon - but since the free trial expires after 100 emails, I also made a button to fire my code manually as well.<br><br>
 How to use this app:<br><br>
-Write a diary entry for tomorrow (25th July at time of writing):<br>
-<img style="width: 80%;" src="https://i.ibb.co/Lz9VRZb/Screenshot-20220724-183549-Samsung-Internet.jpg" />
+<span style="color: #000294;"><b>Write a diary entry for tomorrow (25th July at time of writing):<br>
+<img style="width: 300px;" src="https://i.ibb.co/Lz9VRZb/Screenshot-20220724-183549-Samsung-Internet.jpg" />
 <br><br>
 Find it with the filters:<br>
-<img style="width: 80%;" src="https://i.ibb.co/LJQGhqL/Screenshot-20220725-234206-Samsung-Internet.jpg" />
+<img style="width: 300px;" src="https://i.ibb.co/LJQGhqL/Screenshot-20220725-234206-Samsung-Internet.jpg" />
 <br><br>
 Optionally hide the filters to save space:<br>
-<img style="width: 80%;" src="https://i.ibb.co/47c1thw/Screenshot-20220725-233847-Samsung-Internet.jpg" />
+<img style="width: 300px;" src="https://i.ibb.co/47c1thw/Screenshot-20220725-233847-Samsung-Internet.jpg" />
 <br><br>
 Have a look at it:<br>
-<img style="width: 80%;" src="https://i.ibb.co/FzZ6JgL/Screenshot-20220725-233430-Samsung-Internet.jpg" />
+<img style="width: 300px;" src="https://i.ibb.co/FzZ6JgL/Screenshot-20220725-233430-Samsung-Internet.jpg" />
 <br><br>
 Edit it if you like:<br>
-<img style="width: 80%;" src="https://i.ibb.co/Wv23Nkm/Screenshot-20220725-233351-Samsung-Internet.jpg" />
+<img style="width: 300px;" src="https://i.ibb.co/Wv23Nkm/Screenshot-20220725-233351-Samsung-Internet.jpg" />
 <br><br>
 You can even delete it:<br>
-<img style="width: 80%;" src="https://i.ibb.co/52hcYD3/Screenshot-20220725-233412-Samsung-Internet.jpg" />
+<img style="width: 300px;" src="https://i.ibb.co/52hcYD3/Screenshot-20220725-233412-Samsung-Internet.jpg" />
 <br><br>
 Look what was waiting for me the next morning!<br>
-<img style="width: 80%;" src="https://i.ibb.co/5jrHrGH/Diary-Email.png" />
+<img style="width: 300px;" src="https://i.ibb.co/5jrHrGH/Diary-Email.png" />
+<br><br>
+No diary notes for you today? This app won't leave you wondering:<br>
+<img style="width: 300px;" src="https://i.ibb.co/mB8sLzm/Diary-Email2.png" />
+</b></span>
 
-</div>
+</div><br>
 
 <div class="hello"><a href="{% url "diary:home" %}"><u>Back to project</u></a></div>
 
