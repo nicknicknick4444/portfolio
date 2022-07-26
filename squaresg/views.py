@@ -27,11 +27,6 @@ class IndexView(generic.ListView):
         return queryset
 
 def resetty(request):
-#     if "sesho" in request.COOKIES:
-#         sesh = request.COOKIES["sesho"]
-#     else:
-#         sesh = "FIRST GLUPE"
-
     resety = int(request.COOKIES["resety"])
     resety += 1
     numboure, excepe = make_list_for_view()
@@ -85,15 +80,10 @@ def resetty2(request):
     numboure, excepe = make_list_for_view()
     cou = initial_cou(numboure)
     squores = cookie_help(request, "squores", numboure)
-# # #     excepc = cookie_help(request, "excepor", excepe)
-# # #     print("excepc", excepc)
-    print("eccepe", excepe)
     goesy = cookie_help(request, "goesy", 0)
     resety = cookie_help(request, "resety", 0)
     finishy_time = cookie_help(request, "finishy_time", 0)
     starty_time = cookie_help(request, "starty_time", "BEGIN!")
-# #     cou2 = cookie_help(request, "cou", cou)
-# #     print("cou", cou)
     
     cleanup2(request, response)
     response.set_cookie("squores", numboure)
