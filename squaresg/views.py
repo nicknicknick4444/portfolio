@@ -48,10 +48,6 @@ def resetty3(request):
         numboure = request.COOKIES["squores"]
         excepe = request.COOKIES["excepor"]
         cou = request.COOKIES["cou"]
-# #         starty_time = request.COOKIES["starty_time"]
-# #         finishy_time = request.COOKIES["finishy_time"]
-# #         goesy = request.COOKIES["goesy"]
-# #         requesty = request.COOKIES["resety"]
     else:
         numboure, excepe = make_list_for_view()
         cou = initial_cou(numboure)
@@ -75,7 +71,6 @@ def resetty2(request):
     response = HttpResponseRedirect(reverse("squaresg:squares"))
     request.session.set_test_cookie()
     you = request.COOKIES.get("sesho", str(make_id()))
-    #sesh = you
     response.set_cookie("sesho", you)
     numboure, excepe = make_list_for_view()
     cou = initial_cou(numboure)
@@ -110,38 +105,21 @@ def SquaresView2(request):
         context = {"scores":scores}
     return render(request, template, context)
     
-    
 
 def RandomSquaresView(request):
-#     if "sesho" in request.COOKIES:
-#         sesh = request.COOKIES["sesho"]
-#     else:
-#         sesh = "GLUPE"
     essence = ["squores", "cou", "goesy", "excepor", "starty_time", \
                "finishy_time", "sesho", "resety"]
     for e in essence:
         if e not in request.COOKIES:
             return HttpResponseRedirect(reverse("squaresg:squares"))
-# # # #     if "cou" not in request.COOKIES:
-# # # #         return HttpResponseRedirect(reverse("squaresg:squares"))
-    
-# # # #     if "squores" in request.COOKIES:
+
     numbourey = ast.literal_eval(request.COOKIES["squores"])
-# # # #     else:
-# # # #         return HttpResponseRedirect(reverse("squaresg:squares"))
-    
-# # # #     if "excepor" not in request.COOKIES:
-# # # #         excepe = ""
-# # # #     else:
     excepe = int(request.COOKIES["excepor"])
     turny = int(request.COOKIES["goesy"])
     if "cou" in request.COOKIES and request.COOKIES["cou"] == "WIN":
         turny = turny
     else:
         turny += 1
-
-    
-    #print("MYSTIFY ME", numbourey[3], type(numbourey))
     
     form = ScoreForm
     
@@ -150,11 +128,7 @@ def RandomSquaresView(request):
     
     listy2 = numbourey
     nine_squares_list = numbourey
-# #     if "squores" in request.COOKIES and "cou" in request.COOKIES:
     numbourey, cou = randomise_squares(listy2, excepe, clicked, request)
-#     else:
-#         numbourey [1,2,3,4,5,6,7,8,9]
-#         cou = 0
     
     url = "squaresg/squares.html"
 
@@ -166,10 +140,7 @@ def RandomSquaresView(request):
     context = {"nine_squares_list":numbourey, "cou":cou, "goes":turny,
            "exceppo":excepe, "form":form, "scores":scores}    
     if request.method == "POST" and "squares_rand" in request.POST:
-# # #         response = render(request, url, context)
         response = HttpResponseRequest(reverse("squaresg:squares"))
-
-
 
         response.set_cookie("squores", numbourey)
         response.set_cookies("goesy", turny)
@@ -179,10 +150,7 @@ def RandomSquaresView(request):
         response.set_cookie("finishy_time", datetime.now())
         return response
     else:
-# # #         response = render(request, url, context)
         response = HttpResponseRedirect(reverse("squaresg:squares"))
-
-
         response.set_cookie("squores", numbourey)
         response.set_cookie("goesy", turny)
         response.set_cookie("cou", cou)
@@ -191,18 +159,11 @@ def RandomSquaresView(request):
         response.set_cookie("finishy_time", datetime.now())
         return response
 
-    
-
 def get_time(request):
-#     if "sesho" in request.COOKIES:
-#         sesh = request.COOKIES["sesho"]
-#     else:
-#         sesh = "3rd GLUPE"
     tok = datetime.strptime
     dura = datechange(request.COOKIES["finishy_time"], tok) - \
            datechange(request.COOKIES["starty_time"], tok)
     
-    print("NEEK!", dura, type(dura))
     days = dura.days
     hours = int(dura.seconds*3600)
     hours2 = round(int(dura.seconds/3600),0)
@@ -224,11 +185,6 @@ def get_time(request):
     return duration, seconds2, attempts
 
 def Scoresy(request, *args, **kwargs):
-#     if "sesho" in request.COOKIES:
-#         sesh = request.COOKIES["sesho"]
-#     else:
-#         sesh = "4th GLUPE"
-
     if request.method == "POST" and "saveIt" in request.POST:
         form = ScoreForm(request.POST)
         
@@ -248,34 +204,6 @@ def Scoresy(request, *args, **kwargs):
 
 def ProjectsView(request):
     template="squaresg/projects.html"
-    #links = [str(squaresg:resetto2), str(spelling:index), str(plp:index), str(diary:home), str(calco:calc1)]
     context = {}
     return render(request, template, context)
-
-# # def error404(request, exception):
-# #     #data = {}
-# #     return render(request, "404.html", status=404)
-
-
-# # def handler500(request):
-# #     #data = {}
-# #     response = render("500.html", {}, context_instance = RequestContext(request))
-# #     #return render(request, "500.html", status=500)
-# #     response.status_code = 500
-# #     return response
-# 
-# def custom_page_not_found(request):
-#     return django.views.defaults.page_not_found(request, None)
-# 
-# def custom_server_error(request):
-#     return django.views.defaults.server_error(request)
-
-# 
-# def error_403(request, exception):
-#     data = {}
-#     return render(request, "squaresg/403.html", data)
-# 
-# def error_400(request, exception):
-#     data = {}
-#     return render(request, "squaresg/400.html", data)
 
