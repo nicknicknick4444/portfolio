@@ -5,14 +5,7 @@ from django.utils import timezone
 from django.contrib import admin
 
 
-
 # Create your models here.
-
-class Squaresy(models.Model):
-    square_text = models.CharField(max_length=200)
-    number = models.IntegerField(default=0)
-    def __str__(self):
-        return self.square_text
 
 class Scores(models.Model):
     namey = models.CharField(default="", max_length=9)

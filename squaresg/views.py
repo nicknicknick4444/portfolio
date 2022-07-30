@@ -12,7 +12,7 @@ from .forms import ScoreForm
 from .service import make_list_for_view, randomise_squares, \
      initial_cou, datechange, cleanup2
 from .logico.squares_logic import cookie_help, cookie_help_2, randular
-from .models import Squaresy, Scores
+from .models import Scores
 from datetime import date, time, datetime, timedelta
 import ast
 
