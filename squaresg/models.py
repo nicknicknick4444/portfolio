@@ -14,18 +14,6 @@ class Squaresy(models.Model):
     def __str__(self):
         return self.square_text
 
-# class Number(models.Model):
-#     wardle = models.TextField(null=True)
-#     sessiony = models.CharField(max_length=1000, default="", null=True)
-#     def __str__(self):
-#         return self.wardle
-# 
-# class Exceppo(models.Model):
-#     exceppy = models.TextField(null=True)
-#     sessiony = models.CharField(max_length=1000, default="", null=True)
-#     def __str__(self):
-#         return self.exceppy
-
 class Scores(models.Model):
     namey = models.CharField(default="", max_length=9)
     score = models.IntegerField(default=0)
@@ -37,17 +25,3 @@ class Scores(models.Model):
     
     def get_duration(self):
         return self.finish_time - self.start_time
-
-# class Times(models.Model):
-#     start_time = models.DateTimeField(default=timezone.now)
-#     finish_time = models.DateTimeField(default=timezone.now)
-#     attempts = models.IntegerField(default=0)
-#     sessiony = models.CharField(max_length=1000, default="", null=True)
-#     def __datetime__(self):
-#         return self.start_time
-
-# class FirstInd(models.Model):
-#     first_ind = models.IntegerField(default=0)
-#     sessiony = models.CharField(max_length=1000, default="", null=True)
-#     def __str__(self):
-#         return self.finst_ind

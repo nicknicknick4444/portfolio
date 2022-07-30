@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.views.generic.edit import FormMixin
 from .forms import ScoreForm
 from .service import make_list_for_view, randomise_squares, \
-     initial_cou, make_id, datechange, cleanup2
+     initial_cou, datechange, cleanup2
 from .logico.squares_logic import cookie_help, cookie_help_2, randular
 from .models import Squaresy, Scores
 from datetime import date, time, datetime, timedelta
@@ -70,8 +70,6 @@ def resetty3(request):
 def resetty2(request):
     response = HttpResponseRedirect(reverse("squaresg:squares"))
     request.session.set_test_cookie()
-    you = request.COOKIES.get("sesho", str(make_id()))
-    response.set_cookie("sesho", you)
     numboure, excepe = make_list_for_view()
     cou = initial_cou(numboure)
     squores = cookie_help(request, "squores", numboure)
@@ -108,7 +106,7 @@ def SquaresView2(request):
 
 def RandomSquaresView(request):
     essence = ["squores", "cou", "goesy", "excepor", "starty_time", \
-               "finishy_time", "sesho", "resety"]
+               "finishy_time", "resety"]
     for e in essence:
         if e not in request.COOKIES:
             return HttpResponseRedirect(reverse("squaresg:squares"))
