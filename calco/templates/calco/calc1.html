@@ -52,7 +52,7 @@ Calc 1&nbsp;&nbsp;|&nbsp;&nbsp;
 
  <a href="{% url "calco:key_process" %}?num_id={{ button | urlencode }}" id="the_buttons">
 <div class="buttony" {% if button == "(" or button == ")" %} style="padding-top: 4px; padding-bottom: 4px;" 
- {% elif button == "-" or button == "x" %} style="padding-top: 4px; padding-bottom: 4px;"
+ {% elif button == "-" or button == "x" or button == "÷" %} style="padding-top: 4px; padding-bottom: 4px;"
  {% else %}{% endif %}>{{ button }}</div></a>
   {% endif %}
 {% endfor %}

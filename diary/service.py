@@ -108,7 +108,7 @@ def today():
     return datetime_module.datetime.now().date()
 
 def cookie_eat(reqc, resp):
-    mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", "sesho", "cou", "startytime", \
+    mainlist = ["namey", "boxo", "bisp", "chosen", "risp", "filtery", "cou", "startytime", \
                 "finishy_time", "excepor", "resety", "squores", "goesy", "query_s", \
                 "query_u", "query_d", "design", "picked_colour", "sum_list", "colours_list"]
     for i in mainlist:

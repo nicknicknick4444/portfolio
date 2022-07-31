@@ -72,7 +72,7 @@ def make_lists():
     return collgood, collbad
 
 def cleanup_cookies(reqc, resp):
-    mainlist = ["sesho", "cou", "startytime", "finishy_time", "excepor", "resety", "squores", \
+    mainlist = ["cou", "startytime", "finishy_time", "excepor", "resety", "squores", \
                 "goesy", "namey", "boxo", "bisp", "chosen", "risp", "filtery", "query_s", \
                 "query_u", "query_d", "design", "picked_colour", "sum_list", "colours_list"]
     for i in mainlist:
